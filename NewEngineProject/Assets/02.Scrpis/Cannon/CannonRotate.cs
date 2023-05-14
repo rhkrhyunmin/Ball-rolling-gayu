@@ -23,7 +23,7 @@ public class CannonRotate : MonoBehaviour
 
         // 캐논 y축 회전 처리
         float verticalInput = Input.GetAxis("Vertical");
-        if (verticalInput > 45 && angleY < maxAngleY)
+        if (verticalInput < 45 && angleY < maxAngleY)
         {
             transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
             Debug.Log("1");
@@ -36,7 +36,7 @@ public class CannonRotate : MonoBehaviour
 
         // 캐논 z축 회전 처리
         float horizontalInput = Input.GetAxis("Horizontal");
-        if (horizontalInput > 45 && angleZ < maxAngleZ)
+        if (horizontalInput < 45 && angleZ < maxAngleZ)
         {
             transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime);
             Debug.Log("3");

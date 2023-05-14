@@ -277,6 +277,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &353288895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353288889}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4dd263f5385c54cae78e3396c80f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 10
+  minAngleY: -45
+  maxAngleY: 45
+  minAngleZ: -45
+  maxAngleZ: 45
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,11 +472,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &999065455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7396654156298469847, guid: 0f7e009ae0142f547bc833c19347581d, type: 3}
+  m_PrefabInstance: {fileID: 1048661759}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &999065456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3416400609385885712, guid: 0f7e009ae0142f547bc833c19347581d, type: 3}
   m_PrefabInstance: {fileID: 1048661759}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &999065459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999065455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4dd263f5385c54cae78e3396c80f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 10
+  minAngleY: -45
+  maxAngleY: 45
+  minAngleZ: -45
+  maxAngleZ: 45
 --- !u!1001 &1048661759
 PrefabInstance:
   m_ObjectHideFlags: 0
