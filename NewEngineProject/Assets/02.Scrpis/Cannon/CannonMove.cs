@@ -10,12 +10,34 @@ public class CannonMove : MonoBehaviour
     public float rotateSpeed = 50.0f;      // 회전 속도
     public float minAngle = -80.0f;        // 최소 각도
     public float maxAngle = 80.0f;         // 최대 각도
+    public Transform cannon;              // 회전시킬 오브젝트
 
     private float currentAngle;            // 현재 각도
 
+    public static Transform FindDeepChild(Transform parent, string name)
+    {
+        Transform child = parent.Find(name);
+        if (child != null)
+            return child;
+        foreach (Transform tr in parent)
+        {
+            child = FindDeepChild(tr, name);
+            if (child != null)
+                return child;
+        }
+        return null;
+    }
+
+    private void Awake()
+    {
+        cannon = FindDeepChild(transform, "cannon");
+        cannon.localRotation = Quaternion.Euler(-90, 0, 0);
+    }
+
     void Start()
     {
-        currentAngle = 0.0f;    // 최초 각도는 0
+        currentAngle = -90f;
+        //cannon.localRotation = Quaternion.Euler(-90, 0, 0);
     }
 
     void Update()
@@ -29,7 +51,7 @@ public class CannonMove : MonoBehaviour
         float targetAngle = currentAngle + vertical * rotateSpeed * Time.deltaTime;
         targetAngle = Mathf.Clamp(targetAngle, minAngle, maxAngle);
 
-        transform.localRotation = Quaternion.Euler(-targetAngle, transform.localRotation.eulerAngles.y, 0);
+        cannon.localRotation = Quaternion.Euler(-targetAngle, 0, 0);
         currentAngle = targetAngle;
 
         // 발사
@@ -37,7 +59,7 @@ public class CannonMove : MonoBehaviour
         {
             GameObject projectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * fireForce);
+            rb.AddForce(cannon.forward * fireForce);
         }
     }
 }
