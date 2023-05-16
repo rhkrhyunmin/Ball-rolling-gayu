@@ -4,48 +4,27 @@ using UnityEngine;
 
 public class CannonRotate : MonoBehaviour
 {
-    public float rotateSpeed = 10f;
-    public float minAngleY = -45f;
-    public float maxAngleY = 45f;
-    public float minAngleZ = -45f;
-    public float maxAngleZ = 45f;
-
-    void Start()
+    public float rotationSpeed = 50f;  // 회전 속도
+    Vector3 currentRotation;
+    private void Start()
     {
-        // 초기 로테이션 설정
-        transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
+        currentRotation = transform.localRotation.eulerAngles;
     }
 
     void Update()
     {
-        float angleY = transform.localRotation.eulerAngles.y;
-        float angleZ = transform.localRotation.eulerAngles.z;
-
-        // 캐논 y축 회전 처리
-        float verticalInput = Input.GetAxis("Vertical");
-        if (verticalInput < 45 && angleY < maxAngleY)
-        {
-            transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
-            Debug.Log("1");
-        }
-        else if (verticalInput < 0 && angleY > minAngleY)
-        {
-            transform.Rotate(Vector3.down, rotateSpeed * Time.deltaTime);
-            Debug.Log("2");
-        }
-
-        // 캐논 z축 회전 처리
         float horizontalInput = Input.GetAxis("Horizontal");
-        if (horizontalInput < 45 && angleZ < maxAngleZ)
-        {
-            transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime);
-            Debug.Log("3");
-        }
-       
-        else if (horizontalInput < 0 && angleZ > minAngleZ)
-        {
-            transform.Rotate(Vector3.back, rotateSpeed * Time.deltaTime);
-            Debug.Log("4");
-        }
+        float verticalInput = Input.GetAxis("Vertical");
+
+        float yRotation = verticalInput * rotationSpeed * Time.deltaTime;
+        float zRotation = horizontalInput * rotationSpeed * Time.deltaTime;
+
+        currentRotation.y += yRotation;
+        currentRotation.z += zRotation;
+
+        currentRotation.y = Mathf.Clamp(currentRotation.y, -20f, 20f);
+        currentRotation.z = Mathf.Clamp(currentRotation.z, -30f, 30f);
+        transform.localRotation = Quaternion.Euler(currentRotation);
+
     }
 }
