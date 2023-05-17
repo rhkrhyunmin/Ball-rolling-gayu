@@ -5,9 +5,9 @@ using UnityEngine;
 public class CannonShoot : MonoBehaviour
 {
     public GameObject ballPrefab;
-    public float minForceMagnitude = 10f; // 최소 힘의 크기
-    public float maxForceMagnitude = 50f; // 최대 힘의 크기
-    public float chargeRate = 1f; // 차징 속도
+    [SerializeField] private float minForceMagnitude = 10f; // 최소 힘의 크기
+    [SerializeField] private float maxForceMagnitude = 30f; // 최대 힘의 크기
+    [SerializeField] private float chargeRate = 1f; // 차징 속도
 
     private float currentForceMagnitude = 0f; // 현재 힘의 크기
     private bool isCharging = false; // 차징 중인지 여부
