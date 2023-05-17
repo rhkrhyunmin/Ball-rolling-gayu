@@ -1,72 +1,96 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CannonControl : MonoBehaviour
 {
-    public float force = 10f;  // 스페이스바 누른 힘
-    public float trajectoryDuration = 2f;  // 포물선이 그려지는 시간
-    public float dotInterval = 0.1f;  // 점선을 그릴 간격
-    //public GameObject dotPrefab;  // 점선에 사용될 프리팹
+    [SerializeField] public Transform CamrigTRm;
 
-    private Rigidbody rb;  // 이 오브젝트의 Rigidbody 컴포넌트
-    private LineRenderer lineRenderer;  // 라인 렌더러 컴포넌트
+    private Transform barrerTRM;
+    public CannonShoot ballPrefab;
+    private Transform firePosition;
 
-    void Start()
+    [SerializeField]
+    private CannonState currentState;
+
+    public enum CannonState : short
     {
-        rb = GetComponent<Rigidbody>();
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.enabled = false;
+        IDLE = 0,
+        MOVING = 1,
+        CHARGE = 2,
+        FIRE = 3,
+        WAITING = 4,
     }
 
-    void Update()
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        currentState = CannonState.IDLE;
+        barrerTRM = transform.Find("canon");
+        CamrigTRm = transform.Find("BallCam");
+        Debug.Log("ㄱ");
+    }
+
+    private void Update()
+    {
+        if ((short)currentState < 2)
         {
-            StartCoroutine(ShowTrajectory());
+
+        }
+        CheckFire();
+        Debug.Log("1");
+
+        CheckWait();
+    }
+
+    private void CheckWait()
+    {
+        if (currentState != CannonState.WAITING) return;
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            StartCoroutine(ChanageToIdle());
         }
     }
 
-    IEnumerator ShowTrajectory()
+    private IEnumerator ChanageToIdle()
     {
-        Vector3 initialVelocity = CalculateInitialVelocity();
-        float timeStep = dotInterval / initialVelocity.magnitude;
-        float remainingTime = trajectoryDuration;
+        CameraManger.instance.SetActiveCam(CameraCatagory.Rigcam);
+        yield return new WaitForSeconds(1f);
+        currentState = CannonState.IDLE;
+    }
 
-        lineRenderer.enabled = true;
-        lineRenderer.positionCount = 1;
-        lineRenderer.SetPosition(0, transform.position);
-
-        while (remainingTime > 0)
+    private void CheckFire()
+    {
+        if (Input.GetButtonDown("Jump") && (short)currentState < 2)
         {
-            Vector3 displacement = initialVelocity * timeStep + 0.5f * Physics.gravity * timeStep * timeStep;
-            initialVelocity += Physics.gravity * timeStep;
-            remainingTime -= timeStep;
-
-            Vector3 nextPos = transform.position + displacement;
-            lineRenderer.positionCount++;
-            lineRenderer.SetPosition(lineRenderer.positionCount - 1, nextPos);
-
-            yield return new WaitForSeconds(timeStep);
+            currentState = CannonState.CHARGE;
+            //currentPower = 0;
         }
 
-        lineRenderer.enabled = false;
+        if (Input.GetButton("Jump") && currentState == CannonState.CHARGE)
+        {
+            /*currentPower += chargeSpeed * Time.deltaTime;
+            currentPower = Mathf.Clamp(currentPower, 0, 100);*/
+        }
+
+        if (Input.GetButtonUp("Jump") && currentState == CannonState.CHARGE)
+        {
+            currentState = CannonState.FIRE;
+
+            StartCoroutine(FireSequense());
+        }
     }
 
-    Vector3 CalculateInitialVelocity()
+    private IEnumerator FireSequense()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.transform.position.z - transform.position.z;
+        CameraManger.instance.SetActiveCam(CameraCatagory.CannonCam);
+        CameraManger.instance.SetFollowTarget(CameraCatagory.Ballcam, barrerTRM);
+        yield return new WaitForSeconds(1.5f);
 
-        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        Vector3 direction = worldMousePos - transform.position;
-        direction.Normalize();
+        CamrigTRm.localPosition = Vector3.zero;
 
-        return direction * force;
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        lineRenderer.enabled = false;
+        CannonShoot ball = Instantiate(ballPrefab, firePosition.position, Quaternion.identity);
+        CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ball.transform);
     }
 }
