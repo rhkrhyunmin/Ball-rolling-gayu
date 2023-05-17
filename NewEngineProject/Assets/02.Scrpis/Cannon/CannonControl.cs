@@ -28,7 +28,6 @@ public class CannonControl : MonoBehaviour
         currentState = CannonState.IDLE;
         barrerTRM = transform.Find("canon");
         CamrigTRm = transform.Find("BallCam");
-        Debug.Log("¤¡");
     }
 
     private void Update()
