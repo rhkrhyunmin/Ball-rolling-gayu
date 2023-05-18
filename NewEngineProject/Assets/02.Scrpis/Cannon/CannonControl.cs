@@ -5,7 +5,7 @@ using System;
 
 public class CannonControl : MonoBehaviour
 {
-    [SerializeField] public Transform CamrigTRm;
+    [SerializeField] public GameObject CamrigTRm;
 
     private Transform barrerTRM;
     public CannonShoot ballPrefab;
@@ -27,7 +27,7 @@ public class CannonControl : MonoBehaviour
     {
         currentState = CannonState.IDLE;
         barrerTRM = transform.Find("canon");
-        CamrigTRm = transform.Find("BallCam");
+        CamrigTRm = GameObject.Find("BallCam");
     }
 
     private void Update()
@@ -87,9 +87,10 @@ public class CannonControl : MonoBehaviour
         CameraManger.instance.SetFollowTarget(CameraCatagory.Ballcam, barrerTRM);
         yield return new WaitForSeconds(1.5f);
 
-        CamrigTRm.localPosition = Vector3.zero;
+        CamrigTRm.transform.localPosition = Vector3.zero;
 
         CannonShoot ball = Instantiate(ballPrefab, firePosition.position, Quaternion.identity);
+        Debug.Log("4");
         CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ball.transform);
     }
 }
