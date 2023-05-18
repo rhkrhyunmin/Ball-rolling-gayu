@@ -8,8 +8,8 @@ public class CannonControl : MonoBehaviour
     [SerializeField] public UnityEngine.GameObject CamrigTRm;
 
     private Transform barrerTRM;
-    public Transform ballPrefab;
-    private Transform firePosition;
+    public GameObject ballPrefab;
+    public Transform firePosition;
 
     [SerializeField]
     private CannonState currentState;
@@ -87,8 +87,9 @@ public class CannonControl : MonoBehaviour
 
         CamrigTRm.transform.localPosition = Vector3.zero;
         Debug.Log("4");
-        Transform ball = Instantiate(ballPrefab, firePosition.position, Quaternion.identity);
-        
+
+        GameObject ball = Instantiate(ballPrefab, firePosition.position, Quaternion.identity);
+
         CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ball.transform);
     }
 }
