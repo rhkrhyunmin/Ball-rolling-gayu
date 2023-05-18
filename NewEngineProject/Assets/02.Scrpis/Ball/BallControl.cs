@@ -9,7 +9,7 @@ public class BallControl : MonoBehaviour
 
     [SerializeField]
     private Transform barrerTRM;
-    public CannonShoot ballPrefab;
+    public Transform ballPrefab;
     private Transform firePosition;
 
     [SerializeField]
@@ -90,7 +90,7 @@ public class BallControl : MonoBehaviour
 
         CamrigTRm.localPosition = Vector3.zero;
 
-        CannonShoot ball = Instantiate(ballPrefab, firePosition.position, Quaternion.identity);
+        Transform ball = Instantiate(ballPrefab, firePosition.position, Quaternion.identity);
         CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ball.transform);
     }
 }
