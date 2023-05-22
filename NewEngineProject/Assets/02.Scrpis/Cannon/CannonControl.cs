@@ -8,11 +8,13 @@ public class CannonControl : MonoBehaviour
     [SerializeField] public UnityEngine.GameObject CamrigTRm;
 
     private Transform barrerTRM;
-    public GameObject ballPrefab;
+    //public GameObject ballPrefab;
     public Transform firePosition;
 
     [SerializeField]
     private CannonState currentState;
+
+    CannonShoot cannonShoot;
 
     public enum CannonState : short
     {
@@ -28,6 +30,7 @@ public class CannonControl : MonoBehaviour
         currentState = CannonState.IDLE;
         barrerTRM = transform.Find("canon");
         CamrigTRm = UnityEngine.GameObject.Find("BallCam");
+        cannonShoot = GetComponent<CannonShoot>();
     }
 
     private void Update()
@@ -88,7 +91,7 @@ public class CannonControl : MonoBehaviour
         CamrigTRm.transform.localPosition = Vector3.zero;
         Debug.Log("4");
 
-        GameObject ball = Instantiate(ballPrefab, firePosition.position, Quaternion.identity);
+        GameObject ball = Instantiate(cannonShoot.ballPrefab, firePosition.position, Quaternion.identity);
 
         CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ball.transform);
     }
