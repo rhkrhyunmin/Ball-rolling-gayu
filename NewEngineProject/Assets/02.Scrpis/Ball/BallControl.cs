@@ -28,7 +28,6 @@ public class BallControl : MonoBehaviour
     {
         currentState = CannonState.IDLE;
         CamrigTRm = transform.Find("BallCam");
-        Debug.Log("¤¡");
     }
 
     private void Update()

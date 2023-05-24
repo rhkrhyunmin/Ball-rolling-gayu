@@ -11,12 +11,12 @@ public class thornbat : MonoBehaviour
     private Vector3 initialPosition;
     private float movementTimer = 0f;
      
-    private GameObject GameOverPanel;
+    //private GameObject GameOverPanel;
 
     private void Start()
     {
         initialPosition = transform.position;
-        GameOverPanel.SetActive(false);
+        //GameOverPanel.SetActive(false);
     }
 
     private void Update()
@@ -34,6 +34,6 @@ public class thornbat : MonoBehaviour
     {
         collision.gameObject.CompareTag("Ball");
         
-        GameOverPanel.SetActive(true);
+        //GameOverPanel.SetActive(true);
     }
 }
