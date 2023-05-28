@@ -13,7 +13,7 @@ public class CannonRotate : MonoBehaviour
         currentRotation = transform.localRotation.eulerAngles;
     }
 
-    void Update()
+    public void Rotate()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");

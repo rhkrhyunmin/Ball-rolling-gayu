@@ -7,6 +7,7 @@ public class CannonControl : MonoBehaviour
 {
     [SerializeField] public UnityEngine.GameObject CamrigTRm;
 
+    [SerializeField]
     private Transform barrerTRM;
     //public GameObject ballPrefab;
     public Transform firePosition;
@@ -15,6 +16,7 @@ public class CannonControl : MonoBehaviour
     private CannonState currentState;
 
     CannonShoot cannonShoot;
+    CannonRotate cannonRotate;
 
     public enum CannonState : short
     {
@@ -27,20 +29,36 @@ public class CannonControl : MonoBehaviour
 
     private void Awake()
     {
-        currentState = CannonState.IDLE;
-        barrerTRM = transform.Find("canon");
+        currentState = CannonState.MOVING;
         CamrigTRm = UnityEngine.GameObject.Find("BallCam");
-        cannonShoot = GetComponent<CannonShoot>();
+        cannonShoot = GetComponentInChildren<CannonShoot>();
+        cannonRotate = GetComponentInChildren<CannonRotate>();
     }
 
     private void Update()
     {
-        if ((short)currentState < 2)
+        if(currentState == CannonState.MOVING)
         {
-
+            cannonRotate.Rotate();
+            if (Input.GetButtonDown("Jump"))
+            {
+                currentState = CannonState.CHARGE;
+                //currentPower = 0;
+            }
         }
-        CheckFire();
-        CheckWait();
+        if (Input.GetButton("Jump") && currentState == CannonState.CHARGE)
+        {
+            cannonShoot.Charge();
+            /*currentPower += chargeSpeed * Time.deltaTime;
+            currentPower = Mathf.Clamp(currentPower, 0, 100);*/
+        }
+
+        if (Input.GetButtonUp("Jump") && currentState == CannonState.CHARGE)
+        {
+            currentState = CannonState.FIRE;
+
+            StartCoroutine(FireSequense());
+        }
     }
 
     private void CheckWait()
@@ -60,39 +78,12 @@ public class CannonControl : MonoBehaviour
         currentState = CannonState.IDLE;
     }
 
-    private void CheckFire()
-    {
-        if (Input.GetButtonDown("Jump") && (short)currentState < 2)
-        {
-            currentState = CannonState.CHARGE;
-            //currentPower = 0;
-        }
-
-        if (Input.GetButton("Jump") && currentState == CannonState.CHARGE)
-        {
-            /*currentPower += chargeSpeed * Time.deltaTime;
-            currentPower = Mathf.Clamp(currentPower, 0, 100);*/
-        }
-
-        if (Input.GetButtonUp("Jump") && currentState == CannonState.CHARGE)
-        {
-            currentState = CannonState.FIRE;
-
-            StartCoroutine(FireSequense());
-        }
-    }
 
     private IEnumerator FireSequense()
     {
         CameraManger.instance.SetActiveCam(CameraCatagory.CannonCam);
-        CameraManger.instance.SetFollowTarget(CameraCatagory.Ballcam, barrerTRM);
+        CameraManger.instance.SetFollowTarget(CameraCatagory.CannonCam, barrerTRM);
         yield return new WaitForSeconds(1.5f);
-
-        CamrigTRm.transform.localPosition = Vector3.zero;
-        Debug.Log("4");
-
-        GameObject ball = Instantiate(cannonShoot.ballPrefab, firePosition.position, Quaternion.identity);
-
-        CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ball.transform);
+        cannonShoot.Fire();
     }
 }

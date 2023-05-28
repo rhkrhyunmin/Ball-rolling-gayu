@@ -5,10 +5,17 @@ using UnityEngine;
 public class BallMove : MonoBehaviour
 {
     [SerializeField] private float speed = 5;
+    [SerializeField] LayerMask whatIsGround;
+    Rigidbody rigid;
     private bool canMove = true; // 이동 가능한지 여부를 나타내는 변수
 
+    private void Start()
+    {
+        rigid = GetComponent<Rigidbody>();
+    }
     private void Update()
     {
+        Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.2f, whatIsGround);
         if (canMove)
         {
             // 방향키 입력 처리
@@ -17,7 +24,7 @@ public class BallMove : MonoBehaviour
 
             // 움직임 처리
             Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
-            transform.Translate(movement * speed * Time.deltaTime);
+            rigid.AddForce(Vector3.ProjectOnPlane(movement, hit.normal).normalized*speed, ForceMode.Force);
         }
     }
 

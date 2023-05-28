@@ -28,6 +28,7 @@ public class BallControl : MonoBehaviour
     {
         currentState = CannonState.IDLE;
         CamrigTRm = transform.Find("BallCam");
+        firePosition = transform; // 또는 다른 원하는 위치를 할당할 수 있습니다.
     }
 
     private void Update()

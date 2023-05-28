@@ -7,6 +7,8 @@ public class thornbat : MonoBehaviour
     public float rotationSpeed = 100f;
     public float movementDistance = 2f;
     public float movementSpeed = 2f;
+    public float damageAmount = 10f;
+
 
     private Vector3 initialPosition;
     private float movementTimer = 0f;
@@ -32,8 +34,10 @@ public class thornbat : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        collision.gameObject.CompareTag("Ball");
-        
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            
+        }
         //GameOverPanel.SetActive(true);
     }
 }
