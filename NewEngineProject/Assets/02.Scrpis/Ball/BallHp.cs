@@ -9,19 +9,14 @@ public class BallHp : MonoBehaviour
     public float currentHp = 0f;
     public float damageAmount = 5f;
 
-    [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private Slider healthSlider; 
+    public GameObject gameOverPanel;
+    public Slider healthSlider; 
 
     private void Start()
     {
         currentHp = maxHp;
-       /* GameObject instance = Instantiate(gameOverPanel);
-        BallHp hpScript = instance.GetComponent<BallHp>();
-
-        // 프리팹 인스턴스의 HP 스크립트에 healthSlider를 설정합니다.
-        // 프리팹 내부에 있는 Slider UI 요소를 할당해야 합니다.
-        Slider slider = instance.GetComponentInChildren<Slider>();*/
         UpdateHealthBar(); 
+        healthSlider.value = maxHp;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -55,5 +50,6 @@ public class BallHp : MonoBehaviour
     {
         healthSlider.value = currentHp; // 현재 체력 값을 체력 바에 할당
         healthSlider.maxValue = maxHp; // 최대 체력 값을 체력 바에 할당
+        Debug.Log("1");
     }
 }
