@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private bool hasCollided = false;
-    public Animator animationComponent;
+    //public new Animation animation;
+    Animator anim;
+    public Rigidbody ballRigidbody;
 
-    private void Start()
+    private void Awake()
     {
-        // 애니메이션 컴포넌트 할당
-        animationComponent = GetComponent<Animator>();
+        anim = GetComponent<Animator>();   
+        anim.enabled = false;
+        ballRigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Ball과 충돌한 객체가 특정 조건을 만족하면 애니메이션 재생
-        if (collision.gameObject.CompareTag("Ball") && !hasCollided)
+        if (collision.gameObject.CompareTag("Ball"))
         {
-            hasCollided = true;
-            // 애니메이션 재생
-            animationComponent.SetTrigger("CharacterArmature|Death");
+            // 애니메이션 실행
+            anim.enabled = true;
+            ballRigidbody.useGravity = true;
         }
     }
 }
