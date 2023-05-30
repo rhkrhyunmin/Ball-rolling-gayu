@@ -12,6 +12,8 @@ public class ClearUI : MonoBehaviour
     private int currentTextIndex = 0;
     private float displayTimer = 0f;
 
+    //public GameObject LastPanel;
+
     private void Start()
     {
         // 패널 비활성화

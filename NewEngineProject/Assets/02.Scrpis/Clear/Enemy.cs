@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     Animator anim;
     private Rigidbody ballRigidbody;
     public GameObject openUIPanelObject;
-    private float panelDelay = 5f;
+    private float panelDelay = 3f;
     private bool openUIPanelActivated = false;
 
     private void Awake()
