@@ -4,13 +4,12 @@ using UnityEngine;
 using TMPro;
 
 public class Enemy : MonoBehaviour
-{
-    //public new Animation animation;
+{   
     Animator anim;
     private Rigidbody ballRigidbody;
-    public GameObject Panel;
-    public ClearUI panelManager;
-    public TMP_Text[] panelTexts;
+    public GameObject openUIPanelObject;
+    private float panelDelay = 5f;
+    private bool openUIPanelActivated = false;
 
     private void Awake()
     {
@@ -28,9 +27,14 @@ public class Enemy : MonoBehaviour
             ballRigidbody.useGravity = true;
         }
 
-        else if (collision.gameObject.CompareTag("OpenUI"))
+        if (collision.gameObject.CompareTag("OpenUI"))
         {
-            Panel.SetActive(true);
+            Invoke("ActivateOpenUIPanel", panelDelay);
         }
+    }
+
+    private void ActivateOpenUIPanel()
+    {
+        openUIPanelObject.SetActive(true);
     }
 }

@@ -8,16 +8,9 @@ public class ClearUI : MonoBehaviour
 {
     public GameObject panelObject;
     public TMP_Text[] texts;
-    public float displayTime = 2f;
+    public float displayTime = 5f;
     private int currentTextIndex = 0;
     private float displayTimer = 0f;
-
-    Enemy enemy;
-
-    private void Awake()
-    {
-        enemy = GetComponent<Enemy>();
-    }
 
     private void Start()
     {
@@ -35,13 +28,13 @@ public class ClearUI : MonoBehaviour
             if (displayTimer >= displayTime)
             {
                 // 현재 글 비활성화
-                enemy.panelTexts[currentTextIndex].gameObject.SetActive(false);
+                texts[currentTextIndex].gameObject.SetActive(false);
 
                 // 다음 글 활성화
                 currentTextIndex++;
-                if (currentTextIndex < enemy.panelTexts.Length)
+                if (currentTextIndex < texts.Length)
                 {
-                    enemy.panelTexts[currentTextIndex].gameObject.SetActive(true);
+                    texts[currentTextIndex].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -58,7 +51,7 @@ public class ClearUI : MonoBehaviour
     {
         // 첫 번째 글 활성화
         currentTextIndex = 0;
-        enemy.panelTexts[currentTextIndex].gameObject.SetActive(true);
+        texts[currentTextIndex].gameObject.SetActive(true);
 
         // 패널 활성화
         panelObject.SetActive(true);
