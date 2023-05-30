@@ -1,32 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ClearUI : MonoBehaviour
 {
-    private float playTime = 0f;
-    private bool isPlaying = false;
+    public GameObject panelObject;
+    public TMP_Text[] texts;
+    public float displayTime = 2f;
+    private int currentTextIndex = 0;
+    private float displayTimer = 0f;
+
+    Enemy enemy;
+
+    private void Awake()
+    {
+        enemy = GetComponent<Enemy>();
+    }
 
     private void Start()
     {
-        isPlaying = true;
+        // 패널 비활성화
+        panelObject.SetActive(false);
     }
 
     private void Update()
     {
-        if (isPlaying)
+        if (panelObject.activeSelf)
         {
-            playTime += Time.deltaTime;
+            displayTimer += Time.deltaTime;
+
+            // 글 활성화 시간이 지났을 때
+            if (displayTimer >= displayTime)
+            {
+                // 현재 글 비활성화
+                enemy.panelTexts[currentTextIndex].gameObject.SetActive(false);
+
+                // 다음 글 활성화
+                currentTextIndex++;
+                if (currentTextIndex < enemy.panelTexts.Length)
+                {
+                    enemy.panelTexts[currentTextIndex].gameObject.SetActive(true);
+                }
+                else
+                {
+                    // 모든 글이 나타났을 때 패널 비활성화
+                    panelObject.SetActive(false);
+                }
+
+                displayTimer = 0f;
+            }
         }
     }
 
-    public float GetPlayTime()
+    public void ShowPanel()
     {
-        return playTime;
-    }
+        // 첫 번째 글 활성화
+        currentTextIndex = 0;
+        enemy.panelTexts[currentTextIndex].gameObject.SetActive(true);
 
-    public void StopPlayTime()
-    {
-        isPlaying = false;
+        // 패널 활성화
+        panelObject.SetActive(true);
     }
 }
