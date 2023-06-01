@@ -1,31 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour
 {
-    private float time = 0;
+   /* public GameObject gameOverPanel;
+    bool gameOver = false;
 
-    public void Update()
+    private void Start()
     {
-        GampakGampak();
+        gameOverPanel.SetActive(false);
     }
 
-    private void GampakGampak()
+    void Update()
     {
-        if(time < 0.7f)
+        if (gameOverPanel == true)
         {
-            GetComponent<TextMeshProUGUI>().color = new Color(1,1,1,1 - time);
-        }
-        else
-        {
-            GetComponent<TextMeshProUGUI>().color = new Color(1,1,1,time);
-            if(time > 1.5f)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                time = 0;
+                RestartLevel();
             }
         }
-        time += Time.deltaTime;
     }
+
+    void RestartLevel()
+    {
+        // Time.timeScale 값을 1로 설정하여 게임 일시 정지 해제
+        Time.timeScale = 1f;
+
+        // 현재 씬을 다시 로드합니다.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }*/
 }

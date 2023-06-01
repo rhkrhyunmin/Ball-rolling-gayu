@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 180370444871508211}
   - component: {fileID: 2694343069835940921}
   - component: {fileID: 3888903951767793904}
+  - component: {fileID: 2880323731820443629}
   m_Layer: 0
   m_Name: Hazard_Cylinder (1)
   m_TagString: Untagged
@@ -101,3 +102,18 @@ MonoBehaviour:
   rotationSpeed: 100
   movementDistance: 2
   movementSpeed: 2
+  damageAmount: 10
+--- !u!136 &2880323731820443629
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4495936920822805996}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.019398732
+  m_Height: 0.022773836
+  m_Direction: 1
+  m_Center: {x: -0.0000000018009635, y: -8.791798e-10, z: 0.019161172}

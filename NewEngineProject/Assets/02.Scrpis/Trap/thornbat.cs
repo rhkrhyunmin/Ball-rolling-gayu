@@ -38,6 +38,5 @@ public class thornbat : MonoBehaviour
         {
             
         }
-        //GameOverPanel.SetActive(true);
     }
 }

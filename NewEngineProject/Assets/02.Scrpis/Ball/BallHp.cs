@@ -26,6 +26,12 @@ public class BallHp : MonoBehaviour
             TakeDamage(damageAmount);
             
         }
+
+        if (collision.gameObject.CompareTag("EndLine"))
+        {
+            gameOverPanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
     }
 
     public void TakeDamage(float damage)
@@ -50,6 +56,5 @@ public class BallHp : MonoBehaviour
     {
         healthSlider.value = currentHp; // 현재 체력 값을 체력 바에 할당
         healthSlider.maxValue = maxHp; // 최대 체력 값을 체력 바에 할당
-        Debug.Log("1");
     }
 }
