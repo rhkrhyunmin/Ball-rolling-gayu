@@ -11,12 +11,8 @@ public class SceneLoad : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void NextScene()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            LoadingScence.LoadScene("Main");
-        }
+        
     }
 }
