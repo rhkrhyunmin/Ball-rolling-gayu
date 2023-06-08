@@ -116,7 +116,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &3917623989333470903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +133,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
+  accel: 5
+  deAccel: 5
 --- !u!114 &-970334566150865621
 MonoBehaviour:
   m_ObjectHideFlags: 0

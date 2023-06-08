@@ -31,6 +31,7 @@ public class CamTRM : MonoBehaviour
 
         // 회전 로직
         float rotationAmount = -xMove * Time.deltaTime * RotationSpeed;
-        transform.Rotate(0, 0, rotationAmount);
+        transform.Rotate(0, rotationAmount, 0);
+
     }
 }
