@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System;
 
-public class CannonShoot : MonoBehaviour
+public class OtherCannonShoot : MonoBehaviour
 {
     public GameObject ballPrefab;
     [SerializeField] private float minForceMagnitude = 1f; // 최소 힘의 크기
@@ -13,9 +10,6 @@ public class CannonShoot : MonoBehaviour
     [SerializeField] private float chargeRate = 1f; // 차징 속도
 
     [SerializeField] private GameObject gameoverPanel;
-    [SerializeField] private Slider HPslider;
-    [SerializeField] private float timer = 0;
-    [SerializeField] private TextMeshProUGUI TimerTMP;
 
     private float currentForceMagnitude = 0f; // 현재 힘의 크기
     private bool isCharging = false; // 차징 중인지 여부
@@ -38,22 +32,16 @@ public class CannonShoot : MonoBehaviour
 
     private void Update()
     {
-        Timer();
         if (isCharging)
         {
             UpdateLineRenderer();
         }
     }
 
-    public void Timer()
-    {
-        timer += Time.deltaTime;
-        TimerTMP.text = timer.ToString("F2");
-    }
 
     public void Fire()
     {
-        HPslider.enabled = false;
+
 
         isCharging = false;
         Vector3 forceVector = cannonExit.forward * currentForceMagnitude;
@@ -64,11 +52,6 @@ public class CannonShoot : MonoBehaviour
         ballRb.AddForce(forceVector, ForceMode.Impulse);
 
         BallHp ballHp = ballInstance.GetComponent<BallHp>();
-
-        ballHp.gameOverPanel = gameoverPanel;
-        ballHp.healthSlider = HPslider;
-
-        HPslider.enabled = true;
 
         CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ballInstance.transform);
         CameraManger.instance.SetFollowTarget(CameraCatagory.Ballcam, ballInstance.transform);
