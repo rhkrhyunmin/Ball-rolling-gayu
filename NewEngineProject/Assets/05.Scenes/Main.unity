@@ -653,19 +653,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f7e009ae0142f547bc833c19347581d, type: 3}
   m_PrefabInstance: {fileID: 1820105126}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &130929462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 130929457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 461786412b1e8b244b08be3394db3763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deletionRadius: 20
 --- !u!1001 &134778630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2476,30 +2463,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -3416400609385885712, guid: 0f7e009ae0142f547bc833c19347581d, type: 3}
   m_PrefabInstance: {fileID: 1820105126}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &608184951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608184949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a227c59d3e83ce64193dec10ae3ec983, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 2911776783407910644, guid: 5012e3768de52e34eb082b908618d18d, type: 3}
-  minForceMagnitude: 1
-  maxForceMagnitude: 100
-  chargeRate: 20
-  gameoverPanel: {fileID: 878578430}
-  HPslider: {fileID: 905049012}
-  timer: 0
-  TimerTMP: {fileID: 1657642068}
-  cannonExit: {fileID: 1701281786}
-  startPoint: {fileID: 1701281786}
-  endPoint: {fileID: 9205941146730060479, guid: 5012e3768de52e34eb082b908618d18d, type: 3}
-  controlPoint: {fileID: 1701281786}
 --- !u!114 &608184952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2613,6 +2576,28 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &608184956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608184949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b82c18d7ddbb24bbfcbbea77a0cf1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 2911776783407910644, guid: 5012e3768de52e34eb082b908618d18d, type: 3}
+  minForceMagnitude: 1
+  maxForceMagnitude: 30
+  chargeRate: 1
+  gameoverPanel: {fileID: 0}
+  cannonExit: {fileID: 1701281786}
+  startPoint: {fileID: 1701281786}
+  endPoint: {fileID: 9205941146730060479, guid: 5012e3768de52e34eb082b908618d18d, type: 3}
+  controlPoint: {fileID: 1701281786}
+  deletionRadius: 10
 --- !u!1 &644183051
 GameObject:
   m_ObjectHideFlags: 0
