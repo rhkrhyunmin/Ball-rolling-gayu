@@ -5,31 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour
 {
-   /* public GameObject gameOverPanel;
-    bool gameOver = false;
-
-    private void Start()
+    private void Update()
     {
-        gameOverPanel.SetActive(false);
-    }
-
-    void Update()
-    {
-        if (gameOverPanel == true)
+        // ESC 키를 누르면 게임을 다시 시작합니다.
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                RestartLevel();
-            }
+            RestartGame();
         }
     }
 
-    void RestartLevel()
+    private void RestartGame()
     {
-        // Time.timeScale 값을 1로 설정하여 게임 일시 정지 해제
-        Time.timeScale = 1f;
-
         // 현재 씬을 다시 로드합니다.
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }*/
+    }
 }
