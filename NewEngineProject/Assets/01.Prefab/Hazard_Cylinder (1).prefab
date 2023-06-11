@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2880323731820443629}
   m_Layer: 0
   m_Name: Hazard_Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4495936920822805996}
   m_LocalRotation: {x: 0.6354334, y: 0.31020072, z: 0.31020072, w: -0.6354334}
   m_LocalPosition: {x: -57.11, y: -42.61, z: 9.326605}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 150, y: 150, z: 150}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec78497576e094fb27cb435bf5fa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 100
-  movementDistance: 2
-  movementSpeed: 2
+  rotationSpeed: 150
+  movementDistance: 20
+  movementSpeed: 3
   damageAmount: 10
 --- !u!136 &2880323731820443629
 CapsuleCollider:

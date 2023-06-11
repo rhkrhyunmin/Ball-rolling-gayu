@@ -7,6 +7,7 @@ public class Sawblade : MonoBehaviour
     public float rotationSpeed = 100f;
     public float movementDistance = 2f;
     public float movementSpeed = 2f;
+    public float damageAmount = 10f;
 
     private Vector3 initialPosition;
     private float movementTimer = 0f;

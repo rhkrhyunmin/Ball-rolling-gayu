@@ -29,7 +29,7 @@ public class thornbat : MonoBehaviour
         // ¿Ãµø
         movementTimer += Time.deltaTime;
         float zPosition = Mathf.Sin(movementTimer * movementSpeed) * movementDistance;
-        transform.position = initialPosition + new Vector3(0f, 0f, zPosition);
+        transform.position = initialPosition + new Vector3(zPosition, 0f, 0f);
     }
 
     private void OnCollisionEnter(Collision collision)
