@@ -7,7 +7,7 @@ public class BallHp : MonoBehaviour
 {
     public float maxHp = 20f;
     public float currentHp = 0f;
-    public float damageAmount = 5f;
+    public float damageAmount = 3f;
 
     public GameObject gameOverPanel;
     public Slider healthSlider; 

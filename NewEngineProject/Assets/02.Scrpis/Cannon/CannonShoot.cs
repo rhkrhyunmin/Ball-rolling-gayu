@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.Events;
 
 public class CannonShoot : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class CannonShoot : MonoBehaviour
     public Transform startPoint; // 시작점
     public Transform endPoint; // 끝점
     public Transform controlPoint; // 제어점
+
+    public UnityEvent<BallMove> OnFireEvent;
 
     private void Start()
     {
@@ -73,6 +76,7 @@ public class CannonShoot : MonoBehaviour
         CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ballInstance.transform);
         CameraManger.instance.SetFollowTarget(CameraCatagory.Ballcam, ballInstance.transform);
         chargeTime = 0f;
+        OnFireEvent?.Invoke(ballInstance.GetComponent<BallMove>());
 
         Destroy(lineRenderer);
     }
