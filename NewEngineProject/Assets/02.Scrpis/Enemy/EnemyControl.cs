@@ -94,6 +94,7 @@ public class EnemyControl : MonoBehaviour
     private void Attack()
     {
         isAttacking = true;
+        if(attackTimer > 0f)
         animator.SetBool("IsAttack", true);
         animator.SetBool("IsWalk", false);
         isPlayerDetected = false;
@@ -101,13 +102,12 @@ public class EnemyControl : MonoBehaviour
 
         if (ballHp == null)
         {
-            ballHp = GameObject.Find("Ball")?.GetComponent<BallHp>();
+            ballHp = GameObject.FindObjectOfType<BallHp>();
         }
 
         if (ballHp != null)
         {
             ballHp.TakeDamage(5);
-            Debug.Log("1");
         }
     }
 }
