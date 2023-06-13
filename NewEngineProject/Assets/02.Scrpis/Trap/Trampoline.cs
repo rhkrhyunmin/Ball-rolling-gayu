@@ -5,6 +5,8 @@ using UnityEngine;
 public class Trampoline : MonoBehaviour
 {
     public float jumpForce = 1000f;
+    public GameObject targetObject; // 이동할 대상 GameObject
+
     private bool isJumping = false;
     private Rigidbody rb;
     private Animator animator;
@@ -22,7 +24,6 @@ public class Trampoline : MonoBehaviour
             isJumping = true;
             Jump();
             animator.SetBool("jump", true);
-            Debug.Log("엄");
         }
     }
 
@@ -30,7 +31,7 @@ public class Trampoline : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            isJumping = false;
+            MoveToTarget();
             animator.SetBool("jump", false);
         }
     }
@@ -38,5 +39,13 @@ public class Trampoline : MonoBehaviour
     private void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void MoveToTarget()
+    {
+        if (targetObject != null)
+        {
+            transform.position = targetObject.transform.position;
+        }
     }
 }
