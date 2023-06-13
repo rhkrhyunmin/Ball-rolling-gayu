@@ -48,7 +48,6 @@ public class BeeControl : MonoBehaviour
             if (distanceToPlayer <= detectionDistance)
             {
                 // 제한된 거리 안에 플레이어가 들어오면 Walk 애니메이션 실행
-                animator.SetBool("IsWalk", true);
                 isPlayerDetected = true;
                 isIdle = false;
             }
@@ -59,7 +58,6 @@ public class BeeControl : MonoBehaviour
             if (distanceToPlayer > detectionDistance)
             {
                 // 제한된 거리 밖으로 나가면 IDLE 애니메이션 실행
-                animator.SetBool("IsWalk", false);
                 isPlayerDetected = false;
                 isIdle = true;
             }
@@ -83,6 +81,8 @@ public class BeeControl : MonoBehaviour
             if (attackTimer >= attackCooldown)
             {
                 isAttacking = false;
+                animator.SetBool("IsAttack", false);
+                Debug.Log("isattack bee");
                 animator.SetBool("IsWalk", true);
                 isPlayerDetected = true;
                 attackTimer = 0f;
@@ -93,6 +93,7 @@ public class BeeControl : MonoBehaviour
     private void Attack()
     {
         isAttacking = true;
+        animator.SetBool("IsAttack", true);
         animator.SetBool("IsWalk", false);
         isPlayerDetected = false;
         transform.LookAt(playerController.transform.position);
