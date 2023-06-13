@@ -22,16 +22,14 @@ public class CannonShoot : MonoBehaviour
     private bool isCharging = false; // 차징 중인지 여부
     public Transform cannonExit; // 대포의 입구 위치
     private float chargeTime;
+    
     private LineRenderer lineRenderer;
 
     private int numPoints = 20; // 선에 사용할 점의 개수
     private Vector3[] points; // 베지어 곡선에서 사용할 점의 배열
 
-    public Transform startPoint; // 시작점
-    public Transform endPoint; // 끝점
-    public Transform controlPoint; // 제어점
-
     public UnityEvent<BallMove> OnFireEvent;
+    public UnityEvent<BallMove> OnMoveEvent;
 
     private void Start()
     {
@@ -45,6 +43,7 @@ public class CannonShoot : MonoBehaviour
         if (isCharging)
         {
             UpdateLineRenderer();
+
         }
     }
 
@@ -94,6 +93,7 @@ public class CannonShoot : MonoBehaviour
         CalculateBezierCurve();
         lineRenderer.positionCount = numPoints;
         lineRenderer.SetPositions(points);
+
     }
 
     private void CalculateBezierCurve()
