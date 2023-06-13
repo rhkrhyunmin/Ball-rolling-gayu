@@ -33,6 +33,7 @@ public class Trampoline : MonoBehaviour
         {
             MoveToTarget();
             animator.SetBool("jump", false);
+            isJumping = false; // 다시 점프할 수 있도록 isJumping 변수를 false로 설정
         }
     }
 
