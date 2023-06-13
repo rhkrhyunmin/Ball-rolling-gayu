@@ -25,7 +25,6 @@ public class EnemyControl : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        ballHp = GetComponent<BallHp>();
     }
 
     public void FindPlayer(BallMove ball)
@@ -99,6 +98,8 @@ public class EnemyControl : MonoBehaviour
         animator.SetBool("IsWalk", false);
         isPlayerDetected = false;
         transform.LookAt(playerController.transform.position);
+
+        ballHp = GameObject.Find("Ball").GetComponent<BallHp>();
         ballHp.TakeDamage(5);
     }
 }
