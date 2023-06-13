@@ -99,7 +99,15 @@ public class EnemyControl : MonoBehaviour
         isPlayerDetected = false;
         transform.LookAt(playerController.transform.position);
 
-        ballHp = GameObject.Find("Ball").GetComponent<BallHp>();
-        ballHp.TakeDamage(5);
+        if (ballHp == null)
+        {
+            ballHp = GameObject.Find("Ball")?.GetComponent<BallHp>();
+        }
+
+        if (ballHp != null)
+        {
+            ballHp.TakeDamage(5);
+            Debug.Log("1");
+        }
     }
 }
