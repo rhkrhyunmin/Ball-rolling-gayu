@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour
 {
+    CannonShoot cannonShoot;
+
+
+
     private void Update()
     {
         // ESC 키를 누르면 게임을 다시 시작합니다.
@@ -18,5 +22,7 @@ public class Restart : MonoBehaviour
     {
         // 현재 씬을 다시 로드합니다.
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+
     }
 }

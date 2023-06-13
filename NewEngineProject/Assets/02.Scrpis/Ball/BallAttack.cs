@@ -8,6 +8,7 @@ public class BallAttack : MonoBehaviour
     public float damage = 10f;
 
     private bool isMoving = false;
+    private bool spacePressed = false;
     private Rigidbody rb;
 
     private void Start()
@@ -17,8 +18,14 @@ public class BallAttack : MonoBehaviour
 
     private void Update()
     {
-        // Space 키를 누를 때 공을 움직이게 합니다.
-        if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
+        // Space 키를 누르면 플래그를 설정합니다.
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            spacePressed = true;
+        }
+
+        // Space 키를 누르고, 공이 움직이지 않는 상태일 때 공을 움직입니다.
+        if (spacePressed && !isMoving)
         {
             isMoving = true;
             rb.velocity = transform.forward * speed;
@@ -27,15 +34,13 @@ public class BallAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 적인지 확인하고 데미지를 입힙니다.
-        if (other.CompareTag("Enemy"))
+        // Space 키를 누르고, 적에게 닿으면 데미지를 입힙니다.
+        if (spacePressed && other.CompareTag("Boss"))
         {
             EnemyControl enemy = other.GetComponent<EnemyControl>();
-            BeeControl bee = other.GetComponent<BeeControl>();
             if (enemy != null)
             {
-                //나중에 할거 (시간남으면)
-                //enemy.TakeDamage(damage);
+                //enemy.TakeDamage(damage); // 적에게 데미지를 입히는 함수 호출
             }
 
             // 공을 멈춥니다.
@@ -44,6 +49,15 @@ public class BallAttack : MonoBehaviour
 
             // 공을 초기 위치로 되돌립니다. (필요에 따라 수정 가능)
             transform.position = Vector3.zero;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // Space 키를 뗐을 때 플래그를 초기화합니다.
+        if (other.CompareTag("Enemy"))
+        {
+            spacePressed = false;
         }
     }
 }

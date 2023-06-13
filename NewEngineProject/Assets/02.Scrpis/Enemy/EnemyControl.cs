@@ -99,5 +99,6 @@ public class EnemyControl : MonoBehaviour
         animator.SetBool("IsWalk", false);
         isPlayerDetected = false;
         transform.LookAt(playerController.transform.position);
+        ballHp.TakeDamage(5);
     }
 }

@@ -8,7 +8,6 @@ public class Door : MonoBehaviour
     public float maxRotationTime = 5.0f; // 최대 회전 시간
     public float rotationAngle = 90.0f; // 회전 각도
 
-    private float nextRotationTime; // 다음 회전까지의 시간
     private bool rotating; // 회전 여부
 
     private Quaternion initialRotation; // 초기 회전 상태
@@ -18,21 +17,15 @@ public class Door : MonoBehaviour
         // 초기 회전 상태 저장
         initialRotation = transform.rotation;
 
-        // 첫 회전까지의 시간 설정
-        nextRotationTime = Random.Range(minRotationTime, maxRotationTime);
         rotating = false;
     }
 
     private void Update()
     {
-        // 회전 타이머 업데이트
-        nextRotationTime -= Time.deltaTime;
 
-        if (nextRotationTime <= 0)
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            // 회전할 시간이 되면 회전 상태 변경
             rotating = !rotating;
-            nextRotationTime = Random.Range(minRotationTime, maxRotationTime);
         }
 
         if (rotating)

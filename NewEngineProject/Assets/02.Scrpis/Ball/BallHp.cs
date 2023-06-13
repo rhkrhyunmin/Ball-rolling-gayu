@@ -24,7 +24,6 @@ public class BallHp : MonoBehaviour
         if (collision.gameObject.CompareTag("Trap"))
         {
             TakeDamage(damageAmount);
-            
         }
 
         if (collision.gameObject.CompareTag("EndLine"))
