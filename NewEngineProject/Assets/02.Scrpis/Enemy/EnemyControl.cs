@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyControl : MonoBehaviour
 {
     public float detectionDistance = 10f;
-    public float attackDistance = 2f;
+    public float attackDistance = 0.5f;
     public float movementSpeed = 2f;
     public float currentHp = 0;
     public float MaxHp = 10;

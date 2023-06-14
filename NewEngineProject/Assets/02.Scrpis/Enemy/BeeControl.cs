@@ -97,5 +97,15 @@ public class BeeControl : MonoBehaviour
         animator.SetBool("IsWalk", false);
         isPlayerDetected = false;
         transform.LookAt(playerController.transform.position);
+
+        if (ballHp == null)
+        {
+            ballHp = GameObject.FindObjectOfType<BallHp>();
+        }
+
+        if (ballHp != null)
+        {
+            ballHp.TakeDamage(5);
+        }
     }
 }

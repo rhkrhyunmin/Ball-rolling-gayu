@@ -9,14 +9,13 @@ public class Trampoline : MonoBehaviour
 
     private bool isJumping = false;
     private Rigidbody rb;
-    private Animator animator;
+    public Animator animator;
 
-    private void Awake()
+    public void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ball"))
@@ -33,6 +32,7 @@ public class Trampoline : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             animator.SetBool("jump", true);
             StartCoroutine(ResetJump());
+            Debug.Log("1");
         }
     }
 
