@@ -25,6 +25,6 @@ public class Sawblade : MonoBehaviour
         // ¿Ãµø
         movementTimer += Time.deltaTime;
         float xPosition = Mathf.Sin(movementTimer * movementSpeed) * movementDistance;
-        transform.position = initialPosition + new Vector3(xPosition, 0f, 0f);
+        transform.position = initialPosition + new Vector3(0f, 0f, xPosition);
     }
 }

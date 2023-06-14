@@ -5,7 +5,6 @@ using UnityEngine;
 public class Trampoline : MonoBehaviour
 {
     public float jumpForce = 1000f;
-    public GameObject targetObject;
 
     private bool isJumping = false;
     private Rigidbody rb;
@@ -32,23 +31,15 @@ public class Trampoline : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             animator.SetBool("jump", true);
             StartCoroutine(ResetJump());
-            Debug.Log("1");
         }
     }
 
     private IEnumerator ResetJump()
     {
-        yield return new WaitForSeconds(0.5f); // 점프 후 대기할 시간 설정
+        yield return new WaitForSeconds(0.5f); 
 
         isJumping = false;
         animator.SetBool("jump", false);
     }
 
-    private void MoveToTarget()
-    {
-        if (targetObject != null)
-        {
-            transform.position = targetObject.transform.position;
-        }
-    }
 }
