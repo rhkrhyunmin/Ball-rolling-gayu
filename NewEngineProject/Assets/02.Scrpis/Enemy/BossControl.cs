@@ -14,6 +14,9 @@ public class BossControl : MonoBehaviour
     Rigidbody rb;
     BallHp ballHp;
 
+    public Transform bulletSpawn;
+    public GameObject bullet;
+
     [SerializeField]
     private BallMove playerController;
     private bool isPlayerDetected = false;
@@ -103,5 +106,9 @@ public class BossControl : MonoBehaviour
         animator.SetBool("IsWalk", false);
         isPlayerDetected = false;
         transform.LookAt(playerController.transform.position);
+
+        GameObject Bullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+
+        Destroy(bullet, 15f);
     }
 }
