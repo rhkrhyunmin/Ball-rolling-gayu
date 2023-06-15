@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 10
+  chaseDuration: 3
   ballObject: {fileID: 2911776783407910644, guid: 5012e3768de52e34eb082b908618d18d, type: 3}
 --- !u!54 &6899366587127580146
 Rigidbody:
@@ -143,4 +144,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 10
-  ballObject: {fileID: 0}
+  chaseDuration: 3
+  ballObject: {fileID: 2911776783407910644, guid: 5012e3768de52e34eb082b908618d18d, type: 3}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float bulletSpeed = 10f; // 총알 속도
-    public float chaseDuration = 3f; // Ball 추적 시간
+    public float chaseDuration = 1f; // Ball 추적 시간
 
     private Rigidbody bulletRigidbody;
     public GameObject ballObject; // Ball 오브젝트 참조
@@ -23,7 +23,6 @@ public class Bullet : MonoBehaviour
         ballObject = GameObject.FindWithTag("Ball");
         if (ballObject == null)
         {
-            Debug.LogError("Ball object not found!");
         }
 
         startTime = Time.time;
@@ -60,5 +59,15 @@ public class Bullet : MonoBehaviour
     {
         Vector3 moveAmount = transform.forward * bulletSpeed * Time.fixedDeltaTime;
         bulletRigidbody.MovePosition(transform.position + moveAmount);
+
+        Destroy(gameObject, 10f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

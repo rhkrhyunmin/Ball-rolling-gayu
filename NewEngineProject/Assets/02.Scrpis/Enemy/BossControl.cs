@@ -41,7 +41,6 @@ public class BossControl : MonoBehaviour
 
     private void Update()
     {
-        Destroy(bullet, 15f);
 
         if (playerController == null)
         {
@@ -59,7 +58,6 @@ public class BossControl : MonoBehaviour
                 animator.SetBool("IsWalk", true);
                 isPlayerDetected = true;
                 isIdle = false;
-                Debug.Log("1");
             }
         }
         else
@@ -110,7 +108,5 @@ public class BossControl : MonoBehaviour
         transform.LookAt(playerController.transform.position);
 
         GameObject Bullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
-
-        
     }
 }

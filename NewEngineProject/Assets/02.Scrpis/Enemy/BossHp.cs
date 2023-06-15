@@ -9,8 +9,12 @@ public class BossHp : MonoBehaviour
 
     private BossHpBar hpSlider;
 
+    Animator animator;
+
     private void Start()
     {
+        animator = GetComponent<Animator>();
+
         hpSlider = FindObjectOfType<BossHpBar>();
         if (hpSlider != null)
         {
