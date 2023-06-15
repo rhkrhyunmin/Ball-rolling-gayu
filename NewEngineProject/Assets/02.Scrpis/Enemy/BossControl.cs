@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossControl : MonoBehaviour
 {
     public float detectionDistance = 10f;
-    public float attackDistance = 2f;
+    public float attackDistance = 3f;
     public float movementSpeed = 2f;
     public float currentHp = 0;
     public float MaxHp = 10;
@@ -22,10 +22,13 @@ public class BossControl : MonoBehaviour
     private float attackTimer = 0f;
     public float attackCooldown = 2f;
 
+    BallAttack attack;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         ballHp = GetComponent<BallHp>();
+        attack = GetComponent<BallAttack>();
     }
 
     public void FindPlayer(BallMove ball)
