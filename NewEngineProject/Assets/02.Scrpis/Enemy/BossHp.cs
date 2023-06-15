@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossHp : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class BossHp : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHp -= damage;
+        Debug.Log(currentHp);
         currentHp = Mathf.Clamp(currentHp, 0, maxHp);
 
         if (hpSlider != null)
@@ -41,6 +43,7 @@ public class BossHp : MonoBehaviour
 
     private void Die()
     {
-        
+        animator.SetBool("IsDie",false);
+        //SceneManager.LoadScene(4);
     }
 }

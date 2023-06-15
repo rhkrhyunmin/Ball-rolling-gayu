@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - OpenUI
   - EndLine
+  - Boss
   layers:
   - Default
   - TransparentFX
