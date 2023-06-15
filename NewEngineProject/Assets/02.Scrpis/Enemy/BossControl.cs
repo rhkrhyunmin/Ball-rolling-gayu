@@ -41,6 +41,8 @@ public class BossControl : MonoBehaviour
 
     private void Update()
     {
+        Destroy(bullet, 15f);
+
         if (playerController == null)
         {
             return;
@@ -109,6 +111,6 @@ public class BossControl : MonoBehaviour
 
         GameObject Bullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
 
-        Destroy(bullet, 15f);
+        
     }
 }
