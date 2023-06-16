@@ -31,12 +31,4 @@ public class thornbat : MonoBehaviour
         float zPosition = Mathf.Sin(movementTimer * movementSpeed) * movementDistance;
         transform.position = initialPosition + new Vector3(zPosition, 0f, 0f);
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ball"))
-        {
-            
-        }
-    }
 }

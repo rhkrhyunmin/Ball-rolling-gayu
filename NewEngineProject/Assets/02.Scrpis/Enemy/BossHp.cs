@@ -1,49 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class BossHp : MonoBehaviour
 {
-    public float currentHp = 0;
-    public float maxHp = 10;
+    public float maxHp = 20f;
+    public float currentHp = 0f;
+    public float damageAmount = 3f;
 
-    private BossHpBar hpSlider;
+    public Slider healthSlider;
 
-    Animator animator;
+    private void Awake()
+    {
+        healthSlider = GetComponentInChildren<Slider>();
+    }
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        currentHp = maxHp;
+        UpdateHealthBar();
+        healthSlider.value = maxHp;
+    }
 
-        hpSlider = FindObjectOfType<BossHpBar>();
-        if (hpSlider != null)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
         {
-            hpSlider.SetMaxHp(maxHp);
-            hpSlider.SetHp(currentHp);
+            TakeDamage(damageAmount);
         }
     }
 
     public void TakeDamage(float damage)
     {
         currentHp -= damage;
-        Debug.Log(currentHp);
-        currentHp = Mathf.Clamp(currentHp, 0, maxHp);
+        UpdateHealthBar(); // 체력 바 업데이트
 
-        if (hpSlider != null)
+        if (currentHp <= 5f)
         {
-            hpSlider.SetHp(currentHp);
-        }
-
-        if (currentHp <= 0)
-        {
-            Die();
+            SceneManager.LoadScene("Clear");
         }
     }
 
-    private void Die()
+    private void UpdateHealthBar()
     {
-        animator.SetBool("IsDie",false);
-        //SceneManager.LoadScene(4);
+        healthSlider.value = currentHp; // 현재 체력 값을 체력 바에 할당
+        healthSlider.maxValue = maxHp; // 최대 체력 값을 체력 바에 할당
     }
 }

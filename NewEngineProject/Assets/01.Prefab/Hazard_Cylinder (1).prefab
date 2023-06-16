@@ -102,7 +102,7 @@ MonoBehaviour:
   rotationSpeed: 150
   movementDistance: 20
   movementSpeed: 3
-  damageAmount: 10
+  damageAmount: 3
 --- !u!136 &2880323731820443629
 CapsuleCollider:
   m_ObjectHideFlags: 0

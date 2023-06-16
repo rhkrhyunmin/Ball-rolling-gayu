@@ -99,7 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   movementDistance: 3
-  movementSpeed: 3
+  movementSpeed: 1
+  damageAmount: 3
 --- !u!64 &-6914292060661834295
 MeshCollider:
   m_ObjectHideFlags: 0

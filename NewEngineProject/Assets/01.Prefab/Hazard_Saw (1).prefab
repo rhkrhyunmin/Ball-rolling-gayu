@@ -100,7 +100,7 @@ MonoBehaviour:
   rotationSpeed: 150
   movementDistance: 20
   movementSpeed: 3
-  damageAmount: 10
+  damageAmount: 3
 --- !u!64 &-4111703498112245103
 MeshCollider:
   m_ObjectHideFlags: 0
