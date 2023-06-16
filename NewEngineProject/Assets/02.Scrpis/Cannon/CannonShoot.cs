@@ -24,17 +24,21 @@ public class CannonShoot : MonoBehaviour
     private float chargeTime;
     
     private LineRenderer lineRenderer;
+    Vector3 startPosition;
+    Vector3 startVelocity;
 
-    private int numPoints = 20; // 선에 사용할 점의 개수
-    private Vector3[] points; // 베지어 곡선에서 사용할 점의 배열
+    int i = 0;
+    private int numPoints = 30; // 선에 사용할 점의 개수
+    float lineTimer = 0.3f;
+
+   // private Vector3[] points; // 베지어 곡선에서 사용할 점의 배열
 
     public UnityEvent<BallMove> OnFireEvent;
     public UnityEvent<BallMove> OnMoveEvent;
 
     private void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        points = new Vector3[numPoints];
+       lineRenderer = GetComponent<LineRenderer>();
     }
 
     private void Update()
@@ -42,7 +46,7 @@ public class CannonShoot : MonoBehaviour
         Timer();
         if (isCharging)
         {
-            UpdateLineRenderer();
+            //UpdateLineRenderer();
 
         }
     }
@@ -85,18 +89,38 @@ public class CannonShoot : MonoBehaviour
         chargeTime += Time.deltaTime;
         currentForceMagnitude = Mathf.Clamp(chargeTime * chargeRate, minForceMagnitude, maxForceMagnitude);
         isCharging = true;
-        UpdateLineRenderer();
+        DrawLine();
+        //UpdateLineRenderer();
     }
 
-    private void UpdateLineRenderer()
+    void DrawLine()
+    {
+        i = 0;
+        lineRenderer.positionCount = numPoints;
+        lineRenderer.enabled = true;
+        startPosition = cannonExit.position;
+        startVelocity = currentForceMagnitude * cannonExit.transform.forward;
+        lineRenderer.SetPosition(i, startPosition);
+        for (float j = 0; i < lineRenderer.positionCount - 1; j += lineTimer)
+        {
+            i++;
+            Vector3 linePosition = startPosition + j * startVelocity;
+            linePosition.y = startPosition.y + startVelocity.y * j + 0.5f * Physics.gravity.y * j * j;
+            lineRenderer.SetPosition(i, linePosition);
+        }
+    }
+}
+
+
+   /* private void UpdateLineRenderer()
     {
         CalculateBezierCurve();
         lineRenderer.positionCount = numPoints;
         lineRenderer.SetPositions(points);
 
-    }
+    }*/
 
-    private void CalculateBezierCurve()
+   /* private void CalculateBezierCurve()
     {
         Vector3 startPosition = cannonExit.position;
         Vector3 endPosition = cannonExit.position + cannonExit.forward * currentForceMagnitude * 0.2f;
@@ -110,9 +134,9 @@ public class CannonShoot : MonoBehaviour
             points[i] = CalculateBezierPoint(t, startPosition, endPosition, controlPosition);
             t += tStep;
         }
-    }
+    }*/
 
-    private Vector3 CalculateBezierPoint(float t, Vector3 start, Vector3 end, Vector3 control)
+    /*private Vector3 CalculateBezierPoint(float t, Vector3 start, Vector3 end, Vector3 control)
     {
         // 베지어 곡선의 점을 계산
         float u = 1f - t;
@@ -125,7 +149,6 @@ public class CannonShoot : MonoBehaviour
                         3f * uu * t * control +
                         3f * u * tt * end +
                         ttt * end;
-
         return point;
-    }
-}
+    }*/
+//}

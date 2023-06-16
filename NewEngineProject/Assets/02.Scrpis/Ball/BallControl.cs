@@ -38,7 +38,6 @@ public class BallControl : MonoBehaviour
             
         }
         CheckFire();
-        Debug.Log("1");
 
         CheckWait();
     }
