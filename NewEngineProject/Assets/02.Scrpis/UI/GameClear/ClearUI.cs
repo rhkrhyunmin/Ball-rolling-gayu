@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ClearUI : MonoBehaviour
 {
@@ -34,15 +35,15 @@ public class ClearUI : MonoBehaviour
 
                 // 다음 글 활성화
                 currentTextIndex++;
-                if (currentTextIndex < texts.Length)
-                {
-                    texts[currentTextIndex].gameObject.SetActive(true);
-                }
-                else
+                if (currentTextIndex >= texts.Length)
                 {
                     // 모든 글이 나타났을 때 패널 비활성화
                     panelObject.SetActive(false);
+                    SceneManager.LoadScene("Intro");
+                    return;
                 }
+
+                texts[currentTextIndex].gameObject.SetActive(true);
 
                 displayTimer = 0f;
             }

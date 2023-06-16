@@ -20,21 +20,20 @@ public class tutorial : MonoBehaviour
 
     private float timer = 0f;
     private bool isNextTextRunning = false; // NextText() 함수 실행 여부
+    private float nextTextTimer = 0f; // 다음 텍스트 전환까지의 타이머
+
 
     private void Update()
     {
-        ObjCheck();
-
-        if (!isGamePaused)
+        if (!isNextTextRunning)
         {
-            timer += Time.deltaTime;
-            if (timer >= timeInterval)
+            nextTextTimer += Time.deltaTime;
+            if (nextTextTimer >= timeInterval)
             {
-                timer = 0f;
-                if (!isNextTextRunning)
-                {
-                    NextText();
-                }
+                //NextText();
+                nextTextTimer = 0f;
+                ObjCheck();
+
             }
         }
 
@@ -46,61 +45,53 @@ public class tutorial : MonoBehaviour
         }
     }
 
+   /* private void NextText()
+    {
+        if (isNextTextRunning)
+            return;
+
+        int newIndex = GetNextIndex();
+        int previousIndex = currentIndex;
+
+        if (newIndex != -1)
+        {
+            FirstText[currentIndex].gameObject.SetActive(false);
+            currentIndex = newIndex;
+            FirstText[currentIndex].gameObject.SetActive(true);
+        }
+
+        isNextTextRunning = true;
+        ObjCheck();
+    }
+    private int GetNextIndex()
+    {
+        int count = FirstText.Length;
+        if (count <= 1)
+            return -1;
+
+        int attempts = 0;
+        int randomIndex = currentIndex;
+        while (attempts < count)
+        {
+            randomIndex = (randomIndex + 1) % count;
+            if (randomIndex != currentIndex && randomIndex != previousIndex)
+                return randomIndex;
+
+            attempts++;
+        }
+
+        return -1;
+    }*/
+
     private void ObjCheck()
     {
         bool check = Physics.CheckBox(gameObjects[currentIndex].transform.position + gameObjects[currentIndex].center, gameObjects[currentIndex].size, Quaternion.identity, layer);
         if (check)
         {
             textMeshes[currentIndex].gameObject.SetActive(false);
-            currentIndex++;
-            if (currentIndex >= textMeshes.Length)
-            {
-                currentIndex = 0;
-            }
-            textMeshes[currentIndex].gameObject.SetActive(true);
+            //NextText();
+            textMeshes[currentIndex].gameObject.SetActive(true);    
         }
-    }
-
-    private void NextText()
-    {
-        int newIndex = GetNextIndex();
-
-        if (newIndex != 0)
-        {
-            FirstText[currentIndex].gameObject.SetActive(false);
-            currentIndex = (currentIndex + 1) % FirstText.Length;
-            FirstText[currentIndex].gameObject.SetActive(true);
-        }
-        else
-        {
-            FirstText[currentIndex].gameObject.SetActive(false); // 현재 텍스트를 비활성화
-        }
-    }
-
-    private int GetNextIndex()
-    {
-        int count = FirstText.Length;
-        if (count <= 1)
-        {
-            return 0; // 배열의 크기가 1이하인 경우에는 항상 0번째 인덱스를 반환
-        }
-
-        int attempts = 0;
-        int randomIndex = UnityEngine.Random.Range(0, count); // 랜덤한 인덱스에서 시작
-        while (attempts < count)
-        {
-            if (randomIndex != currentIndex && randomIndex != previousIndex)
-            {
-                return randomIndex; // 이전 인덱스와 현재 인덱스가 아닌 경우, 해당 인덱스 반환
-            }
-            else
-            {
-                randomIndex = (randomIndex + 1) % count; // 다음 인덱스로 이동
-                attempts++;
-            }
-        }
-
-        return -1; // 적절한 인덱스를 찾지 못한 경우 -1 반환
     }
 
     private void OnDrawGizmos()
