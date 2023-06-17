@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float bulletSpeed = 10f; // 총알 속도
+    public float bulletSpeed = 15f; // 총알 속도
     public float chaseDuration = 0.3f; // Ball 추적 시간
 
     private Rigidbody bulletRigidbody;
@@ -60,7 +60,7 @@ public class Bullet : MonoBehaviour
         Vector3 moveAmount = transform.forward * bulletSpeed * Time.fixedDeltaTime;
         bulletRigidbody.MovePosition(transform.position + moveAmount);
 
-        Destroy(gameObject, 10f);
+        Destroy(gameObject, 4f);
     }
 
     private void OnCollisionEnter(Collision collision)

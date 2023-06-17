@@ -45,7 +45,7 @@ public class tutorial : MonoBehaviour
         }
     }
 
-   /* private void NextText()
+    private void NextText()
     {
         if (isNextTextRunning)
             return;
@@ -81,7 +81,7 @@ public class tutorial : MonoBehaviour
         }
 
         return -1;
-    }*/
+    }
 
     private void ObjCheck()
     {

@@ -57,6 +57,7 @@ public class ClearBallMove : MonoBehaviour
             Vector3 direction = (collision.transform.position - transform.position).normalized;
             rb.AddForce(-direction * bounceForce, ForceMode.Impulse);
             currentMovementSpeed = 5;
+            Destroy(gameObject, 3f);
         }
     }
 }
