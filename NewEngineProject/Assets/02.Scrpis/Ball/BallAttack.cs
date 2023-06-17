@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BallAttack : MonoBehaviour
 {
-    public float dashForce = 10f;          // 돌진 힘
     public float dashDuration = 0.5f;      // 돌진 지속 시간
     public float dashCooldown = 1f;        // 돌진 쿨다운 시간
     public float dashDamage = 10f;         // 돌진으로 입힐 데미지
@@ -16,7 +15,6 @@ public class BallAttack : MonoBehaviour
 
     private void Update()
     {
-        // 돌진 쿨다운 갱신
         dashCooldownTimer -= Time.deltaTime;
 
         // 스페이스 바를 누르고 돌진 쿨다운이 0보다 작거나 같을 때만 돌진 가능

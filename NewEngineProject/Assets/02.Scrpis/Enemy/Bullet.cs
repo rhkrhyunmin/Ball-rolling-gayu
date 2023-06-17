@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float bulletSpeed = 10f; // 총알 속도
-    public float chaseDuration = 1f; // Ball 추적 시간
+    public float chaseDuration = 0.3f; // Ball 추적 시간
 
     private Rigidbody bulletRigidbody;
     public GameObject ballObject; // Ball 오브젝트 참조
