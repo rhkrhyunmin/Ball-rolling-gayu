@@ -24,7 +24,6 @@ public class BallAttack : MonoBehaviour
         {
             // 돌진 시작
             StartDash();
-            Debug.Log("1");
         }
 
         // 돌진 중일 때 타이머 갱신 및 돌진 종료 체크

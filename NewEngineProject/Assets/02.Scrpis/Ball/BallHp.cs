@@ -31,6 +31,11 @@ public class BallHp : MonoBehaviour
             gameOverPanel.SetActive(true);
             Time.timeScale = 0f;
         }
+
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(damageAmount);
+        }
     }
 
     public void TakeDamage(float damage)
