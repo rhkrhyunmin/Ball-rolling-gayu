@@ -7,7 +7,7 @@ public class BallAttack : MonoBehaviour
     public float dashForce = 10f;          // 돌진 힘
     public float dashDuration = 0.5f;      // 돌진 지속 시간
     public float dashCooldown = 1f;        // 돌진 쿨다운 시간
-    public float dashDamage = 10f;         // 돌진으로 입힐 데미지
+    public float dashDamage = 5;         // 돌진으로 입힐 데미지
     public float dashKnockbackForce = 5f;  // 돌진으로 적을 튕겨낼 힘
     public float detectionRadius = 5f;      // 보스 감지 반경
     public float upwardForce = 5f;       // 위로 가할 힘
@@ -15,6 +15,7 @@ public class BallAttack : MonoBehaviour
     private Rigidbody playerRigidbody;  // 플레이어 Rigidbody 컴포넌트
 
     private bool isDashing = false;        // 돌진 중인지 여부
+    private bool hasDamagedBoss = false;  // 이미 보스에게 데미지를 주었는지 여
     private float dashTimer = 0f;          // 돌진 타이머
     private float dashCooldownTimer = 0f;  // 돌진 쿨다운 타이머
     public GameObject bossObject;  // 보스 게임 오브젝트
@@ -52,7 +53,6 @@ public class BallAttack : MonoBehaviour
         }
         else if (!isDashing && dashCooldownTimer <= 0f && Input.GetKey(KeyCode.Space))
         {
-            // 돌진 쿨다운이 끝났고, Space 키가 여전히 눌려있으면 돌진 유지
             StartDash();
         }
     }
@@ -77,6 +77,10 @@ public class BallAttack : MonoBehaviour
         // 돌진 종료
         isDashing = false;
 
+        // 플레이어를 뒤로 밀쳐내는 힘 적용
+        Vector3 knockbackDirection = -transform.forward;
+        playerRigidbody.AddForce(knockbackDirection * dashKnockbackForce, ForceMode.Impulse);
+
         // 돌진 쿨다운 설정
         dashCooldownTimer = dashCooldown;
     }
@@ -84,14 +88,19 @@ public class BallAttack : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 돌진 중에 적과 충돌하면 데미지 입히고 튕겨나감
-        if (isDashing && other.CompareTag("Boss"))
+        if (isDashing && other.CompareTag("Boss") && !hasDamagedBoss)
         {
             // 적에게 데미지 입히기
-            other.GetComponent<BossHp>().TakeDamage(dashDamage);
+            BossHp bossHp = other.GetComponent<BossHp>();
+            if (bossHp != null)
+            {
+                bossHp.TakeDamage(dashDamage);
+                hasDamagedBoss = true;  // 데미지를 주었음을 표시
+            }
 
             // 플레이어를 뒤로 튕겨나가는 힘 적용
             Vector3 knockbackDirection = -transform.forward;
-            GetComponent<Rigidbody>().AddForce(knockbackDirection * dashKnockbackForce, ForceMode.Impulse);
+            playerRigidbody.AddForce(knockbackDirection * dashKnockbackForce, ForceMode.Impulse);
         }
     }
 }

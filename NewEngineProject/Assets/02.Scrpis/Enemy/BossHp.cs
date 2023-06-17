@@ -36,6 +36,7 @@ public class BossHp : MonoBehaviour
     {
         currentHp -= damage;
         UpdateHealthBar(); // 체력 바 업데이트
+        Debug.Log(currentHp);
 
         if (currentHp <= 5f)
         {
