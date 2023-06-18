@@ -91,7 +91,7 @@ public class BallAttack : MonoBehaviour
             }
 
             // 적에게 데미지 입히기
-            BossHp bossHp = other.GetComponent<BossHp>();
+            BossControl bossHp = other.GetComponent<BossControl>();
             if (bossHp != null)
             {
                 bossHp.TakeDamage(dashDamage);
