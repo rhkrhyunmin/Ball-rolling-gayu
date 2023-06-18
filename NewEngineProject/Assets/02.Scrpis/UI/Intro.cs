@@ -7,7 +7,7 @@ public class Intro : MonoBehaviour
 {
     public void NextScene()
     {
-        LoadingScence.LoadScene("Main");
+        LoadingScence.LoadScene("Tutorial");
     }
 
     public void Exit()
