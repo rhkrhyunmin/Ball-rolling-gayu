@@ -10,10 +10,14 @@ public class Trampoline : MonoBehaviour
     private Rigidbody rb;
     public Animator animator;
 
+    private AudioSource audioSource; // AudioSource 변수 추가
+    public AudioClip jumpSound;
+
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -31,6 +35,8 @@ public class Trampoline : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             animator.SetBool("jump", true);
             StartCoroutine(ResetJump());
+
+            audioSource.PlayOneShot(jumpSound);
         }
     }
 

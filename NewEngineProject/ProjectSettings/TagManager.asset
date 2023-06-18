@@ -12,6 +12,7 @@ TagManager:
   - EndLine
   - Boss
   - Bullet
+  - Bossarea
   layers:
   - Default
   - TransparentFX

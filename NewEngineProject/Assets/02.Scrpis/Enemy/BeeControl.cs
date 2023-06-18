@@ -13,6 +13,7 @@ public class BeeControl : MonoBehaviour
 
     Rigidbody rb;
     BallHp ballHp;
+    Bullet bullet;
 
     [SerializeField]
     private BallMove playerController;
@@ -26,6 +27,7 @@ public class BeeControl : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         ballHp = GetComponent<BallHp>();
+        bullet = GetComponent<Bullet>();
     }
 
     public void FindPlayer(BallMove ball)
@@ -35,6 +37,7 @@ public class BeeControl : MonoBehaviour
 
     private void Update()
     {
+
         if (playerController == null)
         {
             return;
@@ -82,7 +85,6 @@ public class BeeControl : MonoBehaviour
             {
                 isAttacking = false;
                 animator.SetBool("IsAttack", false);
-                Debug.Log("isattack bee");
                 animator.SetBool("IsWalk", true);
                 isPlayerDetected = true;
                 attackTimer = 0f;
@@ -97,6 +99,7 @@ public class BeeControl : MonoBehaviour
         animator.SetBool("IsWalk", false);
         isPlayerDetected = false;
         transform.LookAt(playerController.transform.position);
+        bullet.ChaseBall();
 
         if (ballHp == null)
         {
