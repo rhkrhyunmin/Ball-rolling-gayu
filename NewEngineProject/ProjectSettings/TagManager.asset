@@ -13,6 +13,7 @@ TagManager:
   - Boss
   - Bullet
   - Bossarea
+  - Goal
   layers:
   - Default
   - TransparentFX
