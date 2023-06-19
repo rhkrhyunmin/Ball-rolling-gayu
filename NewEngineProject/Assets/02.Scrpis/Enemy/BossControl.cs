@@ -71,6 +71,7 @@ public class BossControl : MonoBehaviour
 
         if (isIdle)
         {
+            
             // IDLE 애니메이션이 실행 중인 경우
             if (distanceToPlayer <= detectionDistance)
             {
@@ -85,8 +86,9 @@ public class BossControl : MonoBehaviour
             // Walk 애니메이션 실행 중인 경우
             if (distanceToPlayer > detectionDistance)
             {
+                StartCoroutine(ResetMovementAfterAttack());
                 // 제한된 거리 밖으로 나가면 IDLE 애니메이션 실행
-                animator.SetBool("IsWalk", false);
+                animator.SetBool("IsWalk", true);
                 animator.ResetTrigger("IsAttack");
                 animator.ResetTrigger("IsHit");
                 isPlayerDetected = false;
@@ -99,7 +101,6 @@ public class BossControl : MonoBehaviour
             Vector3 direction = (playerController.transform.position - transform.position).normalized;
             transform.Translate(direction * movementSpeed * Time.deltaTime);
             transform.LookAt(playerController.transform.position);
-            Debug.Log("1");
 
             if (distanceToPlayer <= attackDistance && !isAttacking)
             {
@@ -119,20 +120,30 @@ public class BossControl : MonoBehaviour
                 animator.SetBool("IsWalk", false);
                 isPlayerDetected = false;
                 attackTimer = 0f;
+                
             }
         }
     }
 
     private void Attack()
     {
+        canMove = false;
         transform.LookAt(playerController.transform.position);
         animator.SetBool("IsWalk", false);
         animator.SetTrigger("IsAttack");
-
+        StartCoroutine(ResetMovementAfterAttack());
     }
+
+    private IEnumerator ResetMovementAfterAttack()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        canMove = true; // 공격 후 일정 시간이 지나면 움직임 가능하도록 변수 변경
+    }
+
     public void Fire()
     {
         GameObject Bullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+        
     }
 
      private void OnCollisionEnter(Collision collision)
