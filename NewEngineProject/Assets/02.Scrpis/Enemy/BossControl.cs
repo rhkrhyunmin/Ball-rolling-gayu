@@ -117,7 +117,7 @@ public class BossControl : MonoBehaviour
                 isAttacking = true;
                 animator.ResetTrigger("IsHit");
                 animator.SetTrigger("IsAttack");
-                animator.SetBool("IsWalk", false);
+                animator.SetBool("IsWalk", true);
                 isPlayerDetected = false;
                 attackTimer = 0f;
                 
