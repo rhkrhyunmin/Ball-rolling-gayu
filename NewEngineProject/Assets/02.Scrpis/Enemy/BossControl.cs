@@ -29,6 +29,8 @@ public class BossControl : MonoBehaviour
     private bool isPlayerDetected = false;
     private bool isIdle = true;
     private bool isAttacking = false;
+    private bool canMove = true;
+
     private float attackTimer = 0f;
     public float attackCooldown = 2f;
 
@@ -92,11 +94,12 @@ public class BossControl : MonoBehaviour
             }
         }
 
-        if (isPlayerDetected)
+        if (isPlayerDetected && canMove)
         {
             Vector3 direction = (playerController.transform.position - transform.position).normalized;
             transform.Translate(direction * movementSpeed * Time.deltaTime);
             transform.LookAt(playerController.transform.position);
+            Debug.Log("1");
 
             if (distanceToPlayer <= attackDistance && !isAttacking)
             {
@@ -109,11 +112,12 @@ public class BossControl : MonoBehaviour
             attackTimer += Time.deltaTime;
             if (attackTimer >= attackCooldown)
             {
-                isAttacking = false;
+                movementSpeed = 0;
+                isAttacking = true;
                 animator.ResetTrigger("IsHit");
                 animator.SetTrigger("IsAttack");
-                animator.SetBool("IsWalk", true);
-                isPlayerDetected = true;
+                animator.SetBool("IsWalk", false);
+                isPlayerDetected = false;
                 attackTimer = 0f;
             }
         }
@@ -124,7 +128,7 @@ public class BossControl : MonoBehaviour
         transform.LookAt(playerController.transform.position);
         animator.SetBool("IsWalk", false);
         animator.SetTrigger("IsAttack");
-        
+
     }
     public void Fire()
     {
