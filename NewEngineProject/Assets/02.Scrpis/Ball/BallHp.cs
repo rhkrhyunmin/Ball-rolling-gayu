@@ -32,10 +32,10 @@ public class BallHp : MonoBehaviour
             Time.timeScale = 0f;
         }
 
-        /*if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullet"))
         {
             TakeDamage(damageAmount);
-        }*/
+        }
     }
 
     public void TakeDamage(float damage)
