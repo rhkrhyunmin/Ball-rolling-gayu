@@ -20,7 +20,6 @@ public class BossControl : MonoBehaviour
     public Animator animator;
 
     Rigidbody rb;
-    BallHp ballHp;
 
     public Transform bulletSpawn;
     public GameObject bullet;
@@ -44,7 +43,6 @@ public class BossControl : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        ballHp = GetComponent<BallHp>();
         attack = GetComponent<BallAttack>();
 
         currentHp = maxHp;
@@ -76,8 +74,6 @@ public class BossControl : MonoBehaviour
             {
                 // 제한된 거리 안에 플레이어가 들어오면 Walk 애니메이션 실행
                 animator.SetBool("IsWalk", true);
-                animator.ResetTrigger("IsAttack");
-                animator.ResetTrigger("IsHit");
                 isPlayerDetected = true;
                 isIdle = false;
             }
@@ -128,8 +124,6 @@ public class BossControl : MonoBehaviour
         transform.LookAt(playerController.transform.position);
         animator.SetBool("IsWalk", false);
         animator.SetTrigger("IsAttack");
-        animator.ResetTrigger("IsAttack");
-        animator.SetBool("IsIdle", false);
         
     }
     public void Fire()
@@ -163,7 +157,7 @@ public class BossControl : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        healthSlider.value = currentHp; // 현재 체력 값을 체력 바에 할당
-        healthSlider.maxValue = maxHp; // 최대 체력 값을 체력 바에 할당
+        healthSlider.value = currentHp; 
+        healthSlider.maxValue = maxHp; 
     }
 }
