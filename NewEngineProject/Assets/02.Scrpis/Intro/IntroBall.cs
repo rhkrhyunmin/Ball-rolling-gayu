@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class IntroBall : MonoBehaviour
 {
-    public Transform target; // 목표 지점의 Transform 컴포넌트
-    public Transform plane; // 평면의 Transform 컴포넌트
-    public Transform initialPosition; // 처음 위치의 Transform 컴포넌트
+    public string targetTag = "Goal"; // 타겟 오브젝트의 태그
+    public float speed = 5f;
+    public GameObject prefabSpawner; // SpawnBall 프리팹
 
-    private Rigidbody rb;
-    private Vector3 initialPositionVector; // 처음 위치 저장 변수
-
+    private Transform target; // 타겟 오브젝트
     private bool reachedTarget = false; // 목표 지점 도달 여부
+
+    private float timer = 0f; // 타이머 변수
+    private bool shouldDestroy = false; // 삭제 여부
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        initialPositionVector = initialPosition.position; // 처음 위치 저장
+        // 타겟 오브젝트 찾기
+        target = GameObject.FindGameObjectWithTag(targetTag)?.transform;
     }
 
     private void FixedUpdate()
@@ -25,40 +26,51 @@ public class IntroBall : MonoBehaviour
         {
             MoveTowardsTarget();
         }
+        else if (shouldDestroy)
+        {
+            timer += Time.fixedDeltaTime;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Goal"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void MoveTowardsTarget()
     {
+        if (target == null)
+        {
+            return;
+        }
+
         // 공과 목표 지점 사이의 방향 벡터 계산
         Vector3 direction = target.position - transform.position;
 
-        // 평면의 법선 벡터 계산
-        Vector3 normal = plane.up;
+        // 목표 지점까지의 거리 계산
+        float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-        // 방향 벡터를 평면에 투영
-        Vector3 projectedDirection = Vector3.ProjectOnPlane(direction, normal);
-
-        // 투영된 방향으로 공을 굴러가도록 설정
-        rb.AddForce(projectedDirection.normalized * 10f);
-
-        // 목표 지점에 도달했는지 확인
-        if (Vector3.Distance(transform.position, target.position) < 0.5f)
+        if (distanceToTarget < 0.5f)
         {
             reachedTarget = true;
-            ResetToInitialPosition(); // 목표 지점에 도달하면 처음 위치로 되돌아감
+            shouldDestroy = true;
+            SpawnPrefab();
+        }
+        else
+        {
+            // 이동 속도와 방향을 곱하여 이동 벡터 계산
+            Vector3 movement = direction.normalized * speed * Time.fixedDeltaTime;
+
+            // 현재 위치에 이동 벡터를 더하여 이동
+            transform.position += movement;
         }
     }
 
-    private void ResetToInitialPosition()
+    private void SpawnPrefab()
     {
-        // 공의 위치를 처음 위치로 설정
-        transform.position = initialPositionVector;
-
-        // 공의 속도와 힘 초기화
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.Sleep(); // 공의 물리 시뮬레이션 정지
-
-        reachedTarget = false; // 목표 지점 도달 여부 초기화
+        Instantiate(prefabSpawner, transform.position, Quaternion.identity);
     }
 }
