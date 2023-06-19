@@ -10,6 +10,8 @@ public class SpawnBall : MonoBehaviour
     public float minX = 0f;  // 최소 x 좌표
     public float maxX = 7f;  // 최대 x 좌표
 
+    public float SpawnTime = 15;
+
 
     private float timer = 0f;      // 타이머 변수
 
@@ -17,7 +19,7 @@ public class SpawnBall : MonoBehaviour
     {
         timer += Time.deltaTime;   // 프레임 간 시간 업데이트
 
-        if (timer >= 10f)           // 10초마다 실행
+        if (timer >= SpawnTime)           // 10초마다 실행
         {
             Spawn();            // 공 생성 함수 호출
             timer = 0f;             // 타이머 초기화

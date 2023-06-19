@@ -49,8 +49,6 @@ public class CannonControl : MonoBehaviour
         if (Input.GetButton("Jump") && currentState == CannonState.CHARGE)
         {
             cannonShoot.Charge();
-            /*currentPower += chargeSpeed * Time.deltaTime;
-            currentPower = Mathf.Clamp(currentPower, 0, 100);*/
         }
 
         if (Input.GetButtonUp("Jump") && currentState == CannonState.CHARGE)

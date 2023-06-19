@@ -76,6 +76,8 @@ public class BossControl : MonoBehaviour
             {
                 // 제한된 거리 안에 플레이어가 들어오면 Walk 애니메이션 실행
                 animator.SetBool("IsWalk", true);
+                animator.ResetTrigger("IsAttack");
+                animator.ResetTrigger("IsHit");
                 isPlayerDetected = true;
                 isIdle = false;
             }
@@ -87,6 +89,8 @@ public class BossControl : MonoBehaviour
             {
                 // 제한된 거리 밖으로 나가면 IDLE 애니메이션 실행
                 animator.SetBool("IsWalk", false);
+                animator.ResetTrigger("IsAttack");
+                animator.ResetTrigger("IsHit");
                 isPlayerDetected = false;
                 isIdle = true;
             }
@@ -100,7 +104,6 @@ public class BossControl : MonoBehaviour
 
             if (distanceToPlayer <= attackDistance && !isAttacking)
             {
-                // 공격 범위 안에 플레이어가 있고, 공격 중이 아닌 경우 공격 애니메이션 실행
                 Attack();
             }
         }
@@ -111,9 +114,9 @@ public class BossControl : MonoBehaviour
             if (attackTimer >= attackCooldown)
             {
                 isAttacking = false;
-                animator.SetBool("IsAttack", false);
+                animator.ResetTrigger("IsHit");
+                animator.SetTrigger("IsAttack");
                 animator.SetBool("IsWalk", true);
-                animator.SetBool("IsHit", false);
                 isPlayerDetected = true;
                 attackTimer = 0f;
             }
@@ -122,13 +125,15 @@ public class BossControl : MonoBehaviour
 
     private void Attack()
     {
-        isAttacking = true;
-        animator.SetBool("IsAttack", true);
-        animator.SetBool("IsWalk", false);
-        animator.SetBool("IsHit", false);
-        isPlayerDetected = false;
         transform.LookAt(playerController.transform.position);
-
+        animator.SetBool("IsWalk", false);
+        animator.SetTrigger("IsAttack");
+        animator.ResetTrigger("IsAttack");
+        animator.SetBool("IsIdle", false);
+        
+    }
+    public void Fire()
+    {
         GameObject Bullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
     }
 
@@ -142,10 +147,11 @@ public class BossControl : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        animator.SetBool("IsHit", true);
-        animator.SetBool("IsAttack", false);
         currentHp -= damage;
-        
+        animator.SetBool("IsWalk", false);
+        animator.SetTrigger("IsHit");
+        animator.ResetTrigger("IsAttack");
+
         UpdateHealthBar(); // 체력 바 업데이트
         Debug.Log(currentHp);
 

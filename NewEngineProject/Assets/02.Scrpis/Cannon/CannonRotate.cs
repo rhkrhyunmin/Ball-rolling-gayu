@@ -25,7 +25,7 @@ public class CannonRotate : MonoBehaviour
         currentRotation.z += zRotation;
 
         currentRotation.y = Mathf.Clamp(currentRotation.y, -20f, 20f);
-        currentRotation.z = Mathf.Clamp(currentRotation.z, -30f, 30f);
+        currentRotation.z = Mathf.Clamp(currentRotation.z, -20f, 30f);
         transform.localRotation = Quaternion.Euler(currentRotation);
     }
 }

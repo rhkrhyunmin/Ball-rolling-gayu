@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         }
 
         startTime = Time.time;
-        initialDirection = transform.forward;
+        initialDirection = transform.up;
         chaseEndTime = Time.time + chaseDuration;
 
     }

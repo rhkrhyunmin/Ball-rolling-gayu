@@ -8445,7 +8445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc7a43edd56e22479d85139d3be6a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
+  detectionDistance: 40
   attackDistance: 15
   movementSpeed: 8
   maxHp: 20
@@ -51817,7 +51817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1177376691
 Transform:
   m_ObjectHideFlags: 0
