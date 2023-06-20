@@ -71,7 +71,7 @@ public class BossControl : MonoBehaviour
 
         if (isIdle)
         {
-            
+            canMove = true;
             // IDLE 애니메이션이 실행 중인 경우
             if (distanceToPlayer <= detectionDistance)
             {
@@ -132,12 +132,16 @@ public class BossControl : MonoBehaviour
         animator.SetBool("IsWalk", false);
         animator.SetTrigger("IsAttack");
         StartCoroutine(ResetMovementAfterAttack());
+        
     }
 
     private IEnumerator ResetMovementAfterAttack()
     {
         yield return new WaitForSeconds(attackCooldown);
         canMove = true; // 공격 후 일정 시간이 지나면 움직임 가능하도록 변수 변경
+        animator.ResetTrigger("IsAttack");
+        animator.SetBool("IsWalk", true);
+        isIdle = false;
     }
 
     public void Fire()

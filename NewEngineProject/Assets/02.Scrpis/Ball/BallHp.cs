@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BallHp : MonoBehaviour
 {
-    public float maxHp = 20f;
+    public float maxHp = 30f;
     public float currentHp = 0f;
     public float damageAmount = 3f;
 
