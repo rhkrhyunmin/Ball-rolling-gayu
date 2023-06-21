@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 30
   currentHp: 0
-  damageAmount: 3
+  damageAmount: 2
   gameOverPanel: {fileID: 0}
   healthSlider: {fileID: 0}
 --- !u!114 &-6265466610438397287

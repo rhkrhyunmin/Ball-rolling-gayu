@@ -9263,9 +9263,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1325304696}
     m_Modifications:
+    - target: {fileID: 6000572160917826296, guid: f811e5a6f51b8c845ae639137dbd6a57, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -155.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000572161624639106, guid: f811e5a6f51b8c845ae639137dbd6a57, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6000572161655210384, guid: f811e5a6f51b8c845ae639137dbd6a57, type: 3}
       propertyPath: m_Name
       value: Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000572161655210384, guid: f811e5a6f51b8c845ae639137dbd6a57, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6000572161655210385, guid: f811e5a6f51b8c845ae639137dbd6a57, type: 3}
       propertyPath: m_Pivot.x
@@ -9349,6 +9361,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6000572161655210385, guid: f811e5a6f51b8c845ae639137dbd6a57, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000572161752982772, guid: f811e5a6f51b8c845ae639137dbd6a57, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
