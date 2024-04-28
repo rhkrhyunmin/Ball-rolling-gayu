@@ -775,8 +775,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC5EC\uAE30\uC11C\uB294 \uBCF4\uC2A4\uAC00 \uB4F1\uC7A5\uD55C\uB2F5\uB2C8\uB2E4??"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0b2ab7f07b819a148b313a97c2e37c7a, type: 2}
-  m_sharedMaterial: {fileID: -1368305847481733072, guid: 0b2ab7f07b819a148b313a97c2e37c7a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d37a7310e853d5748a56926517627a4c, type: 2}
+  m_sharedMaterial: {fileID: -3592534885369872324, guid: d37a7310e853d5748a56926517627a4c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
