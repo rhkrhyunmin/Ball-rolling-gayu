@@ -1723,7 +1723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &694629409
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2383,7 +2383,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2DC\uC791\uD558\uAE30"
+  m_text: "\u25B6\uC2DC\uC791\uD558\uAE30\u25C0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0a977e95cd5c5c459a389566bba9499, type: 2}
   m_sharedMaterial: {fileID: -4341100312078248492, guid: c0a977e95cd5c5c459a389566bba9499, type: 2}
@@ -2392,8 +2392,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2410,8 +2410,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
-  m_fontSizeBase: 70
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2489,6 +2489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185f2c3512fddb040b37cbc95153db32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startText: {fileID: 771054364}
 --- !u!4 &797000407
 Transform:
   m_ObjectHideFlags: 0
@@ -3155,7 +3156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1140514240
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3174,8 +3175,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6, y: -268}
-  m_SizeDelta: {x: 333.9615, y: 131.433}
+  m_AnchoredPosition: {x: 55.838, y: -268}
+  m_SizeDelta: {x: 457.64, y: 131.433}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1140514241
 MonoBehaviour:
@@ -6259,8 +6260,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6, y: -130}
-  m_SizeDelta: {x: 333.9615, y: 131.433}
+  m_AnchoredPosition: {x: 0.0050049, y: -206.2924}
+  m_SizeDelta: {x: 1920, y: 667.4153}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2101838204
 MonoBehaviour:
@@ -6284,10 +6285,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 1, g: 0, b: 0, a: 0.5019608}
-    m_PressedColor: {r: 1, g: 0, b: 0, a: 0.5019608}
-    m_SelectedColor: {r: 1, g: 0, b: 0, a: 0.5019608}
-    m_DisabledColor: {r: 1, g: 0, b: 0, a: 0.5019608}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 0}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 0}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -6628,6 +6629,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1617556264}
     m_Modifications:
+    - target: {fileID: 6000572160917826297, guid: f811e5a6f51b8c845ae639137dbd6a57, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6000572161183544501, guid: f811e5a6f51b8c845ae639137dbd6a57, type: 3}
       propertyPath: m_Value
       value: 0.5

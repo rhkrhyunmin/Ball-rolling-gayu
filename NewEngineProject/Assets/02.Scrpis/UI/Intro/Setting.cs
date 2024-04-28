@@ -7,23 +7,20 @@ using UnityEngine.SceneManagement;
 public class Setting : MonoBehaviour
 {
     public GameObject SettingPanel;
+    private bool isPanelActive = false;
 
-    public void OnPanel()
+    void Start()
     {
-        SettingPanel.SetActive(true);
+        SettingPanel.SetActive(false); // 시작 시에는 패널을 비활성화
     }
 
-    public void Update()
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            SettingPanel.SetActive(false); // 패널을 비활성화하여 숨깁니다.
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            SettingPanel.SetActive(false);
-            SceneManager.LoadScene("Intro");
+            // 현재 패널의 활성화 상태에 따라 반대로 설정
+            isPanelActive = !isPanelActive;
+            SettingPanel.SetActive(isPanelActive);
         }
     }
 }
