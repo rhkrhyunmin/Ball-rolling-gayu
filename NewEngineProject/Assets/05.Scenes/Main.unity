@@ -12204,14 +12204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 292734515}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &292734515
 Animator:
   serializedVersion: 4
@@ -22027,7 +22021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_FollowOffset: {x: -67.19998, y: 3.8000002, z: 59}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -26720,14 +26714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 614453317}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &614453317
 Animator:
   serializedVersion: 4
@@ -27113,14 +27101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 630661239}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &630661239
 Animator:
   serializedVersion: 4
@@ -27975,14 +27957,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 652076430}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &652076430
 Animator:
   serializedVersion: 4
@@ -30388,14 +30364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 708244974}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &708244974
 Animator:
   serializedVersion: 4
@@ -31918,14 +31888,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 753676744}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &753676744
 Animator:
   serializedVersion: 4
@@ -35885,14 +35849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 822270530}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &822270530
 Animator:
   serializedVersion: 4
@@ -43662,14 +43620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 987092502}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &987092502
 Animator:
   serializedVersion: 4
@@ -43823,14 +43775,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 988166242}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &988166242
 Animator:
   serializedVersion: 4
@@ -46940,14 +46886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1044896741}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &1044896741
 Animator:
   serializedVersion: 4
@@ -54680,14 +54620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1232822186}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &1232822186
 Animator:
   serializedVersion: 4
@@ -55356,14 +55290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1251913685}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!1001 &1252003108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58354,14 +58282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1330421374}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &1330421374
 Animator:
   serializedVersion: 4
@@ -61668,14 +61590,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1423113899}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &1423113899
 Animator:
   serializedVersion: 4
@@ -66619,14 +66535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1515709521}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!1001 &1516313056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66970,14 +66880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1518623572}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &1518623572
 Animator:
   serializedVersion: 4
@@ -72585,14 +72489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1661158706}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &1661158706
 Animator:
   serializedVersion: 4
@@ -74678,14 +74576,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1709112199}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!64 &1709112201
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -76616,14 +76508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1748530852}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &1748530852
 Animator:
   serializedVersion: 4
@@ -79971,15 +79857,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818308110}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.4, y: 7.5, z: -66.4}
+  m_LocalRotation: {x: -0, y: 0.70914674, z: -0, w: 0.705061}
+  m_LocalPosition: {x: -43.79998, y: 11.3, z: 2.5999985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 504762926}
   m_Father: {fileID: 78521965}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90.331, z: 0}
 --- !u!114 &1818308112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81629,14 +81515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1859056926}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &1859056926
 Animator:
   serializedVersion: 4
@@ -84892,14 +84772,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b2521e78e1154498158dfdea40a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 20
-  attackDistance: 2
-  movementSpeed: 5
-  currentHp: 0
-  MaxHp: 10
+  enemyStats: {fileID: 0}
   animator: {fileID: 1941801588}
-  playerController: {fileID: 0}
-  attackCooldown: 0.5
 --- !u!95 &1941801588
 Animator:
   serializedVersion: 4
