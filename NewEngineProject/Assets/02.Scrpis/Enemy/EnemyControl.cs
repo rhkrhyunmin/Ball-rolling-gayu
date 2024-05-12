@@ -9,7 +9,7 @@ public class EnemyControl : MonoBehaviour
     private Animator animator;
 
     private NavMeshAgent agent;
-    public GameObject player;
+    private GameObject player;
     private BallHp ballHp;
 
     private bool isAttacking = false;
