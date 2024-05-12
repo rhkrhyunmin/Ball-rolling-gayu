@@ -1,58 +1,37 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class BossControl : MonoBehaviour
 {
-    public float detectionDistance = 10f;
-    public float attackDistance = 3f;
-    public float movementSpeed = 2f;
-
-    public float maxHp = 20f;
-    public float currentHp = 0f;
-    public float damageAmount = 3f;
+    public EnemySO bossEnemySo;
 
     public Slider healthSlider;
-
-
     public Animator animator;
 
-    Rigidbody rb;
-
+    private NavMeshAgent agent;
     public Transform bulletSpawn;
     public GameObject bullet;
 
-    [SerializeField]
     private BallMove playerController;
-    private bool isPlayerDetected = false;
-    private bool isIdle = true;
+
     private bool isAttacking = false;
     private bool canMove = true;
-
-    private float attackTimer = 0f;
-    public float attackCooldown = 2f;
-
-    BallAttack attack;
 
     private void Awake()
     {
         healthSlider = GetComponentInChildren<Slider>();
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        attack = GetComponent<BallAttack>();
-
-        currentHp = maxHp;
+        bossEnemySo.currentHp = bossEnemySo.MaxHp;
         UpdateHealthBar();
-        healthSlider.value = maxHp;
     }
-
-    
 
     public void FindPlayer(BallMove ball)
     {
@@ -61,114 +40,69 @@ public class BossControl : MonoBehaviour
 
     private void Update()
     {
-
         if (playerController == null)
-        {
             return;
-        }
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerController.transform.position);
 
-        if (isIdle)
+        if (distanceToPlayer <= bossEnemySo.DetectionDistance)
         {
-            canMove = true;
-            // IDLE 애니메이션이 실행 중인 경우
-            if (distanceToPlayer <= detectionDistance)
-            {
-                // 제한된 거리 안에 플레이어가 들어오면 Walk 애니메이션 실행
-                animator.SetBool("IsWalk", true);
-                isPlayerDetected = true;
-                isIdle = false;
-            }
-        }
-        else
-        {
-            // Walk 애니메이션 실행 중인 경우
-            if (distanceToPlayer > detectionDistance)
-            {
-                StartCoroutine(ResetMovementAfterAttack());
-                // 제한된 거리 밖으로 나가면 IDLE 애니메이션 실행
-                animator.SetBool("IsWalk", true);
-                animator.ResetTrigger("IsAttack");
-                animator.ResetTrigger("IsHit");
-                isPlayerDetected = false;
-                isIdle = true;
-            }
-        }
-
-        if (isPlayerDetected && canMove)
-        {
-            Vector3 direction = (playerController.transform.position - transform.position).normalized;
-            transform.Translate(direction * movementSpeed * Time.deltaTime);
-            transform.LookAt(playerController.transform.position);
-
-            if (distanceToPlayer <= attackDistance && !isAttacking)
+            MoveTowardsPlayer(playerController.transform.position);
+            if (!isAttacking && distanceToPlayer <= bossEnemySo.AttackDistance)
             {
                 Attack();
             }
         }
+    }
 
-        if (isAttacking)
+    private void MoveTowardsPlayer(Vector3 targetPosition)
+    {
+        if (canMove)
         {
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= attackCooldown)
-            {
-                movementSpeed = 0;
-                isAttacking = true;
-                animator.ResetTrigger("IsHit");
-                animator.SetTrigger("IsAttack");
-                animator.SetBool("IsWalk", true);
-                isPlayerDetected = false;
-                attackTimer = 0f;
-                
-            }
+            agent.SetDestination(targetPosition);
+            animator.SetBool("IsWalk", true);
+            animator.SetBool("IsAttack", false); // Stop attacking animation while moving
         }
     }
 
     private void Attack()
     {
         canMove = false;
-        transform.LookAt(playerController.transform.position);
         animator.SetBool("IsWalk", false);
-        animator.SetTrigger("IsAttack");
+        animator.SetBool("IsAttack", true); // Start attacking animation
         StartCoroutine(ResetMovementAfterAttack());
-        
     }
 
     private IEnumerator ResetMovementAfterAttack()
     {
-        yield return new WaitForSeconds(attackCooldown);
+        yield return new WaitForSeconds(bossEnemySo.AttackCoolDonw);
         canMove = true; // 공격 후 일정 시간이 지나면 움직임 가능하도록 변수 변경
-        animator.ResetTrigger("IsAttack");
+        animator.SetBool("IsAttack", false);
         animator.SetBool("IsWalk", true);
-        isIdle = false;
     }
 
     public void Fire()
     {
         GameObject Bullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
-        
     }
 
-     private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            TakeDamage(damageAmount);
+            TakeDamage(bossEnemySo.AttackDamage);
         }
     }
 
     public void TakeDamage(float damage)
     {
-        currentHp -= damage;
+        bossEnemySo.currentHp -= damage;
         animator.SetBool("IsWalk", false);
         animator.SetTrigger("IsHit");
-        animator.ResetTrigger("IsAttack");
 
         UpdateHealthBar(); // 체력 바 업데이트
-        Debug.Log(currentHp);
 
-        if (currentHp <= 5f)
+        if (bossEnemySo.currentHp <= 0f)
         {
             SceneManager.LoadScene("Clear");
         }
@@ -176,7 +110,7 @@ public class BossControl : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        healthSlider.value = currentHp; 
-        healthSlider.maxValue = maxHp; 
+        healthSlider.value = bossEnemySo.currentHp;
+        healthSlider.maxValue = bossEnemySo.MaxHp;
     }
 }

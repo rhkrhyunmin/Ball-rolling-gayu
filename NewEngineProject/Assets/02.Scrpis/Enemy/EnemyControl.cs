@@ -1,97 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyControl : MonoBehaviour
 {
     public EnemySO enemyStats; // EnemySO는 EnemyStat으로 변경하여 의미를 명확하게 함
     public Animator animator;
 
-    private Rigidbody rb;
-    private BallMove playerController;
+    private NavMeshAgent agent;
+    private GameObject player;
     private BallHp ballHp;
 
-    private bool isPlayerDetected = false;
     private bool isAttacking = false;
-    private float attackTimer = 0f;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    public void SetPlayer(BallMove ball)
-    {
-        playerController = ball; // FindPlayer 함수명을 SetPlayer로 변경하고, 이름의 명확성을 높임
+        agent = GetComponent<NavMeshAgent>();
+        
     }
 
     private void Update()
     {
-        if (playerController == null)
+        player = GameObject.FindGameObjectWithTag("Ball");
+
+        if (player == null)
             return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, playerController.transform.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        if (!isPlayerDetected && distanceToPlayer <= enemyStats.DetectionDistance)
+        if (distanceToPlayer <= enemyStats.DetectionDistance)
         {
-            StartWalking(); // IDLE 애니메이션 실행 및 Walk로 전환
-        }
-        else if (isPlayerDetected && distanceToPlayer > enemyStats.DetectionDistance)
-        {
-            StopWalking(); // Walk 애니메이션 실행 중지 및 IDLE로 전환
-        }
-
-        if (isPlayerDetected)
-        {
-            MoveTowardsPlayer(distanceToPlayer);
-
-            if (distanceToPlayer <= enemyStats.AttackDistance && !isAttacking)
+            MoveTowardsPlayer();
+            if (!isAttacking && distanceToPlayer <= enemyStats.AttackDistance)
             {
-                Attack();
+                StartCoroutine(AttackCoroutine());
             }
         }
-
-        if (isAttacking)
-        {
-            UpdateAttackTimer();
-        }
     }
 
-    private void StartWalking()
+    private void MoveTowardsPlayer()
     {
+        agent.SetDestination(player.transform.position);
         animator.SetBool("IsWalk", true);
-        isPlayerDetected = true;
-        
+        animator.SetBool("IsAttack", false); // Stop attacking animation while moving
     }
 
-    private void StopWalking()
+    IEnumerator AttackCoroutine()
     {
         animator.SetBool("IsWalk", false);
-        isPlayerDetected = false;
-    }
-
-    private void MoveTowardsPlayer(float distanceToPlayer)
-    {
-        Vector3 direction = (playerController.transform.position - transform.position).normalized;
-        transform.Translate(direction * enemyStats.MovementSpeed * Time.deltaTime);
-        transform.LookAt(playerController.transform.position);
-    }
-
-    private void UpdateAttackTimer()
-    {
-        attackTimer += Time.deltaTime;
-        if (attackTimer >= enemyStats.AttackCoolDonw)
-        {
-            EndAttack();
-        }
-    }
-
-    private void Attack()
-    {
-        isAttacking = true;
-        animator.SetBool("IsAttack", true);
-        animator.SetBool("IsWalk", false);
-        transform.LookAt(playerController.transform.position);
+        animator.SetBool("IsAttack", true); // Start attacking animation
+        transform.LookAt(player.transform.position);
 
         if (ballHp == null)
         {
@@ -100,16 +59,13 @@ public class EnemyControl : MonoBehaviour
 
         if (ballHp != null)
         {
-            ballHp.TakeDamage(enemyStats.AttackDamage); // Attack Damage를 EnemySO에 추가하여 사용
+            isAttacking = true;
+            ballHp.TakeDamage(enemyStats.AttackDamage);
+            yield return new WaitForSeconds(3f);
         }
-    }
 
-    private void EndAttack()
-    {
-        isAttacking = false;
+        // 공격 딜레이 이후 공격 애니메이션 종료
         animator.SetBool("IsAttack", false);
-        animator.SetBool("IsWalk", true);
-        isPlayerDetected = true;
-        attackTimer = 0f;
+        isAttacking = false;
     }
 }

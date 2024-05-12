@@ -96,7 +96,6 @@ public class BallAttack : MonoBehaviour
             {
                 bossHp.TakeDamage(dashDamage);
                 hasDamagedBoss = true;  // 데미지를 주었음을 표시
-                Debug.Log(bossHp.currentHp);
                 // 플레이어를 뒤로 튕겨나가는 힘 적용
                 Vector3 direction = (other.transform.position - transform.position).normalized;
                 playerRigidbody.AddForce(-direction * boundsForce, ForceMode.Impulse);
