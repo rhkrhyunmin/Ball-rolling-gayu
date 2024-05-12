@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public class CannonShoot : MonoBehaviour
 {
     public GameObject ballPrefab;
+    public ParticleSystem boomEffect;
     [SerializeField] private float minForceMagnitude = 1f; // 최소 힘의 크기
     [SerializeField] private float maxForceMagnitude = 30f; // 최대 힘의 크기
     [SerializeField] private float chargeRate = 1f; // 차징 속도
@@ -63,6 +64,7 @@ public class CannonShoot : MonoBehaviour
 
     public void Fire()
     {
+        boomEffect.Play();
         HPslider.enabled = false;
 
         isCharging = false;

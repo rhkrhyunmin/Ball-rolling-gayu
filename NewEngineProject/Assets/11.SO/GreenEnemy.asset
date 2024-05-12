@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: GreenEnemy
   m_EditorClassIdentifier: 
   DetectionDistance: 20
-  AttackDistance: 5
-  MovementSpeed: 5
-  currentHp: 0
+  AttackDistance: 2
+  MovementSpeed: 10
+  AttackCoolDonw: 1
+  AttackDamage: 5
+  currentHp: 20
   MaxHp: 20

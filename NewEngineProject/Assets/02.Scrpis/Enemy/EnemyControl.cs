@@ -6,10 +6,10 @@ using UnityEngine.AI;
 public class EnemyControl : MonoBehaviour
 {
     public EnemySO enemyStats; // EnemySO는 EnemyStat으로 변경하여 의미를 명확하게 함
-    public Animator animator;
+    private Animator animator;
 
     private NavMeshAgent agent;
-    private GameObject player;
+    public GameObject player;
     private BallHp ballHp;
 
     private bool isAttacking = false;
@@ -17,7 +17,7 @@ public class EnemyControl : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -43,7 +43,6 @@ public class EnemyControl : MonoBehaviour
     {
         agent.SetDestination(player.transform.position);
         animator.SetBool("IsWalk", true);
-        animator.SetBool("IsAttack", false); // Stop attacking animation while moving
     }
 
     IEnumerator AttackCoroutine()
@@ -54,14 +53,14 @@ public class EnemyControl : MonoBehaviour
 
         if (ballHp == null)
         {
-            ballHp = FindObjectOfType<BallHp>(); // GameObject.FindObjectOfType 대신 FindObjectOfType 사용
+            ballHp = FindObjectOfType<BallHp>(); 
         }
 
         if (ballHp != null)
         {
             isAttacking = true;
             ballHp.TakeDamage(enemyStats.AttackDamage);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(enemyStats.AttackCoolDonw);
         }
 
         // 공격 딜레이 이후 공격 애니메이션 종료
