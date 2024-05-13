@@ -75,10 +75,10 @@ public class BallAttack : MonoBehaviour
         playerRigidbody.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         // 돌진 중에 적과 충돌하면 데미지 입히고 튕겨나감
-        if (isDashing && other.CompareTag("Boss") && !hasDamagedBoss)
+        if (isDashing && other.collider.CompareTag("Boss") && !hasDamagedBoss)
         {
             // 스페이스를 3초에 1번만 사용 가능하도록 체크
             if (Time.time - lastSpacePressTime >= spaceCooldown)
@@ -91,12 +91,11 @@ public class BallAttack : MonoBehaviour
             }
 
             // 적에게 데미지 입히기
-            BossControl bossHp = other.GetComponent<BossControl>();
+            BossControl bossHp = other.collider.GetComponent<BossControl>();
             if (bossHp != null)
             {
                 bossHp.TakeDamage(dashDamage);
                 hasDamagedBoss = true;  // 데미지를 주었음을 표시
-                // 플레이어를 뒤로 튕겨나가는 힘 적용
                 Vector3 direction = (other.transform.position - transform.position).normalized;
                 playerRigidbody.AddForce(-direction * boundsForce, ForceMode.Impulse);
                 currentMovementSpeed = 5;
