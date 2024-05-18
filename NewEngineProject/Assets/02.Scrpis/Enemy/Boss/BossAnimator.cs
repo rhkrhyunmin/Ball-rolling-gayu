@@ -59,12 +59,11 @@ public class BossAnimator : MonoBehaviour
                 if (currentState != state)
                 {
                     animationStates[currentState] = false;
+                    
                     animator.SetBool(animationTriggers[currentState], false);
                 }
             }
         }
-
-        // 현재 상태 설정
         animationStates[state] = value;
 
         // 애니메이션 업데이트
@@ -76,6 +75,7 @@ public class BossAnimator : MonoBehaviour
         // 상태에 따른 애니메이션 처리
         foreach (var state in animationStates)
         {
+            Debug.Log(state);
             animator.SetBool(animationTriggers[state.Key], state.Value);
         }
     }

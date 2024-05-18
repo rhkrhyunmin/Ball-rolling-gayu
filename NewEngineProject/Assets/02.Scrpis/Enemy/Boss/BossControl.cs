@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class BossControl : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class BossControl : MonoBehaviour
     private GameObject player;
     private BallHp ballHp;
 
-    private bool isAttacking = false;
+    public bool isAttacking = false;
+
 
     private void Awake()
     {
@@ -32,13 +34,14 @@ public class BossControl : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        if (distanceToPlayer <= bossState.DetectionDistance)
+        if (distanceToPlayer <= bossState.DetectionDistance && !isAttacking)
         {
             MoveTowardsPlayer();
-            if (!isAttacking && distanceToPlayer <= bossState.AttackDistance)
-            {
-                StartCoroutine(AttackCoroutine());
-            }
+        }
+
+        if (!isAttacking && distanceToPlayer <= bossState.AttackDistance)
+        {
+            StartCoroutine(AttackCoroutine());
         }
     }
 
@@ -46,6 +49,7 @@ public class BossControl : MonoBehaviour
     {
         agent.isStopped = false;
         agent.SetDestination(player.transform.position);
+        agent.speed += bossState.MovementSpeed;
         bossAnimator.SetAnimationState(AnimationState.Run,true);
     }
 
@@ -65,21 +69,13 @@ public class BossControl : MonoBehaviour
             isAttacking = true;
             yield return new WaitForSeconds(bossState.AttackCoolDonw);
         }
-        /*bossAnimator.SetAnimationState(AnimationState.Run,true);
-        bossAnimator.SetAnimationState(AnimationState.Attack, false);*/
         isAttacking = false;
-    }
-
-    public void GiveDamage()
-    {
-        ballHp.TakeDamage(bossState.AttackDamage);
     }
 
     public void TakeDamage(float damage)
     {
         bossState.currentHp -= damage;
         bossAnimator.SetAnimationState(AnimationState.Hit,true);
-        Debug.Log(bossState.currentHp);
     }
 
     private void OnTriggerEnter(Collider other)

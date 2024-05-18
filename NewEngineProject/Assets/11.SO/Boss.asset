@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Boss
   m_EditorClassIdentifier: 
   DetectionDistance: 30
-  AttackDistance: 3
-  MovementSpeed: 30
+  AttackDistance: 5
+  MovementSpeed: 15
   AttackCoolDonw: 2
   AttackDamage: 8
   currentHp: 25
