@@ -22,6 +22,8 @@ public class EnemyControl : MonoBehaviour
 
     private void Update()
     {
+
+        Debug.Log(isAttacking);
         player = GameObject.FindGameObjectWithTag("Ball");
 
         if (player == null)
@@ -29,25 +31,33 @@ public class EnemyControl : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        if (distanceToPlayer <= enemyStats.DetectionDistance)
+        if (distanceToPlayer <= enemyStats.DetectionDistance && !isAttacking)
         {
             MoveTowardsPlayer();
-            if (!isAttacking && distanceToPlayer <= enemyStats.AttackDistance)
-            {
-                StartCoroutine(AttackCoroutine());
-            }
+        }
+
+        if (distanceToPlayer <= enemyStats.AttackDistance)
+        {
+            StartCoroutine(AttackCoroutine());
         }
     }
 
     private void MoveTowardsPlayer()
     {
         agent.SetDestination(player.transform.position);
-        animator.SetBool("IsWalk", true);
+        if(isAttacking == true)
+        {
+            animator.SetBool("IsWalk", false);
+        }
+        else
+        {
+            animator.SetBool("IsWalk", true);
+        }
     }
 
     IEnumerator AttackCoroutine()
     {
-        animator.SetBool("IsWalk", false);
+        //animator.SetBool("IsWalk", false);
         animator.SetBool("IsAttack", true); // Start attacking animation
         transform.LookAt(player.transform.position);
 
@@ -65,6 +75,6 @@ public class EnemyControl : MonoBehaviour
 
         // 공격 딜레이 이후 공격 애니메이션 종료
         animator.SetBool("IsAttack", false);
-        isAttacking = false;
+        isAttacking = false; 
     }
 }

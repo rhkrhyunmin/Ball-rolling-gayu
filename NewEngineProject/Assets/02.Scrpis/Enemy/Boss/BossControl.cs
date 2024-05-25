@@ -47,7 +47,7 @@ public class BossControl : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        agent.isStopped = false;
+        //agent.isStopped = false;
         agent.SetDestination(player.transform.position);
         agent.speed += bossState.MovementSpeed;
         bossAnimator.SetAnimationState(AnimationState.Run,true);
@@ -56,7 +56,8 @@ public class BossControl : MonoBehaviour
     IEnumerator AttackCoroutine()
     {
         bossAnimator.SetAnimationState(AnimationState.Attack,true);
-        agent.isStopped = true;
+        agent.speed = 0;
+        //agent.isStopped = true;
         transform.LookAt(player.transform.position);
 
         if (ballHp == null)

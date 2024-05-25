@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   DetectionDistance: 20
-  AttackDistance: 2
+  AttackDistance: 4
   MovementSpeed: 10
   AttackCoolDonw: 1.5
   AttackDamage: 3
