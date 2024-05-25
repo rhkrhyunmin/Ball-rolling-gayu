@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
-    public float rotationSpeed = 100f;
-    public float movementDistance = 2f;
-    public float movementSpeed = 2f;
-    public float damageAmount = 3f;
+    public TrapSo trapSo;
 
     private Vector3 initialPosition;
     private float movementTimer = 0f;
@@ -21,7 +18,7 @@ public class Spike : MonoBehaviour
     {
         // ¿Ãµø
         movementTimer += Time.deltaTime;
-        float YPosition = Mathf.Cos(movementTimer * movementSpeed) * movementDistance;
+        float YPosition = Mathf.Cos(movementTimer * trapSo.MovementSpeed) * trapSo.movementDistance;
         transform.position = initialPosition + new Vector3(0f, YPosition, 0f);
     }
 }

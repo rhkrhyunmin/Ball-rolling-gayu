@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DetectionDistance: 20
   AttackDistance: 4
-  MovementSpeed: 10
-  AttackCoolDonw: 1.5
+  MovementSpeed: 5
+  AttackCoolDonw: 2
   AttackDamage: 3
   currentHp: 20
   MaxHp: 20

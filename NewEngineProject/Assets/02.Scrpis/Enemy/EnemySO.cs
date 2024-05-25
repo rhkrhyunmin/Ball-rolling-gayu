@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SO", menuName = "Enemies/EnemySO")]
+[CreateAssetMenu(fileName = "SO", menuName = "SO/EnemySO")]
 public class EnemySO : ScriptableObject
 {
     [Header("Distance")]

@@ -22,37 +22,43 @@ public class EnemyControl : MonoBehaviour
 
     private void Update()
     {
-
-        Debug.Log(isAttacking);
         player = GameObject.FindGameObjectWithTag("Ball");
 
         if (player == null)
             return;
+
+        UpdateMoveAnmation();
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         if (distanceToPlayer <= enemyStats.DetectionDistance && !isAttacking)
         {
             MoveTowardsPlayer();
+            Debug.Log("12");
+            if (distanceToPlayer <= enemyStats.AttackDistance)
+            {
+                StartCoroutine(AttackCoroutine());
+            }
         }
+    }
 
-        if (distanceToPlayer <= enemyStats.AttackDistance)
+    private void UpdateMoveAnmation()
+    {
+        if (!isAttacking)
         {
-            StartCoroutine(AttackCoroutine());
+            animator.SetBool("IsWalk", true);
+            agent.speed = enemyStats.MovementSpeed;
+        }
+        else
+        {
+            animator.SetBool("IsWalk", false);
+            agent.speed = 0;
         }
     }
 
     private void MoveTowardsPlayer()
     {
         agent.SetDestination(player.transform.position);
-        if(isAttacking == true)
-        {
-            animator.SetBool("IsWalk", false);
-        }
-        else
-        {
-            animator.SetBool("IsWalk", true);
-        }
     }
 
     IEnumerator AttackCoroutine()
