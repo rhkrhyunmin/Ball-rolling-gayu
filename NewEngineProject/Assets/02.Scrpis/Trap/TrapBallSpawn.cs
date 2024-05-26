@@ -5,9 +5,11 @@ using UnityEngine;
 public class TrapBallSpawn : MonoBehaviour
 {
     public string poolTag = "Trap";
+    private float spawnRandomTime;
 
     private void Start()
     {
+        spawnRandomTime = Random.Range(3, 10);
         StartCoroutine(SpawnTrapBalls());
     }
 
@@ -16,14 +18,15 @@ public class TrapBallSpawn : MonoBehaviour
         while (true)
         {
             SpawnTrapBall();
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(spawnRandomTime);
         }
     }
 
     private IEnumerator DisableTrapBall(GameObject trapBall)
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(28f);
         PoolManager.Instance.ReturnObject(trapBall);
+        
     }
 
     private void SpawnTrapBall()
