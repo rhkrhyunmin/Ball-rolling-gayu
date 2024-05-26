@@ -8511,6 +8511,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1560818858}
     m_Modifications:
+    - target: {fileID: 2076703036728998987, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
+      propertyPath: trapSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 4166dc92acc3f844bbc224c6b6eaaadf, type: 2}
     - target: {fileID: 3832306424529334102, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -16405,6 +16409,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1560818858}
     m_Modifications:
+    - target: {fileID: 2076703036728998987, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
+      propertyPath: trapSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 4166dc92acc3f844bbc224c6b6eaaadf, type: 2}
     - target: {fileID: 3832306424529334102, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
       propertyPath: m_RootOrder
       value: 28
@@ -16758,6 +16766,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5530119412760015482, guid: 307c875ae474a3c45b279771d188c1af, type: 3}
   m_PrefabInstance: {fileID: 1812168990}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &397323183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 397323184}
+  - component: {fileID: 397323185}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &397323184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397323183}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 613817299}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &397323185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397323183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7146b6c9db98d548a478deea2a3e463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolTag: Trap
 --- !u!1 &398039012
 GameObject:
   m_ObjectHideFlags: 0
@@ -25444,7 +25497,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 13ab7581fa5e88b4f84ad305237b2c51, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 397323184}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13ab7581fa5e88b4f84ad305237b2c51, type: 3}
 --- !u!4 &613817299 stripped
@@ -51119,6 +51175,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1560818858}
     m_Modifications:
+    - target: {fileID: 2076703036728998987, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
+      propertyPath: trapSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 4166dc92acc3f844bbc224c6b6eaaadf, type: 2}
     - target: {fileID: 3832306424529334102, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -57097,7 +57157,7 @@ MonoBehaviour:
   pools:
   - tag: Trap
     prefab: {fileID: 6176895730347200828, guid: 2aa79471f62c1904da955ae167fb7c49, type: 3}
-    size: 0
+    size: 10
 --- !u!1001 &1428571273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58427,6 +58487,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1560818858}
     m_Modifications:
+    - target: {fileID: 2076703036728998987, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
+      propertyPath: trapSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 4166dc92acc3f844bbc224c6b6eaaadf, type: 2}
     - target: {fileID: 3832306424529334102, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -63935,6 +63999,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1560818858}
     m_Modifications:
+    - target: {fileID: 2076703036728998987, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
+      propertyPath: trapSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 4166dc92acc3f844bbc224c6b6eaaadf, type: 2}
     - target: {fileID: 2880323731820443629, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
       propertyPath: m_Height
       value: 0.047656685
@@ -68461,6 +68529,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1560818858}
     m_Modifications:
+    - target: {fileID: 2076703036728998987, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
+      propertyPath: trapSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 4166dc92acc3f844bbc224c6b6eaaadf, type: 2}
     - target: {fileID: 3832306424529334102, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
       propertyPath: m_RootOrder
       value: 29
@@ -70397,6 +70469,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1560818858}
     m_Modifications:
+    - target: {fileID: 2076703036728998987, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
+      propertyPath: trapSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 4166dc92acc3f844bbc224c6b6eaaadf, type: 2}
     - target: {fileID: 3832306424529334102, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -90923,6 +90999,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1560818858}
     m_Modifications:
+    - target: {fileID: 2076703036728998987, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
+      propertyPath: trapSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 4166dc92acc3f844bbc224c6b6eaaadf, type: 2}
     - target: {fileID: 3832306424529334102, guid: eb64d57566b08504f90132c9bcbbbd0d, type: 3}
       propertyPath: m_RootOrder
       value: 27
