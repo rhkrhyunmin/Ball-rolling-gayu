@@ -15,6 +15,7 @@ TagManager:
   - Bossarea
   - Goal
   - IntroBall
+  - TrapBall
   layers:
   - Default
   - TransparentFX
