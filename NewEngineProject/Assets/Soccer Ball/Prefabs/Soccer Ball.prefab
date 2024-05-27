@@ -150,7 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 787604813204d1745a98b05dcd489864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
@@ -180,10 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11cb6be1100715d41bcda7ae5da89f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 30
-  currentHp: 0
-  damageAmount: 3
-  gameOverPanel: {fileID: 0}
+  ballSO: {fileID: 11400000, guid: 5e2354be5badc8b468be67544428a484, type: 2}
+  gameOverPanel: {fileID: 919132149155446097, guid: 37f21eaba727e094fa1ff12ed34ac8d3, type: 3}
   healthSlider: {fileID: 0}
 --- !u!114 &148510934325527148
 MonoBehaviour:
@@ -197,10 +194,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9305e237e7595bc4f94213ab7a612299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashForce: 15
-  dashDuration: 0.5
-  dashCooldown: 1
-  dashDamage: 3
-  dashKnockbackForce: 5
-  detectionRadius: 5
-  upwardForce: 7
+  ballSO: {fileID: 11400000, guid: 5e2354be5badc8b468be67544428a484, type: 2}

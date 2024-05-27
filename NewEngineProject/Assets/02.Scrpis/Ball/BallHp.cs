@@ -5,25 +5,20 @@ using UnityEngine.UI;
 
 public class BallHp : MonoBehaviour
 {
-    public float maxHp = 30f;
-    public float currentHp = 0f;
-    public float damageAmount = 3f;
-
+    public BallSO ballSO;
     public GameObject gameOverPanel;
     public Slider healthSlider; 
 
     private void Start()
     {
-        currentHp = maxHp;
-        UpdateHealthBar(); 
-        healthSlider.value = maxHp;
+        healthSlider.maxValue = ballSO.maxHp; 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Trap"))
         {
-            TakeDamage(damageAmount);
+            TakeDamage(ballSO.damageAmount);
         }
 
         if (collision.gameObject.CompareTag("EndLine"))
@@ -31,21 +26,15 @@ public class BallHp : MonoBehaviour
             gameOverPanel.SetActive(true);
             Time.timeScale = 0f;
         }
-
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            TakeDamage(damageAmount);
-        }
     }
 
     public void TakeDamage(float damage)
     {
-        currentHp -= damage;
-        UpdateHealthBar(); // 체력 바 업데이트
+        ballSO.currentHp -= damage;
+        UpdateHealthBar(); 
 
-        if (currentHp <= 0f)
+        if (ballSO.currentHp <= 0f)
         {
-            // 추가: 데미지로 인해 체력이 0 이하가 되면 게임 오버 처리 등을 수행할 수 있습니다.
             ShowGameOver();
         }
     }
@@ -58,7 +47,6 @@ public class BallHp : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        healthSlider.value = currentHp; // 현재 체력 값을 체력 바에 할당
-        healthSlider.maxValue = maxHp; // 최대 체력 값을 체력 바에 할당
+        healthSlider.value = ballSO.currentHp; // 현재 체력 값을 체력 바에 할당
     }
 }

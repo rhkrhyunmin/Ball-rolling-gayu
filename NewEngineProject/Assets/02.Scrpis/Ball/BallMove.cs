@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BallMove : MonoBehaviour
 {
-    [SerializeField] private float speed = 5;
     [SerializeField] LayerMask whatIsGround;
     Rigidbody rigid;
     private bool canMove = true; // 이동 가능한지 여부를 나타내는 변수
@@ -28,24 +27,14 @@ public class BallMove : MonoBehaviour
             Vector3 dir = cam.transform.forward;
             dir.y = 0;
             dir *= verticalInput;
-            if(verticalInput != 0)curSpeed += Time.deltaTime * accel;
+            if(verticalInput != 0) curSpeed += Time.deltaTime * accel;
             else curSpeed -= Time.deltaTime * deAccel;
-            curSpeed = Mathf.Clamp(curSpeed, 0, speed);
+            curSpeed = Mathf.Clamp(curSpeed, 0, 5);
 
             // 움직임 처리
 
             rigid.AddForce(Vector3.ProjectOnPlane(dir, hit.normal).normalized*curSpeed, ForceMode.Force);
         }
-    }
-
-    private IEnumerator FireSequence()
-    {
-        // 대포 발사 시퀀스 실행
-
-        // 공이 땅에 닿을 때까지 대기
-        yield return new WaitForSeconds(1f); // 원하는 대기 시간
-
-        canMove = true; // 이동 허용
     }
 
     private void OnCollisionEnter(Collision collision)

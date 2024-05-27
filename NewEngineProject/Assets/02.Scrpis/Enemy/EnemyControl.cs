@@ -34,7 +34,6 @@ public class EnemyControl : MonoBehaviour
         if (distanceToPlayer <= enemyStats.DetectionDistance && !isAttacking)
         {
             MoveTowardsPlayer();
-            Debug.Log("12");
             if (distanceToPlayer <= enemyStats.AttackDistance)
             {
                 StartCoroutine(AttackCoroutine());

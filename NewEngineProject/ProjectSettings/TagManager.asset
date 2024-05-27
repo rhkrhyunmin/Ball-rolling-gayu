@@ -16,6 +16,7 @@ TagManager:
   - Goal
   - IntroBall
   - TrapBall
+  - ItemBox
   layers:
   - Default
   - TransparentFX
