@@ -153,8 +153,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
-  accel: 5
-  deAccel: 5
+  ballSO: {fileID: 11400000, guid: 5e2354be5badc8b468be67544428a484, type: 2}
+  rigid: {fileID: 0}
 --- !u!114 &-713765339450034518
 MonoBehaviour:
   m_ObjectHideFlags: 0

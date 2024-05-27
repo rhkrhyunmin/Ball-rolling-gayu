@@ -30,12 +30,12 @@ public class RandomItemBox : MonoBehaviour
         {
             if (randomItem == "Boost")
             {
-                // 부스트 아이템 처리 코드
+                
             }
             else if (randomItem == "Health")
             {
-                BallHp ballhp = new BallHp();
-                ballhp.ballSO.maxHp += 5f;
+                HillPack hillPack = new HillPack();
+                hillPack.OnHill();
             }
             else if (randomItem == "Shield")
             {

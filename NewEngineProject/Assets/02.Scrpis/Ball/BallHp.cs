@@ -5,20 +5,22 @@ using UnityEngine.UI;
 
 public class BallHp : MonoBehaviour
 {
-    public BallSO ballSO;
+    private Player player;
+
     public GameObject gameOverPanel;
     public Slider healthSlider; 
 
     private void Start()
     {
-        healthSlider.maxValue = ballSO.maxHp; 
+        player = GetComponent<Player>();
+        healthSlider.maxValue = player.ballSO.maxHp; 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Trap"))
         {
-            TakeDamage(ballSO.damageAmount);
+            TakeDamage(player.ballSO.damageAmount);
         }
 
         if (collision.gameObject.CompareTag("EndLine"))
@@ -30,10 +32,10 @@ public class BallHp : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        ballSO.currentHp -= damage;
+        player.ballSO.currentHp -= damage;
         UpdateHealthBar(); 
 
-        if (ballSO.currentHp <= 0f)
+        if (player.ballSO.currentHp <= 0f)
         {
             ShowGameOver();
         }
@@ -47,6 +49,6 @@ public class BallHp : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        healthSlider.value = ballSO.currentHp; // 현재 체력 값을 체력 바에 할당
+        healthSlider.value = player.ballSO.currentHp; // 현재 체력 값을 체력 바에 할당
     }
 }

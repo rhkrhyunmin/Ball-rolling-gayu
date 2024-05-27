@@ -3,18 +3,16 @@ using UnityEngine;
 
 public class BallAttack : MonoBehaviour
 {
-    public BallSO ballSO;
-    private Rigidbody playerRigidbody;  // 플레이어 Rigidbody 컴포넌트
+    private Player player;
 
     private bool isDashing = false;       // 돌진 중인지 여부
     private bool canUseSpace = true;     // 스페이스 사용 가능한지 여부
 
-    private float spaceCooldown = 3f;    // 스페이스 쿨다운 시간
     private float boundsForce = 10f;     // 튕겨나갈 때의 힘
 
     private void Start()
     {
-        playerRigidbody = GetComponent<Rigidbody>();
+        player = GetComponent<Player>();
     }
 
     private void Update()
@@ -31,7 +29,7 @@ public class BallAttack : MonoBehaviour
     {
         canUseSpace = false;  // 스페이스 사용 불가능 상태로 설정
 
-        yield return new WaitForSeconds(spaceCooldown);
+        yield return new WaitForSeconds(player.ballSO.dashCooldown);
 
         canUseSpace = true;  // 스페이스 사용 가능 상태로 설정
     }
@@ -47,7 +45,7 @@ public class BallAttack : MonoBehaviour
             Vector3 dashDirection = (bossObject.transform.position - transform.position).normalized;
 
             // 돌진 힘 적용
-            playerRigidbody.AddForce(dashDirection * ballSO.dashForce + Vector3.up * ballSO.dashForce, ForceMode.Impulse);
+            player.rigid.AddForce(dashDirection * player.ballSO.dashForce + Vector3.up * player.ballSO.dashForce, ForceMode.Impulse);
         }
     }
 
@@ -62,10 +60,10 @@ public class BallAttack : MonoBehaviour
             BossControl bossHp = other.collider.GetComponent<BossControl>();
             if (bossHp != null)
             {
-                bossHp.TakeDamage(ballSO.dashDamage);
+                bossHp.TakeDamage(player.ballSO.dashDamage);
 
                 Vector3 direction = (other.transform.position - transform.position).normalized;
-                playerRigidbody.AddForce(-direction * boundsForce, ForceMode.Impulse);
+                player.rigid.AddForce(-direction * boundsForce, ForceMode.Impulse);
             }
         }
     }

@@ -28632,7 +28632,7 @@ GameObject:
   - component: {fileID: 678951885}
   - component: {fileID: 678951886}
   m_Layer: 0
-  m_Name: Ground
+  m_Name: ---------Ground---------
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45623,6 +45623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b40209bacab844a912bf6a7e06bf34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemList: []
   plusHp: 3
 --- !u!65 &1043603684
 BoxCollider:

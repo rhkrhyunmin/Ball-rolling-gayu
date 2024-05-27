@@ -3,24 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class HillPack : MonoBehaviour
+public class HillPack : RandomItemBox
 {
     public int plusHp = 3;
-    private BallHp ballHp;
+    private Player player;
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnHill()
     {
-        if(collision.collider.CompareTag("Player"))
-        {
-            if (ballHp == null)
-            {
-                ballHp = FindObjectOfType<BallHp>();
-            }
-
-            if (ballHp != null)
-            {
-                ballHp.ballSO.currentHp += plusHp;
-            }
-        }
+        player = FindObjectOfType<Player>();
+        player.ballSO.currentHp += plusHp;
     }
 }
