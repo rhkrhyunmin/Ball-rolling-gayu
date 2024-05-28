@@ -34,8 +34,7 @@ public class RandomItemBox : MonoBehaviour
             }
             else if (randomItem == "Health")
             {
-                HillPack hillPack = new HillPack();
-                hillPack.OnHill();
+
             }
             else if (randomItem == "Shield")
             {

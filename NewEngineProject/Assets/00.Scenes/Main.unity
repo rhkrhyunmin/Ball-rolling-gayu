@@ -70207,7 +70207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6be7b3516ff5f6f498500f72ebcacda7, type: 3}
       propertyPath: m_Name
-      value: Cube_Question
+      value: ItemBox
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6be7b3516ff5f6f498500f72ebcacda7, type: 3}
       propertyPath: m_TagString
