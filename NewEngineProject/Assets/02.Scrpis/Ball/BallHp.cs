@@ -5,15 +5,19 @@ using UnityEngine.UI;
 
 public class BallHp : MonoBehaviour
 {
+    public bool isShield;
+
     private Player player;
 
     public GameObject gameOverPanel;
+    public ParticleSystem shieldParticle;
     public Slider healthSlider; 
 
     private void Start()
     {
         player = GetComponent<Player>();
-        healthSlider.maxValue = player.ballSO.maxHp; 
+        healthSlider.maxValue = player.ballSO.maxHp;
+        player.ballSO.currentHp = player.ballSO.maxHp;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -32,12 +36,34 @@ public class BallHp : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        player.ballSO.currentHp -= damage;
-        UpdateHealthBar(); 
-
-        if (player.ballSO.currentHp <= 0f)
+        if(isShield == false)
         {
-            ShowGameOver();
+            player.ballSO.currentHp -= damage;
+            UpdateHealthBar();
+
+            if (player.ballSO.currentHp <= 0f)
+            {
+                ShowGameOver();
+            }
+        }
+        else
+        {
+            Onshield();
+            isShield = false;
+        }
+    }
+
+    public void Onshield()
+    {
+        isShield = true;
+
+        if(isShield == true)
+        {
+            shieldParticle.Play();
+        }
+        else
+        {
+            shieldParticle.Stop();
         }
     }
 
