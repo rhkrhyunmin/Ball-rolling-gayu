@@ -84356,7 +84356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1861488092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -100925,7 +100925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossControl: {fileID: 5866666021698493041}
   bossSo: {fileID: 11400000, guid: 3fa8ca28a4d1b2a43b3123122eb52dd7, type: 2}
-  ballHp: {fileID: 0}
+  playerHp: {fileID: 0}
 --- !u!65 &1538852821608091122
 BoxCollider:
   m_ObjectHideFlags: 0

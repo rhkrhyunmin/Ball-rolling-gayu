@@ -6,12 +6,12 @@ public class Boost : RandomItemBox
 {
     public float boostPower = 7f;
     public ParticleSystem boostParticle;
-    private BallMove ballMove;
+    private Player ballMove;
 
     public void ONBoost()
     {
-        ballMove = FindObjectOfType<BallMove>();
+        ballMove = FindObjectOfType<Player>();
         boostParticle.Play();
-        //ballMove.rigid.AddForce();
+        //player.rigid.AddForce();
     }
 }

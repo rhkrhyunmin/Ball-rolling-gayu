@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BallHp : MonoBehaviour
+public class PlayerHp : MonoBehaviour
 {
     public bool isShield;
     private Player player;
 
     public GameObject gameOverPanel;
-    public Slider healthSlider; 
+
+    public Slider healthSlider;
+    public Image heartImage;
 
     private void Start()
     {
         player = GetComponent<Player>();
         healthSlider.maxValue = player.ballSO.maxHp;
+        //heartImage.enabled = true;
         player.ballSO.currentHp = player.ballSO.maxHp;
         UpdateHealthBar();
     }
@@ -40,7 +43,7 @@ public class BallHp : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if(isShield == false)
+        if (isShield == false)
         {
             player.ballSO.currentHp -= damage;
             UpdateHealthBar();
@@ -58,7 +61,7 @@ public class BallHp : MonoBehaviour
 
     public void Onshield()
     {
-        if(isShield == true)
+        if (isShield == true)
         {
             player.shieldParticle.Play();
         }

@@ -13,11 +13,8 @@ GameObject:
   - component: {fileID: 23737651838244920}
   - component: {fileID: 135134225773752490}
   - component: {fileID: 8996786251468235792}
-  - component: {fileID: 1035980983806773796}
-  - component: {fileID: -713765339450034518}
-  - component: {fileID: -3135020054465610075}
-  - component: {fileID: 148510934325527148}
   - component: {fileID: -1107388655244801585}
+  - component: {fileID: 2251786580177479532}
   m_Layer: 6
   m_Name: Soccer Ball
   m_TagString: Ball
@@ -140,61 +137,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1035980983806773796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1975457108487340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 787604813204d1745a98b05dcd489864, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  isBoost: 0
---- !u!114 &-713765339450034518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1975457108487340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33dcb8aa9f73ef04f8f9b84e43352436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-3135020054465610075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1975457108487340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11cb6be1100715d41bcda7ae5da89f5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isShield: 0
-  gameOverPanel: {fileID: 919132149155446097, guid: 37f21eaba727e094fa1ff12ed34ac8d3, type: 3}
-  healthSlider: {fileID: 0}
---- !u!114 &148510934325527148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1975457108487340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9305e237e7595bc4f94213ab7a612299, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1107388655244801585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +152,25 @@ MonoBehaviour:
   ballSO: {fileID: 11400000, guid: 5e2354be5badc8b468be67544428a484, type: 2}
   shieldParticle: {fileID: 5867539539472708496}
   boostParticle: {fileID: 0}
-  rigid: {fileID: 8996786251468235792}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  isBoost: 0
+--- !u!114 &2251786580177479532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975457108487340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b3948c78975bc47b8f1b52a54a9808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShield: 0
+  gameOverPanel: {fileID: 0}
+  healthSlider: {fileID: 0}
 --- !u!1001 &6029247945892301760
 PrefabInstance:
   m_ObjectHideFlags: 0

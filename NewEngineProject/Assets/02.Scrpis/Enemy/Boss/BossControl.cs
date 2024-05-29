@@ -13,7 +13,7 @@ public class BossControl : MonoBehaviour
 
     private NavMeshAgent agent;
     private GameObject player;
-    private BallHp ballHp;
+    private PlayerHp playerHp;
 
     public bool isAttacking = false;
 
@@ -60,9 +60,9 @@ public class BossControl : MonoBehaviour
         //agent.isStopped = true;
         transform.LookAt(player.transform.position);
 
-        if (ballHp == null)
+        if (playerHp == null)
         {
-            ballHp = FindObjectOfType<BallHp>();
+            playerHp = FindObjectOfType<PlayerHp>();
         }
 
         else

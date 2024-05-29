@@ -10,7 +10,7 @@ public class EnemyControl : MonoBehaviour
 
     private NavMeshAgent agent;
     private GameObject player;
-    private BallHp ballHp;
+    private PlayerHp playerHp;
 
     private bool isAttacking = false;
 
@@ -66,15 +66,15 @@ public class EnemyControl : MonoBehaviour
         animator.SetBool("IsAttack", true); // Start attacking animation
         transform.LookAt(player.transform.position);
 
-        if (ballHp == null)
+        if (playerHp == null)
         {
-            ballHp = FindObjectOfType<BallHp>(); 
+            playerHp = FindObjectOfType<PlayerHp>(); 
         }
 
-        if (ballHp != null)
+        if (playerHp != null)
         {
             isAttacking = true;
-            ballHp.TakeDamage(enemyStats.AttackDamage);
+            playerHp.TakeDamage(enemyStats.AttackDamage);
             yield return new WaitForSeconds(enemyStats.AttackCoolDonw);
         }
 

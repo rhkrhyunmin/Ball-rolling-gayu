@@ -30,8 +30,6 @@ public class Navegation : MonoBehaviour
     {
         float distance = Vector3.Distance(playerTransform.position, Destination.position); // 플레이어와 목적지 사이의 거리 계산
         float progress = 1 - Mathf.Clamp01(distance / maxDistance); // 슬라이더 값 계산 (0 ~ 1 사이)
-        Debug.Log("Distance: " + distance);
-        Debug.Log("Progress: " + progress);
         progressSlider.value = progress; // 슬라이더 값 업데이트
     }
 }

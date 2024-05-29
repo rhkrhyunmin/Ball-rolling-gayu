@@ -29,13 +29,12 @@ public class RandomItemBox : MonoBehaviour
     public void OnBuff()
     {
         Player player = FindObjectOfType<Player>();
-        BallHp ballHp = FindObjectOfType<BallHp>();
-        BallMove ballMove = FindObjectOfType<BallMove>();
+        PlayerHp ballHp = FindObjectOfType<PlayerHp>();
 
         if (randomItem == "Boost")
         {
             Debug.Log("B");
-            ballMove.isBoost = true;
+            player.isBoost = true;
         }
         else if (randomItem == "Health")
         {

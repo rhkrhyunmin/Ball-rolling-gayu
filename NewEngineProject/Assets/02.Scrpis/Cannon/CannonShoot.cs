@@ -38,8 +38,8 @@ public class CannonShoot : MonoBehaviour
 
    // private Vector3[] points; // 베지어 곡선에서 사용할 점의 배열
 
-    public UnityEvent<BallMove> OnFireEvent;
-    public UnityEvent<BallMove> OnMoveEvent;
+    public UnityEvent<Player> OnFireEvent;
+    public UnityEvent<Player> OnMoveEvent;
 
     private void Start()
     {
@@ -76,7 +76,7 @@ public class CannonShoot : MonoBehaviour
         Rigidbody ballRb = ballInstance.GetComponent<Rigidbody>();
         ballRb.AddForce(forceVector, ForceMode.Impulse);
 
-        BallHp ballHp = ballInstance.GetComponent<BallHp>();
+        PlayerHp ballHp = ballInstance.GetComponent<PlayerHp>();
 
         ballHp.gameOverPanel = gameoverPanel;
         ballHp.healthSlider = HPslider;
@@ -86,7 +86,7 @@ public class CannonShoot : MonoBehaviour
         CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ballInstance.transform);
         CameraManger.instance.SetFollowTarget(CameraCatagory.Ballcam, ballInstance.transform);
         chargeTime = 0f;
-        OnFireEvent?.Invoke(ballInstance.GetComponent<BallMove>());
+        OnFireEvent?.Invoke(ballInstance.GetComponent<Player>());
 
         Destroy(lineRenderer);
         audioSource.PlayOneShot(bombclip);

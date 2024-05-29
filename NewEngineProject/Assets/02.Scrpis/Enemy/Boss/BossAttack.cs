@@ -7,14 +7,14 @@ public class BossAttack : MonoBehaviour
 {
     public BossControl bossControl;
     public EnemySO bossSo;
-    public BallHp ballHp;
+    public PlayerHp playerHp;
 
     public void Update()
     {
         // ballHp가 null인 경우에만 찾도록 함
-        if (ballHp == null)
+        if (playerHp == null)
         {
-            ballHp = FindObjectOfType<BallHp>();
+            playerHp = FindObjectOfType<PlayerHp>();
         }
     }
 
@@ -24,9 +24,9 @@ public class BossAttack : MonoBehaviour
         Debug.Log(bossControl.isAttacking);
         if (other.CompareTag("Ball") && bossControl.isAttacking == true)
         {
-            if (ballHp != null)
+            if (playerHp != null)
             {
-                ballHp.TakeDamage(bossSo.AttackDamage);
+                playerHp.TakeDamage(bossSo.AttackDamage);
             }
         }
     }
