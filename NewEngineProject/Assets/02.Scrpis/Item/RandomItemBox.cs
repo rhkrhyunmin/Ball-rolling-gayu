@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
 
 public class RandomItemBox : MonoBehaviour
@@ -18,31 +19,31 @@ public class RandomItemBox : MonoBehaviour
         {
             int randomIndex = Random.Range(0, itemList.Count);
             randomItem = itemList[randomIndex];
-            Debug.Log("획득한 아이템: " + randomItem);
-            gameObject.SetActive(false);
+
+            OnBuff();
         }
+
+        gameObject.SetActive(false);
     }
 
-    void Update()
+    public void OnBuff()
     {
-        // 여기서 랜덤으로 얻은 아이템을 처리할 수 있습니다.
-        if (!string.IsNullOrEmpty(randomItem))
+        Player player = FindObjectOfType<Player>();
+        BallHp ballHp = FindObjectOfType<BallHp>();
+        BallMove ballMove = FindObjectOfType<BallMove>();
+
+        if (randomItem == "Boost")
         {
-            if (randomItem == "Boost")
-            {
-                
-            }
-            else if (randomItem == "Health")
-            {
-
-            }
-            else if (randomItem == "Shield")
-            {
-                
-            }
-
-            // 아이템을 사용한 후 초기화
-            randomItem = null;
+            Debug.Log("B");
+            ballMove.isBoost = true;
+        }
+        else if (randomItem == "Health")
+        {
+            player.ballSO.currentHp += 3f;
+        }
+        else if (randomItem == "Shield")
+        {
+            ballHp.isShield = true;
         }
     }
 }

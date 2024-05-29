@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class BallMove : MonoBehaviour
 {
     public LayerMask whatIsGround;
+
     private Player player;
+
+    public bool isBoost;
 
     Camera cam;
 
@@ -33,7 +37,29 @@ public class BallMove : MonoBehaviour
             player.ballSO.moveSpeed = Mathf.Clamp(player.ballSO.moveSpeed, 0, 5);
 
             player.rigid.AddForce(Vector3.ProjectOnPlane(dir, hit.normal).normalized * player.ballSO.moveSpeed, ForceMode.Force);
+        
+            OnBoost();
         }
+    }
+
+    private void OnBoost()
+    {
+        if(isBoost)
+        {
+            player.boostParticle.Play();
+            StartCoroutine(BoostCo(5f));
+        }
+        else
+        {
+            //player.boostParticle.Stop();
+        }
+    }
+
+    IEnumerator BoostCo(float delay)
+    {
+        player = GetComponent<Player>();
+        player.rigid.AddForce(Vector3.forward * player.ballSO.moveSpeed * 3);
+        yield return new WaitForSeconds(delay);
     }
 
     private void OnCollisionEnter(Collision collision)

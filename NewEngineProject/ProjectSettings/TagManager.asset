@@ -17,6 +17,7 @@ TagManager:
   - IntroBall
   - TrapBall
   - ItemBox
+  - Destination
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - UI
   - Player
   - Weapon
-  - 
+  - Ground
   - 
   - 
   - 

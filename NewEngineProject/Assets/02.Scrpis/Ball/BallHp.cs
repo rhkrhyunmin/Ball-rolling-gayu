@@ -6,11 +6,9 @@ using UnityEngine.UI;
 public class BallHp : MonoBehaviour
 {
     public bool isShield;
-
     private Player player;
 
     public GameObject gameOverPanel;
-    public ParticleSystem shieldParticle;
     public Slider healthSlider; 
 
     private void Start()
@@ -18,6 +16,12 @@ public class BallHp : MonoBehaviour
         player = GetComponent<Player>();
         healthSlider.maxValue = player.ballSO.maxHp;
         player.ballSO.currentHp = player.ballSO.maxHp;
+        UpdateHealthBar();
+    }
+
+    private void Update()
+    {
+        Onshield();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -48,22 +52,19 @@ public class BallHp : MonoBehaviour
         }
         else
         {
-            Onshield();
             isShield = false;
         }
     }
 
     public void Onshield()
     {
-        isShield = true;
-
         if(isShield == true)
         {
-            shieldParticle.Play();
+            player.shieldParticle.Play();
         }
         else
         {
-            shieldParticle.Stop();
+            player.shieldParticle.Stop();
         }
     }
 

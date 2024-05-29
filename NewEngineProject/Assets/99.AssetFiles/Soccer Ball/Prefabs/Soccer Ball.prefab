@@ -155,6 +155,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
+  isBoost: 0
 --- !u!114 &-713765339450034518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +182,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShield: 0
   gameOverPanel: {fileID: 919132149155446097, guid: 37f21eaba727e094fa1ff12ed34ac8d3, type: 3}
-  shieldParticle: {fileID: 5867539539472708496}
   healthSlider: {fileID: 0}
 --- !u!114 &148510934325527148
 MonoBehaviour:
@@ -208,6 +208,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballSO: {fileID: 11400000, guid: 5e2354be5badc8b468be67544428a484, type: 2}
+  shieldParticle: {fileID: 5867539539472708496}
+  boostParticle: {fileID: 0}
   rigid: {fileID: 8996786251468235792}
 --- !u!1001 &6029247945892301760
 PrefabInstance:

@@ -2,7 +2,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public Player player;
+
     private static GameManager instance;
+
+    public void Update()
+    {
+        player = FindObjectOfType<Player>();
+    }
 
     public static GameManager Instance
     {
