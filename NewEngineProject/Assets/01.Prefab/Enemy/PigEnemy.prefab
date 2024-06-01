@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 7063898683604824077}
   - component: {fileID: -2863078670094093115}
   - component: {fileID: 4210948008524047113}
+  - component: {fileID: 5023261416967654388}
   m_Layer: 0
   m_Name: PigEnemy
   m_TagString: Enemy
@@ -476,6 +477,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &5023261416967654388
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3126265920040096925}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.684639
+  m_Height: 3.0481234
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.410007, z: 0.18463898}
 --- !u!1 &3334566876070692682
 GameObject:
   m_ObjectHideFlags: 0
