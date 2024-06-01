@@ -18583,6 +18583,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolTag: Trap
+  spawnPoints:
+  - {fileID: 397323184}
+  - {fileID: 1792346033}
 --- !u!1 &398039012
 GameObject:
   m_ObjectHideFlags: 0
@@ -40123,17 +40126,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6044570773242944842, guid: 6e4f285e26d95f24a913f8168d681f85, type: 3}
   m_PrefabInstance: {fileID: 567175898}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &905049012 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6746732701078989086, guid: 55032aa86ee6de44d902fc3e08ab9a5a, type: 3}
-  m_PrefabInstance: {fileID: 359252372}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &907637183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6044570773242944842, guid: 6e4f285e26d95f24a913f8168d681f85, type: 3}
@@ -44685,10 +44677,7 @@ MonoBehaviour:
   minForceMagnitude: 1
   maxForceMagnitude: 100
   chargeRate: 20
-  HPslider: {fileID: 905049012}
   cannonExit: {fileID: 1274507705}
-  SpeedImage: {fileID: 811209763}
-  HeartImage: {fileID: 1861488093}
   bombclip: {fileID: 8300000, guid: 4398cd241f6b6534bb69f0343e8f01ed, type: 3}
 --- !u!120 &999065473
 LineRenderer:
@@ -77316,12 +77305,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792346032}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7146b6c9db98d548a478deea2a3e463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   poolTag: Trap
+  spawnPoints: []
 --- !u!4 &1792854966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6044570773242944842, guid: 6e4f285e26d95f24a913f8168d681f85, type: 3}
