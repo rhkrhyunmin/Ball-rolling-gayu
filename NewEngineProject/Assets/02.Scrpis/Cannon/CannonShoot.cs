@@ -17,7 +17,6 @@ public class CannonShoot : MonoBehaviour
     [SerializeField] private float chargeRate = 1f; // 차징 속도
     private float currentForceMagnitude = 0f; // 현재 힘의 크기
 
-    [SerializeField] private Slider HPslider;
     private float timer = 0;
 
     
@@ -28,9 +27,6 @@ public class CannonShoot : MonoBehaviour
     private LineRenderer lineRenderer;
     Vector3 startPosition;
     Vector3 startVelocity;
-
-    public Image SpeedImage;
-    public Image HeartImage;
 
     int i = 0;
     private int numPoints = 30; // 선에 사용할 점의 개수
@@ -65,9 +61,9 @@ public class CannonShoot : MonoBehaviour
     public void Fire()
     {
         boomEffect.Play();
-        HPslider.enabled = false;
-        SpeedImage.gameObject.SetActive(true);
-        HeartImage.gameObject.SetActive(true);
+        UIManager.Instance.hpSlider.enabled = false;
+        UIManager.Instance.speedImage.gameObject.SetActive(true);
+        UIManager.Instance.hpImage.gameObject.SetActive(true);
 
         isCharging = false;
         Vector3 forceVector = cannonExit.forward * currentForceMagnitude;
@@ -79,9 +75,9 @@ public class CannonShoot : MonoBehaviour
 
         PlayerHp ballHp = ballInstance.GetComponent<PlayerHp>();
 
-        ballHp.healthSlider = HPslider;
+        ballHp.healthSlider = UIManager.Instance.hpSlider;
 
-        HPslider.enabled = true;
+        UIManager.Instance.hpSlider.enabled = true;
 
         CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ballInstance.transform);
         CameraManger.instance.SetFollowTarget(CameraCatagory.Ballcam, ballInstance.transform);
