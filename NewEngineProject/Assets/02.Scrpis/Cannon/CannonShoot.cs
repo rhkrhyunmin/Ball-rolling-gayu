@@ -11,16 +11,16 @@ public class CannonShoot : MonoBehaviour
     public GameObject ballPrefab;
     public CameraShake cameraShake;
     public ParticleSystem boomEffect;
+    [Header("chargingvalue")]
     [SerializeField] private float minForceMagnitude = 1f; // 최소 힘의 크기
     [SerializeField] private float maxForceMagnitude = 30f; // 최대 힘의 크기
     [SerializeField] private float chargeRate = 1f; // 차징 속도
-
-    [SerializeField] private GameObject gameoverPanel;
-    [SerializeField] private Slider HPslider;
-    [SerializeField] private float timer = 0;
-    [SerializeField] private TextMeshProUGUI TimerTMP;
-
     private float currentForceMagnitude = 0f; // 현재 힘의 크기
+
+    [SerializeField] private Slider HPslider;
+    private float timer = 0;
+
+    
     private bool isCharging = false; // 차징 중인지 여부
     public Transform cannonExit; // 대포의 입구 위치
     private float chargeTime;
@@ -28,6 +28,9 @@ public class CannonShoot : MonoBehaviour
     private LineRenderer lineRenderer;
     Vector3 startPosition;
     Vector3 startVelocity;
+
+    public Image SpeedImage;
+    public Image HeartImage;
 
     int i = 0;
     private int numPoints = 30; // 선에 사용할 점의 개수
@@ -37,9 +40,6 @@ public class CannonShoot : MonoBehaviour
     private AudioSource audioSource;
 
    // private Vector3[] points; // 베지어 곡선에서 사용할 점의 배열
-
-    public UnityEvent<Player> OnFireEvent;
-    public UnityEvent<Player> OnMoveEvent;
 
     private void Start()
     {
@@ -60,13 +60,14 @@ public class CannonShoot : MonoBehaviour
     public void Timer()
     {
         timer += Time.deltaTime;
-        TimerTMP.text = timer.ToString("F2");
     }
 
     public void Fire()
     {
         boomEffect.Play();
         HPslider.enabled = false;
+        SpeedImage.gameObject.SetActive(true);
+        HeartImage.gameObject.SetActive(true);
 
         isCharging = false;
         Vector3 forceVector = cannonExit.forward * currentForceMagnitude;
@@ -78,7 +79,6 @@ public class CannonShoot : MonoBehaviour
 
         PlayerHp ballHp = ballInstance.GetComponent<PlayerHp>();
 
-        ballHp.gameOverPanel = gameoverPanel;
         ballHp.healthSlider = HPslider;
 
         HPslider.enabled = true;
@@ -86,7 +86,6 @@ public class CannonShoot : MonoBehaviour
         CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ballInstance.transform);
         CameraManger.instance.SetFollowTarget(CameraCatagory.Ballcam, ballInstance.transform);
         chargeTime = 0f;
-        OnFireEvent?.Invoke(ballInstance.GetComponent<Player>());
 
         Destroy(lineRenderer);
         audioSource.PlayOneShot(bombclip);

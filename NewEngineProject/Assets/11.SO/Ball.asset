@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Ball
   m_EditorClassIdentifier: 
   maxHp: 30
-  currentHp: 0
+  currentHp: 30
   damageAmount: 3
   dashForce: 5
   dashDuration: 0.5
   dashCooldown: 1
   dashDamage: 2
   dashKnockbackForce: 5
-  moveSpeed: 9.636275
+  moveSpeed: 5.1247826

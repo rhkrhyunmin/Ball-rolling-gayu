@@ -44,8 +44,8 @@ public class Player : MonoBehaviour
             dir *= verticalInput;
             if (verticalInput != 0) ballSO.moveSpeed += Time.deltaTime * accel;
             else ballSO.moveSpeed -= Time.deltaTime * deAccel;
-            ballSO.moveSpeed = Mathf.Clamp(ballSO.moveSpeed, 0, 10);
-
+            ballSO.moveSpeed = Mathf.Clamp(ballSO.moveSpeed, 0, 30);
+            
             rigid.AddForce(Vector3.ProjectOnPlane(dir, hit.normal).normalized * ballSO.moveSpeed, ForceMode.Force);
             OnBoost();
         }

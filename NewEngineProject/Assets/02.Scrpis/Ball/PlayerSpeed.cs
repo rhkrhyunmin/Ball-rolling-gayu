@@ -22,6 +22,6 @@ public class PlayerSpeed : MonoBehaviour
 
     private void OnSpeedGage()
     {
-        speedSlider.value = player.ballSO.moveSpeed * 2;
+        speedSlider.value = player.ballSO.moveSpeed;
     }
 }
