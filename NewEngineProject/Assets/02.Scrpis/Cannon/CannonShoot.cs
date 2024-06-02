@@ -61,6 +61,9 @@ public class CannonShoot : MonoBehaviour
     public void Fire()
     {
         boomEffect.Play();
+        
+
+        UIManager.Instance.Navagation.SetActive(true);
         UIManager.Instance.hpSlider.enabled = false;
         UIManager.Instance.speedImage.gameObject.SetActive(true);
         UIManager.Instance.hpImage.gameObject.SetActive(true);
@@ -72,10 +75,6 @@ public class CannonShoot : MonoBehaviour
 
         Rigidbody ballRb = ballInstance.GetComponent<Rigidbody>();
         ballRb.AddForce(forceVector, ForceMode.Impulse);
-
-        PlayerHp ballHp = ballInstance.GetComponent<PlayerHp>();
-
-        //ballHp. = UIManager.Instance.hpSlider;
 
         UIManager.Instance.hpSlider.enabled = true;
 

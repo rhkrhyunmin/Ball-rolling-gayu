@@ -33,10 +33,6 @@ public class BallControl : MonoBehaviour
 
     private void Update()
     {
-        if ((short)currentState < 2)
-        {
-            
-        }
         CheckFire();
 
         CheckWait();

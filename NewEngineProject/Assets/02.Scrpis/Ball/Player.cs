@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     private bool isDashing = false;       // 돌진 중인지 여부
     private bool canUseSpace = true;     // 스페이스 사용 가능한지 여부
 
-    private float accel = 5f, deAccel = 5f , boundsForce = 10f;
+    private float accel = 5f, deAccel = 10f , boundsForce = 10f;
 
     private void Start()
     {
@@ -42,13 +42,27 @@ public class Player : MonoBehaviour
             Vector3 dir = cam.transform.forward;
             dir.y = 0;
             dir *= verticalInput;
-            if (verticalInput != 0) ballSO.moveSpeed += Time.deltaTime * accel;
-            else ballSO.moveSpeed -= Time.deltaTime * deAccel;
+
+            // 속도 가속 및 감속 처리
+            if (verticalInput > 0)
+            {
+                ballSO.moveSpeed += Time.deltaTime * accel;
+            }
+            else if (verticalInput < 0)
+            {
+                ballSO.moveSpeed -= Time.deltaTime * accel; // 뒤로 갈 때는 속도를 감소시킴
+            }
+            else
+            {
+                ballSO.moveSpeed -= Time.deltaTime * deAccel;
+            }
+
             ballSO.moveSpeed = Mathf.Clamp(ballSO.moveSpeed, 0, 30);
-            
+
             rigid.AddForce(Vector3.ProjectOnPlane(dir, hit.normal).normalized * ballSO.moveSpeed, ForceMode.Force);
-            OnBoost();
+            //OnBoost();
         }
+
 
         // 스페이스 사용 가능한 상태에서 스페이스를 누르면 행동 실행
         if (canUseSpace && Input.GetKeyDown(KeyCode.Space))
@@ -63,6 +77,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             canMove = true;
+            Debug.Log("1");
         }
 
         // 돌진 중에 보스와 충돌하면 데미지 입히고 튕겨나감
@@ -79,6 +94,15 @@ public class Player : MonoBehaviour
                 Vector3 direction = (other.transform.position - transform.position).normalized;
                 rigid.AddForce(-direction * boundsForce, ForceMode.Impulse);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("OnBoss"))
+        {
+            UIManager.Instance.BossHp.gameObject.SetActive(true);
+
         }
     }
 

@@ -8,11 +8,16 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    public Slider speedSlider;
-    public Slider hpSlider;
+    public GameObject Navagation;
+    public GameObject BossHp;
 
-    public Image hpImage;
+    [Header("Speed")]
+    public Slider speedSlider;
     public Image speedImage;
+    [Header("Hp")]
+    public Slider hpSlider;
+    public Image hpImage;
+    
 
     private void Awake()
     {
