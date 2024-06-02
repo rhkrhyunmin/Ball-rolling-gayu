@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     public GameObject Navagation;
-    public GameObject BossHp;
+    public Slider BossHp;
 
     [Header("Speed")]
     public Slider speedSlider;

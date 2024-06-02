@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     public bool isBoost;
 
-    private bool canMove = true;
+    private bool canMove = false;
     private bool isDashing = false;       // 돌진 중인지 여부
     private bool canUseSpace = true;     // 스페이스 사용 가능한지 여부
 
@@ -33,8 +33,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.2f, whatIsGround);
-
-        if (canMove)
+        if(canMove)
         {
             // 방향키 입력 처리
             float verticalInput = Input.GetAxis("Vertical");
@@ -77,7 +76,10 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             canMove = true;
-            Debug.Log("1");
+        }
+        else
+        {
+            canMove = false;
         }
 
         // 돌진 중에 보스와 충돌하면 데미지 입히고 튕겨나감
