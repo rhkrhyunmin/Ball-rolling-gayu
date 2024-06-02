@@ -12,7 +12,7 @@ public class TrapBallSpawn : MonoBehaviour
 
     private void Start()
     {
-        spawnRandomTime = Random.Range(3, 10);
+        spawnRandomTime = Random.Range(1, 7);
         StartCoroutine(SpawnTrapBalls());
     }
 
