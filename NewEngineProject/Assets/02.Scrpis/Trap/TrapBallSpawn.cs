@@ -6,7 +6,9 @@ public class TrapBallSpawn : MonoBehaviour
 {
     public string poolTag = "Trap";
     private float spawnRandomTime;
-    public List<Transform> spawnPoints; // TrapBall이 스폰될 위치들을 저장하는 리스트
+
+    public Vector3 minSpawnRange; // 최소 스폰 범위 (X, Y, Z)
+    public Vector3 maxSpawnRange; // 최대 스폰 범위 (X, Y, Z)
 
     private void Start()
     {
@@ -34,10 +36,15 @@ public class TrapBallSpawn : MonoBehaviour
         GameObject trapBall = PoolManager.Instance.GetObject(poolTag);
         if (trapBall != null)
         {
-            // 무작위로 스폰 위치를 선택합니다.
-            Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
-            trapBall.transform.position = spawnPoint.position;
-            trapBall.transform.rotation = spawnPoint.rotation;
+            // 무작위로 스폰 위치를 생성합니다.
+            Vector3 randomPosition = new Vector3(
+                Random.Range(minSpawnRange.x, maxSpawnRange.x),
+                Random.Range(minSpawnRange.y, maxSpawnRange.y),
+                Random.Range(minSpawnRange.z, maxSpawnRange.z)
+            );
+
+            trapBall.transform.position = randomPosition;
+            trapBall.transform.rotation = Quaternion.identity; // 또는 다른 원하는 회전값 설정
             StartCoroutine(DisableTrapBall(trapBall));
         }
     }

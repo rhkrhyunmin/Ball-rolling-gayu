@@ -75,7 +75,7 @@ public class CannonShoot : MonoBehaviour
 
         PlayerHp ballHp = ballInstance.GetComponent<PlayerHp>();
 
-        ballHp.healthSlider = UIManager.Instance.hpSlider;
+        //ballHp. = UIManager.Instance.hpSlider;
 
         UIManager.Instance.hpSlider.enabled = true;
 

@@ -6,13 +6,11 @@ using UnityEngine.UI;
 
 public class PlayerSpeed : MonoBehaviour
 {
-    public Slider speedSlider;
     private Player player;
 
     private void Start()
     {
         player = GetComponent<Player>();
-        speedSlider = FindObjectOfType<Slider>();
     }
 
     private void Update()
@@ -22,6 +20,6 @@ public class PlayerSpeed : MonoBehaviour
 
     private void OnSpeedGage()
     {
-        speedSlider.value = player.ballSO.moveSpeed;
+        UIManager.Instance.speedSlider.value = player.ballSO.moveSpeed;
     }
 }

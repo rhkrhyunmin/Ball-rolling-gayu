@@ -10,14 +10,10 @@ public class PlayerHp : MonoBehaviour
 
     public GameObject gameOverPanel;
 
-    public Slider healthSlider;
-    public Image heartImage;
-
     private void Start()
     {
         player = GetComponent<Player>();
-        healthSlider.maxValue = player.ballSO.maxHp;
-        //heartImage.enabled = true;
+        UIManager.Instance.hpSlider.maxValue = player.ballSO.maxHp;
         player.ballSO.currentHp = player.ballSO.maxHp;
         UpdateHealthBar();
     }
@@ -79,6 +75,6 @@ public class PlayerHp : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        healthSlider.value = player.ballSO.currentHp; // 현재 체력 값을 체력 바에 할당
+        UIManager.Instance.hpSlider.value = player.ballSO.currentHp; // 현재 체력 값을 체력 바에 할당
     }
 }
