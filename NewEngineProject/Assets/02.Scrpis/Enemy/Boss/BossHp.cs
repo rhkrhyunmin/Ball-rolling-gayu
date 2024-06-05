@@ -20,7 +20,12 @@ public class BossHp : MonoBehaviour
 
     private void UpdateHpUI()
     {
-        UIManager.Instance.BossHp.value += BossControl.bossState.currentHp;
+        float currentHp = BossControl.bossState.currentHp;
+        float maxHp = BossControl.bossState.MaxHp;
+
+        UIManager.Instance.BossHp.value += currentHp;
+        UIManager.Instance.TextBossHp.text = currentHp + " / " + maxHp;
+
         if(BossControl.bossState.currentHp <= 0)
         {
             SceneManager.LoadScene("EndScene");

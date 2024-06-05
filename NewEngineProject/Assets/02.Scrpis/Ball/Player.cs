@@ -103,7 +103,8 @@ public class Player : MonoBehaviour
     {
         if(other.CompareTag("OnBoss"))
         {
-            UIManager.Instance.BossHp.gameObject.SetActive(true);
+            
+            StartCoroutine(BossUI(3f));
             GameManager.Instance.isBoss = true;
         }
     }
@@ -125,6 +126,18 @@ public class Player : MonoBehaviour
     {
         rigid.AddForce(Vector3.forward * ballSO.moveSpeed * 3);
         yield return new WaitForSeconds(delay);
+    }
+
+    IEnumerator BossUI(float duration)
+    {
+        UIManager.Instance.bossWarningImage.SetActive(true);
+        
+        
+        yield return new WaitForSeconds(duration);
+
+        UIManager.Instance.BossHp.gameObject.SetActive(true);
+        UIManager.Instance.bossWarningImage.SetActive(false);
+
     }
 
     private IEnumerator SpaceCooldown()
