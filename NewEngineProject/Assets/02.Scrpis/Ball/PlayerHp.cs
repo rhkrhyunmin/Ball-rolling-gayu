@@ -8,8 +8,6 @@ public class PlayerHp : MonoBehaviour
     public bool isShield;
     private Player player;
 
-    public GameObject gameOverPanel;
-
     private void Start()
     {
         player = GetComponent<Player>();
@@ -32,8 +30,7 @@ public class PlayerHp : MonoBehaviour
 
         if (collision.gameObject.CompareTag("EndLine"))
         {
-            gameOverPanel.SetActive(true);
-            Time.timeScale = 0f;
+            ShowGameOver();
         }
     }
 
@@ -69,7 +66,7 @@ public class PlayerHp : MonoBehaviour
 
     private void ShowGameOver()
     {
-        gameOverPanel.SetActive(true);
+        UIManager.Instance.gameOverUI.SetActive(true);
         Time.timeScale = 0f;
     }
 

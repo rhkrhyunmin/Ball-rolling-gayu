@@ -6,21 +6,71 @@ using UnityEngine.SceneManagement;
 
 public class Setting : MonoBehaviour
 {
-    public GameObject SettingPanel;
-    private bool isPanelActive = false;
+    [Header("Music")]
+    public Image OnMusicImage;
+    public Image OffMusicImage;
+    public Slider MusicSlider;
 
-    void Start()
+    [Header("GrapicButton")]
+    public Image highGrapicButton;
+    public Image MediumGrapicButton;
+    public Image LowGrapicButton;
+
+    private void Update()
     {
-        SettingPanel.SetActive(false); // 시작 시에는 패널을 비활성화
+        
     }
 
-    void Update()
+    public void Exit()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            // 현재 패널의 활성화 상태에 따라 반대로 설정
-            isPanelActive = !isPanelActive;
-            SettingPanel.SetActive(isPanelActive);
-        }
+        UIManager.Instance.settingUI.gameObject.SetActive(false);
+        UIManager.Instance.pauseUI.gameObject.SetActive(true);
     }
+
+    public void OpenURLOtherGame()
+    {
+        // 여기에 열고 싶은 URL을 입력하세요.
+        Application.OpenURL("https://nickel-tracker-e45.notion.site/b4651968780847b9b754f6cae152fc23?v=bc55addce8d3429b87332b117f1576b6");
+    }
+
+    public void OpenURLAbout()
+    {
+        Application.OpenURL("https://ggm.gondr.net/user/profile/60");
+    }
+
+    #region 그래픽 설정
+    private void SetGraphicsQuality(int qualityIndex)
+    {
+        // 유니티 품질 레벨 설정
+        QualitySettings.SetQualityLevel(qualityIndex, true);
+    }
+
+    public void SetHighQuality()
+    {
+        highGrapicButton.enabled = true;
+        SetGraphicsQuality(5);
+        MediumGrapicButton.enabled = false;
+        LowGrapicButton.enabled = false;
+    }
+
+    // 중간 그래픽 품질로 설정
+    public void SetMediumQuality()
+    {
+        MediumGrapicButton.enabled = true;
+        SetGraphicsQuality(3);
+        LowGrapicButton.enabled = false;
+        highGrapicButton.enabled = false;
+    }
+
+    // 낮은 그래픽 품질로 설정
+    public void SetLowQuality()
+    {
+        LowGrapicButton.enabled = true;
+        SetGraphicsQuality(1);
+        highGrapicButton.enabled = false;
+        MediumGrapicButton.enabled = false;
+    }
+
+    
+    #endregion
 }

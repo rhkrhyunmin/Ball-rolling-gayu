@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class UIManager : MonoBehaviour
@@ -11,17 +12,21 @@ public class UIManager : MonoBehaviour
 
     public GameObject Navagation;
 
+    [Header("GameUI")]
+    public GameObject pauseUI;
+    public GameObject settingUI;
     [Header("Boss")]
     public GameObject bossWarningImage;
     public TextMeshProUGUI TextBossHp;
     public Slider BossHp;
-
     [Header("Speed")]
     public Slider speedSlider;
     public Image speedImage;
     [Header("Hp")]
     public Slider hpSlider;
     public Image hpImage;
+    [Header("GameOverUI")]
+    public GameObject gameOverUI;
     
 
     private void Awake()
@@ -37,4 +42,42 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject); // 이미 인스턴스가 존재하면 새로 생성된 객체를 파괴합니다.
         }
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseUI();
+            Time.timeScale = 0;
+        }
+    }
+
+    public void SettingUI()
+    {
+        pauseUI.SetActive(false);
+        settingUI.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+    }
+
+    public void ConinueGame()
+    {
+        pauseUI.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void PauseUI()
+    {
+        pauseUI.SetActive(true);
+    }
+
+    public void MainScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+    
 }
