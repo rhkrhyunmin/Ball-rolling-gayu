@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Player player;
-    public bool isBoss;
+    public bool isBoss = false;
 
     private static GameManager instance;
 

@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         if(other.CompareTag("OnBoss"))
         {
             UIManager.Instance.BossHp.gameObject.SetActive(true);
-
+            GameManager.Instance.isBoss = true;
         }
     }
 

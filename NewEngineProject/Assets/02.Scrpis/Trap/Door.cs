@@ -23,9 +23,9 @@ public class Door : MonoBehaviour
     private void Update()
     {
 
-        if (GameManager.Instance.isBoss)
+        if (GameManager.Instance.isBoss == true)
         {
-            rotating = !rotating;
+            rotating = true;
         }
 
         if (rotating)

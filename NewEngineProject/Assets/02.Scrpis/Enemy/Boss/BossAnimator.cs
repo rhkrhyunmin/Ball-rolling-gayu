@@ -75,7 +75,6 @@ public class BossAnimator : MonoBehaviour
         // 상태에 따른 애니메이션 처리
         foreach (var state in animationStates)
         {
-            Debug.Log(state);
             animator.SetBool(animationTriggers[state.Key], state.Value);
         }
     }
