@@ -15,16 +15,19 @@ public class UIManager : MonoBehaviour
     [Header("GameUI")]
     public GameObject pauseUI;
     public GameObject settingUI;
+    public GameObject playerStatUI;
+    public GameObject victoryUI;
+
     [Header("Boss")]
     public GameObject bossWarningImage;
     public TextMeshProUGUI TextBossHp;
     public Slider BossHp;
     [Header("Speed")]
     public Slider speedSlider;
-    public Image speedImage;
+    //public Image speedImage;
     [Header("Hp")]
     public Slider hpSlider;
-    public Image hpImage;
+    //public Image hpImage;
     [Header("GameOverUI")]
     public GameObject gameOverUI;
     
@@ -79,5 +82,22 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void VictroyUI()
+    {
+        StartCoroutine(OnvictoryUI(3f));
+    }
     
+    public IEnumerator OnvictoryUI(float duration)
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        playerStatUI.SetActive(false);
+        victoryUI.SetActive(true);
+
+        yield return new WaitForSeconds(duration);
+
+        GameManager.Instance.isGoal = true;
+        SceneManager.LoadScene(currentSceneIndex + 1);
+    }
 }

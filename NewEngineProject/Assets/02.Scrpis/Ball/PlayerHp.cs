@@ -31,6 +31,7 @@ public class PlayerHp : MonoBehaviour
         if (collision.gameObject.CompareTag("EndLine"))
         {
             ShowGameOver();
+            UIManager.Instance.playerStatUI.SetActive(false);
         }
     }
 

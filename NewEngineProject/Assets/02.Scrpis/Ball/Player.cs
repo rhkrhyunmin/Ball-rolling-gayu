@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -46,17 +47,20 @@ public class Player : MonoBehaviour
             if (verticalInput > 0)
             {
                 ballSO.moveSpeed += Time.deltaTime * accel;
+                Debug.Log("3");
             }
             else if (verticalInput < 0)
             {
                 ballSO.moveSpeed -= Time.deltaTime * accel; // 뒤로 갈 때는 속도를 감소시킴
+                Debug.Log("4");
             }
-            else
+            /*else
             {
                 ballSO.moveSpeed -= Time.deltaTime * deAccel;
-            }
+                Debug.Log("5");
+            }*/
 
-            ballSO.moveSpeed = Mathf.Clamp(ballSO.moveSpeed, 0, 30);
+            ballSO.moveSpeed = Mathf.Clamp(ballSO.moveSpeed, 0, 15);
 
             rigid.AddForce(Vector3.ProjectOnPlane(dir, hit.normal).normalized * ballSO.moveSpeed, ForceMode.Force);
             //OnBoost();
@@ -76,11 +80,13 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             canMove = true;
+            Debug.Log("1");
         }
-        else
+        /*else
         {
+            Debug.Log("2");
             canMove = false;
-        }
+        }*/
 
         // 돌진 중에 보스와 충돌하면 데미지 입히고 튕겨나감
         if (isDashing && other.collider.CompareTag("Boss"))
@@ -106,6 +112,11 @@ public class Player : MonoBehaviour
             
             StartCoroutine(BossUI(3f));
             GameManager.Instance.isBoss = true;
+        }
+
+        if (other.CompareTag("Goal"))
+        {
+            UIManager.Instance.VictroyUI();
         }
     }
 

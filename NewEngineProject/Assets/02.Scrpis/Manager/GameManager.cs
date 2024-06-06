@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public Player player;
     public bool isBoss = false;
+    public bool isGoal = false;
 
     private static GameManager instance;
 

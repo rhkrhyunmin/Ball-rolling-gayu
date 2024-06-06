@@ -9,13 +9,13 @@ public class StageUnlock : MonoBehaviour
     void Update()
     {
         // 스페이스바를 눌렀을 때 스테이지 클리어 처리
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (GameManager.Instance.isGoal == true)
         {
             OnStageCleared();
         }
     }
 
-    void OnStageCleared()
+    public void OnStageCleared()
     {
         // 현재 스테이지를 클리어 상태로 설정
         PlayerPrefs.SetInt("Stage" + currentStageIndex.ToString() + "Unlocked", 1);
@@ -28,5 +28,7 @@ public class StageUnlock : MonoBehaviour
         PlayerPrefs.Save();
 
         Debug.Log("Stage " + currentStageIndex + " cleared. Stage " + nextStageIndex + " unlocked.");
+
+        GameManager.Instance.isGoal = false;
     }
 }

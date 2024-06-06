@@ -65,8 +65,7 @@ public class CannonShoot : MonoBehaviour
 
         UIManager.Instance.Navagation.SetActive(true);
         UIManager.Instance.hpSlider.enabled = false;
-        UIManager.Instance.speedImage.gameObject.SetActive(true);
-        UIManager.Instance.hpImage.gameObject.SetActive(true);
+        UIManager.Instance.playerStatUI.SetActive(true);
 
         isCharging = false;
         Vector3 forceVector = cannonExit.forward * currentForceMagnitude;

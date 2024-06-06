@@ -21,7 +21,8 @@ public class Intro : MonoBehaviour
 
     public void NextScene()
     {
-        LoadingScence.LoadScene("Tutorial");
+        stageUI.SetActive(true);
+        //LoadingScence.LoadScene("Tutorial");
     }
 
     public void Back()
