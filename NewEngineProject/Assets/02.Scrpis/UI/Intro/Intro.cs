@@ -7,6 +7,7 @@ using TMPro;
 
 public class Intro : MonoBehaviour
 {
+    public GameObject stageUI;
     public TextMeshProUGUI _startText;
     public void Start()
     {
@@ -21,6 +22,11 @@ public class Intro : MonoBehaviour
     public void NextScene()
     {
         LoadingScence.LoadScene("Tutorial");
+    }
+
+    public void Back()
+    {
+        stageUI.SetActive(false);
     }
 
     public void Exit()
