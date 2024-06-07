@@ -1,60 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Navegation : MonoBehaviour
+public class Navigation : MonoBehaviour
 {
-    public Transform Destination; // 목적지 Transform
-    public Slider progressSlider; // 슬라이더 UI
-    public float maxDistance = 2000f; // 최대 거리
-    private Transform playerTransform;
-    private NavMeshPath navMeshPath;
+    public Transform destination; // 목적지 위치
+    public GameObject indicatorPrefab; // 목적지 아이콘 프리팹
+    public float amplitude = 0.5f; // 아이콘의 위아래 움직임 강도
+    public float speed = 1.0f; // 아이콘의 움직임 속도
+    public float initialYOffset = 2.0f; // 초기 y값 오프셋
+
+    private GameObject indicatorInstance; // 생성된 아이콘 인스턴스
+    private float startY; // 아이콘의 초기 y 위치
 
     void Start()
     {
-        navMeshPath = new NavMeshPath();
+        // 목적지 아이콘 생성
+        indicatorInstance = Instantiate(indicatorPrefab, Vector3.zero, Quaternion.identity);
+        startY = indicatorInstance.transform.position.y + initialYOffset; // 초기 y 위치 설정
     }
 
     void Update()
     {
-        // 플레이어 객체를 동적으로 찾기
-        Player playerObject = FindObjectOfType<Player>();
-        if (playerObject != null)
-        {
-            playerTransform = playerObject.transform;
-        }
+        // 목적지 아이콘의 위치를 목적지 위치로 이동
+        indicatorInstance.transform.position = destination.position;
 
-        if (playerTransform != null)
-        {
-            UpdateProgress();
-        }
-    }
+        // 목적지 아이콘을 플레이어를 향하도록 회전
+        indicatorInstance.transform.LookAt(Camera.main.transform);
 
-    void UpdateProgress()
-    {
-        // 네브메쉬 경로 계산
-        NavMesh.CalculatePath(playerTransform.position, Destination.position, NavMesh.AllAreas, navMeshPath);
-        float distance = CalculatePathDistance(navMeshPath); // 네브메쉬 경로 거리 계산
-        float progress = 1 - Mathf.Clamp01(distance / maxDistance); // 슬라이더 값 계산 (0 ~ 1 사이)
-        progressSlider.value = progress; // 슬라이더 값 업데이트
-    }
-
-    float CalculatePathDistance(NavMeshPath path)
-    {
-        float distance = 0f;
-
-        if (path.corners.Length < 2)
-        {
-            return distance;
-        }
-
-        for (int i = 1; i < path.corners.Length; i++)
-        {
-            distance += Vector3.Distance(path.corners[i - 1], path.corners[i]);
-        }
-
-        return distance;
+        // 아이콘의 y 위치를 위아래로 변화시켜 움직임 효과를 줌
+        float newY = startY + Mathf.Sin(Time.time * speed) * amplitude;
+        indicatorInstance.transform.position = new Vector3(indicatorInstance.transform.position.x, newY, indicatorInstance.transform.position.z);
     }
 }
