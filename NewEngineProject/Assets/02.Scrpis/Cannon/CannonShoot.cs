@@ -62,8 +62,6 @@ public class CannonShoot : MonoBehaviour
     {
         boomEffect.Play();
         
-
-        UIManager.Instance.Navagation.SetActive(true);
         UIManager.Instance.hpSlider.enabled = false;
         UIManager.Instance.playerStatUI.SetActive(true);
 

@@ -10,8 +10,6 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    public GameObject Navagation;
-
     [Header("GameUI")]
     public GameObject pauseUI;
     public GameObject settingUI;

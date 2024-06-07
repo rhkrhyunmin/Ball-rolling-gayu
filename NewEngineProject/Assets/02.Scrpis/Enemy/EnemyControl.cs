@@ -27,7 +27,7 @@ public class EnemyControl : MonoBehaviour
         if (player == null)
             return;
 
-        UpdateMoveAnmation();
+        UpdateMoveAnimation();
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
@@ -41,7 +41,7 @@ public class EnemyControl : MonoBehaviour
         }
     }
 
-    private void UpdateMoveAnmation()
+    private void UpdateMoveAnimation()
     {
         if (!isAttacking)
         {
@@ -62,13 +62,17 @@ public class EnemyControl : MonoBehaviour
 
     IEnumerator AttackCoroutine()
     {
-        //animator.SetBool("IsWalk", false);
+        // 공격 시작: 걷기 애니메이션을 멈추고 공격 애니메이션 시작
+        animator.SetBool("IsWalk", false);
         animator.SetBool("IsAttack", true); // Start attacking animation
-        transform.LookAt(player.transform.position);
+        //transform.LookAt(player.transform.position);
+
+        // 공격 중 움직이지 않도록 NavMeshAgent를 멈춤
+        agent.isStopped = true;
 
         if (playerHp == null)
         {
-            playerHp = FindObjectOfType<PlayerHp>(); 
+            playerHp = FindObjectOfType<PlayerHp>();
         }
 
         if (playerHp != null)
@@ -78,8 +82,9 @@ public class EnemyControl : MonoBehaviour
             yield return new WaitForSeconds(enemyStats.AttackCoolDonw);
         }
 
-        // 공격 딜레이 이후 공격 애니메이션 종료
+        // 공격 끝: 공격 애니메이션을 멈추고 다시 움직일 수 있도록 설정
         animator.SetBool("IsAttack", false);
-        isAttacking = false; 
+        isAttacking = false;
+        agent.isStopped = false;
     }
 }
