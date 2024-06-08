@@ -34,9 +34,7 @@ public class Door : MonoBehaviour
 
         if (rotating)
         {
-            Debug.Log("99");
-            // 회전 중이면 회전 실행
-            transform.rotation = initialRotation * Quaternion.Euler(0, 0, rotationAngle);
+            Destroy(gameObject);
         }
         else
         {
