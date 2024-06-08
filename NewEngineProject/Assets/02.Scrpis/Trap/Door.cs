@@ -20,16 +20,21 @@ public class Door : MonoBehaviour
         rotating = false;
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("Ball") && GameManager.Instance.isKey)
+        {
+            rotating = true;
+            GameManager.Instance.isKey = false;
+        }
+    }
+
     private void Update()
     {
 
-        if (GameManager.Instance.isBoss == true)
-        {
-            rotating = true;
-        }
-
         if (rotating)
         {
+            Debug.Log("99");
             // 회전 중이면 회전 실행
             transform.rotation = initialRotation * Quaternion.Euler(0, 0, rotationAngle);
         }

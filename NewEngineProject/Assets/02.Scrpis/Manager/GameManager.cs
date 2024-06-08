@@ -3,8 +3,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject player;
+
     public bool isBoss = false;
     public bool isGoal = false;
+    public bool isKey = false;
 
     private static GameManager instance;
 

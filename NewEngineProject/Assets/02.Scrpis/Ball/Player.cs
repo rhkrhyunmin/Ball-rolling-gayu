@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,26 +13,29 @@ public class Player : MonoBehaviour
 
     public LayerMask whatIsGround;
 
-    Camera cam;
+    private Camera cam;
 
     public bool isBoost;
 
     private bool canMove = false;
-    private bool isDashing = false;       // 돌진 중인지 여부
-    private bool canUseSpace = true;     // 스페이스 사용 가능한지 여부
+    private bool isDashing = false;       
+    private bool canUseSpace = true;
 
-    private float accel = 5f, deAccel = 10f , boundsForce = 10f;
+    private float accel = 5f, deAccel = 10f, boundsForce = 10f;
 
     private void Start()
     {
         cam = Camera.main;
         rigid = GetComponent<Rigidbody>();
+        rigid.freezeRotation = false;  // 회전은 허용
     }
 
     private void Update()
     {
-        Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.2f, whatIsGround);
-        if(canMove)
+        // 바닥에 닿아있는지 확인 (회전을 고려하여 여러 Raycast 사용)
+        canMove = CheckGrounded();
+
+        if (canMove)
         {
             // 방향키 입력 처리
             float verticalInput = Input.GetAxis("Vertical");
@@ -47,25 +48,16 @@ public class Player : MonoBehaviour
             if (verticalInput > 0)
             {
                 ballSO.moveSpeed += Time.deltaTime * accel;
-                Debug.Log("3");
             }
             else if (verticalInput < 0)
             {
                 ballSO.moveSpeed -= Time.deltaTime * accel; // 뒤로 갈 때는 속도를 감소시킴
-                Debug.Log("4");
             }
-            /*else
-            {
-                ballSO.moveSpeed -= Time.deltaTime * deAccel;
-                Debug.Log("5");
-            }*/
 
             ballSO.moveSpeed = Mathf.Clamp(ballSO.moveSpeed, 0, 15);
 
-            rigid.AddForce(Vector3.ProjectOnPlane(dir, hit.normal).normalized * ballSO.moveSpeed, ForceMode.Force);
-            //OnBoost();
+            rigid.AddForce(dir.normalized * ballSO.moveSpeed, ForceMode.Force);
         }
-
 
         // 스페이스 사용 가능한 상태에서 스페이스를 누르면 행동 실행
         if (canUseSpace && Input.GetKeyDown(KeyCode.Space))
@@ -75,18 +67,44 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        // 추가 중력 적용
+        //if (!canMove)
+        //{
+        //    rigid.AddForce(Vector3.down * 20f, ForceMode.Acceleration);
+        //}
+    }
+
+    private bool CheckGrounded()
+    {
+        float rayLength = 0.5f; // Raycast 길이
+        Vector3[] raycastOrigins = new Vector3[]
+        {
+            transform.position + Vector3.forward * 0.5f,
+            transform.position - Vector3.forward * 0.5f,
+            transform.position + Vector3.right * 0.5f,
+            transform.position - Vector3.right * 0.5f,
+            transform.position
+        };
+
+        foreach (var origin in raycastOrigins)
+        {
+            if (Physics.Raycast(origin, Vector3.down, rayLength, whatIsGround))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
             canMove = true;
-            Debug.Log("1");
         }
-        /*else
-        {
-            Debug.Log("2");
-            canMove = false;
-        }*/
 
         // 돌진 중에 보스와 충돌하면 데미지 입히고 튕겨나감
         if (isDashing && other.collider.CompareTag("Boss"))
@@ -107,9 +125,8 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("OnBoss"))
+        if (other.CompareTag("OnBoss"))
         {
-            
             StartCoroutine(BossUI(3f));
             GameManager.Instance.isBoss = true;
         }
@@ -117,6 +134,11 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Goal"))
         {
             UIManager.Instance.VictroyUI();
+        }
+
+        if(other.CompareTag("Key"))
+        {
+            GameManager.Instance.isKey = true;
         }
     }
 
@@ -126,10 +148,6 @@ public class Player : MonoBehaviour
         {
             boostParticle.Play();
             StartCoroutine(BoostCo(5f));
-        }
-        else
-        {
-            //player.boostParticle.Stop();
         }
     }
 
@@ -142,21 +160,16 @@ public class Player : MonoBehaviour
     IEnumerator BossUI(float duration)
     {
         UIManager.Instance.bossWarningImage.SetActive(true);
-        
-        
         yield return new WaitForSeconds(duration);
 
         UIManager.Instance.BossHp.gameObject.SetActive(true);
         UIManager.Instance.bossWarningImage.SetActive(false);
-
     }
 
     private IEnumerator SpaceCooldown()
     {
         canUseSpace = false;  // 스페이스 사용 불가능 상태로 설정
-
         yield return new WaitForSeconds(ballSO.dashCooldown);
-
         canUseSpace = true;  // 스페이스 사용 가능 상태로 설정
     }
 
@@ -174,6 +187,4 @@ public class Player : MonoBehaviour
             rigid.AddForce(dashDirection * ballSO.dashForce + Vector3.up * ballSO.dashForce, ForceMode.Impulse);
         }
     }
-
-
 }

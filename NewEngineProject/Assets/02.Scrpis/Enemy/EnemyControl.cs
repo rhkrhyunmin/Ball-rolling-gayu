@@ -18,6 +18,10 @@ public class EnemyControl : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        // 기본 상태를 Idle로 설정
+        animator.SetBool("IsWalk", false);
+        animator.SetBool("IsAttack", false);
     }
 
     private void Update()
@@ -45,7 +49,14 @@ public class EnemyControl : MonoBehaviour
     {
         if (!isAttacking)
         {
-            animator.SetBool("IsWalk", true);
+            if (agent.velocity.sqrMagnitude > 0f)
+            {
+                animator.SetBool("IsWalk", true);
+            }
+            else
+            {
+                animator.SetBool("IsWalk", false);
+            }
             agent.speed = enemyStats.MovementSpeed;
         }
         else

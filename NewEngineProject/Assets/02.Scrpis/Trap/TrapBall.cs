@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class TrapBall : MonoBehaviour
 {
-    private float moveSpeed = 5f;
+    private Vector3 originalScale;   // 원래 크기
 
-    private Vector3 initialPosition;
-    private float movementTimer = 0f;
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        initialPosition = transform.position;
+        originalScale = transform.localScale; // 초기 크기 저장
     }
 
-    private void Update()
+    // 충돌 감지
+    void OnTriggerEnter(Collider other)
     {
-        Vector3 dir = new Vector3(0,0,0) * moveSpeed;
+        if (other.CompareTag("Player")) // 충돌한 객체가 플레이어인지 확인
+        {
+            // 객체 크기 증가
+            transform.localScale = originalScale * 2.5f;
+
+            // 플레이어에게 데미지 주기
+            PlayerHp playerHealth = other.GetComponent<PlayerHp>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(5);
+            }
+        }
     }
 }
