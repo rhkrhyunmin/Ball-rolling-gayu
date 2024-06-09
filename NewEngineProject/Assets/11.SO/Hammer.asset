@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   movementDistance: 8
-  MovementSpeed: 10
-  rotationSpeed: 0
+  MovementSpeed: 7
+  rotationSpeed: 300
   AttackDamage: 3

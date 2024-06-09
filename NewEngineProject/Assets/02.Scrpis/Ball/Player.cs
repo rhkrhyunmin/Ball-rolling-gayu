@@ -56,7 +56,17 @@ public class Player : MonoBehaviour
 
             ballSO.moveSpeed = Mathf.Clamp(ballSO.moveSpeed, 0, 15);
 
-            rigid.AddForce(dir.normalized * ballSO.moveSpeed, ForceMode.Force);
+            // dir.normalized의 각 성분을 ballSO.moveSpeed로 곱하여 힘 계산
+            Vector3 normalizedDir = dir.normalized;
+            Vector3 force = normalizedDir * ballSO.moveSpeed;
+
+            rigid.AddForce(force, ForceMode.Force);
+
+            // Rigidbody의 속도를 이용해 슬라이더 값 업데이트
+            float velocityMagnitude = rigid.velocity.magnitude;
+            UIManager.Instance.speedSlider.value = velocityMagnitude;
+
+            Debug.Log("Velocity magnitude: " + velocityMagnitude); // Debug log 추가
         }
 
         // 스페이스 사용 가능한 상태에서 스페이스를 누르면 행동 실행
@@ -66,6 +76,10 @@ public class Player : MonoBehaviour
             StartDash();
         }
     }
+
+
+
+
 
     private void FixedUpdate()
     {
@@ -125,7 +139,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("OnBoss"))
+        if (other.CompareTag("OnBoss") && !GameManager.Instance.isBoss)
         {
             StartCoroutine(BossUI(3f));
             GameManager.Instance.isBoss = true;
@@ -159,6 +173,7 @@ public class Player : MonoBehaviour
 
     IEnumerator BossUI(float duration)
     {
+        
         UIManager.Instance.bossWarningImage.SetActive(true);
         yield return new WaitForSeconds(duration);
 

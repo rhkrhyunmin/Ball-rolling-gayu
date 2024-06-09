@@ -12,14 +12,5 @@ public class PlayerSpeed : MonoBehaviour
     {
         player = GetComponent<Player>();
     }
-
-    private void Update()
-    {
-        OnSpeedGage();
-    }
-
-    private void OnSpeedGage()
-    {
-        UIManager.Instance.speedSlider.value = player.ballSO.moveSpeed;
-    }
+    
 }
