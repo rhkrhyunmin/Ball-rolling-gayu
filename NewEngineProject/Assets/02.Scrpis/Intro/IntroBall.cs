@@ -1,76 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using DG.Tweening;
 
 public class IntroBall : MonoBehaviour
 {
-    public string targetTag = "Goal"; // 타겟 오브젝트의 태그
-    public float speed = 5f;
-    public GameObject prefabSpawner; // SpawnBall 프리팹
+    public float speed = 5f; // 공의 이동 속도
+    public float checkInterval = 1f; // 위치를 체크하는 간격
 
-    private Transform target; // 타겟 오브젝트
-    private bool reachedTarget = false; // 목표 지점 도달 여부
+    private List<Vector3> positions = new List<Vector3>();
 
-    private float timer = 0f; // 타이머 변수
-    private bool shouldDestroy = false; // 삭제 여부
-
-    private void Start()
+    void Start()
     {
-        // 타겟 오브젝트 찾기
-        target = GameObject.FindGameObjectWithTag(targetTag)?.transform;
+        StartCoroutine(MoveBall());
     }
 
-    private void FixedUpdate()
+    IEnumerator MoveBall()
     {
-        if (!reachedTarget)
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = new Vector3(startPosition.x + 10, startPosition.y, startPosition.z); // 오른쪽으로 10 유닛 이동
+
+        float distance = Vector3.Distance(startPosition, endPosition);
+        float elapsedTime = 0;
+
+        while (elapsedTime < distance / speed)
         {
-            MoveTowardsTarget();
+            transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / (distance / speed));
+            elapsedTime += Time.deltaTime;
+
+            // 위치 체크 및 저장
+            if (elapsedTime % checkInterval < Time.deltaTime)
+            {
+                positions.Add(transform.position);
+            }
+
+            yield return null;
         }
-        else if (shouldDestroy)
-        {
-            timer += Time.fixedDeltaTime;
-        }
+
+        // 마지막 위치 체크
+        positions.Add(endPosition);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Goal"))
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void MoveTowardsTarget()
-    {
-        if (target == null)
-        {
-            return;
-        }
-
-        // 공과 목표 지점 사이의 방향 벡터 계산
-        Vector3 direction = target.position - transform.position;
-
-        // 목표 지점까지의 거리 계산
-        float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-        if (distanceToTarget < 0.5f)
-        {
-            reachedTarget = true;
-            shouldDestroy = true;
-            SpawnPrefab();
-        }
-        else
-        {
-            // 이동 속도와 방향을 곱하여 이동 벡터 계산
-            Vector3 movement = direction.normalized * speed * Time.fixedDeltaTime;
-
-            // 현재 위치에 이동 벡터를 더하여 이동
-            transform.position += movement;
-        }
-    }
-
-    private void SpawnPrefab()
-    {
-        Instantiate(prefabSpawner, transform.position, Quaternion.identity);
-    }
 }

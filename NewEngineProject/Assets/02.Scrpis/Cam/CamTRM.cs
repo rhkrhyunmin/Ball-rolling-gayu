@@ -20,18 +20,7 @@ public class CamTRM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xMove = Input.GetAxisRaw("Horizontal");
-        float yMove = Input.GetAxisRaw("Vertical");
-
-        // 이동 로직
-        float xData = xMove * Time.deltaTime * Movespeed;
-        Vector3 xPos = transform.position + new Vector3(xData, 0, 0);
-        xPos.x = Mathf.Clamp(xPos.x, StartX, EndX);
-        transform.position = xPos;
-
-        // 회전 로직
-        float rotationAmount = -xMove * Time.deltaTime * RotationSpeed;
-        transform.Rotate(0, rotationAmount, 0);
+       
 
     }
 }

@@ -13,21 +13,18 @@ public class Player : MonoBehaviour
 
     public LayerMask whatIsGround;
 
-    private Camera cam;
-
     public bool isBoost;
 
     private bool canMove = false;
-    private bool isDashing = false;       
+    private bool isDashing = false;
     private bool canUseSpace = true;
 
     private float accel = 5f, deAccel = 10f, boundsForce = 10f;
 
     private void Start()
     {
-        cam = Camera.main;
         rigid = GetComponent<Rigidbody>();
-        rigid.freezeRotation = false;  // 회전은 허용
+        rigid.freezeRotation = false;  // 회전은 허용4wwwwwww
     }
 
     private void Update()
@@ -39,10 +36,9 @@ public class Player : MonoBehaviour
         {
             // 방향키 입력 처리
             float verticalInput = Input.GetAxis("Vertical");
+            float horizontalInput = Input.GetAxis("Horizontal");
 
-            Vector3 dir = cam.transform.forward;
-            dir.y = 0;
-            dir *= verticalInput;
+            Vector3 dir = new Vector3(horizontalInput, 0, verticalInput);
 
             // 속도 가속 및 감속 처리
             if (verticalInput > 0)
@@ -75,19 +71,6 @@ public class Player : MonoBehaviour
             StartCoroutine(SpaceCooldown());
             StartDash();
         }
-    }
-
-
-
-
-
-    private void FixedUpdate()
-    {
-        // 추가 중력 적용
-        //if (!canMove)
-        //{
-        //    rigid.AddForce(Vector3.down * 20f, ForceMode.Acceleration);
-        //}
     }
 
     private bool CheckGrounded()
@@ -150,7 +133,7 @@ public class Player : MonoBehaviour
             UIManager.Instance.VictroyUI();
         }
 
-        if(other.CompareTag("Key"))
+        if (other.CompareTag("Key"))
         {
             GameManager.Instance.isKey = true;
         }
@@ -173,7 +156,6 @@ public class Player : MonoBehaviour
 
     IEnumerator BossUI(float duration)
     {
-        
         UIManager.Instance.bossWarningImage.SetActive(true);
         yield return new WaitForSeconds(duration);
 

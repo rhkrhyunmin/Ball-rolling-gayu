@@ -20,4 +20,4 @@ MonoBehaviour:
   dashCooldown: 1
   dashDamage: 2
   dashKnockbackForce: 5
-  moveSpeed: 19.692453
+  moveSpeed: 7

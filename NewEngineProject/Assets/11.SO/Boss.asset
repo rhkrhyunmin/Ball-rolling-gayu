@@ -17,5 +17,5 @@ MonoBehaviour:
   MovementSpeed: 15
   AttackCoolDonw: 2
   AttackDamage: 8
-  currentHp: 25
-  MaxHp: 25
+  currentHp: 30
+  MaxHp: 30

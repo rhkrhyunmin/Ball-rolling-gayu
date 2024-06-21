@@ -9,6 +9,7 @@ public class Intro : MonoBehaviour
 {
     public GameObject stageUI;
     public TextMeshProUGUI _startText;
+
     public void Start()
     {
         BlinkText();
