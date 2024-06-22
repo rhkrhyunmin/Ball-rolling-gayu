@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public bool isBoss = false;
     public bool isGoal = false;
     public bool isKey = false;
+    public bool isShrinking = false;
 
     private static GameManager instance;
 

@@ -60,6 +60,7 @@ public class CannonShoot : MonoBehaviour
 
     public void Fire()
     {
+        GameManager.Instance.isShrinking = true;
         boomEffect.Play();
         
         UIManager.Instance.hpSlider.enabled = false;
