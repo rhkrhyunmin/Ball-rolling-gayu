@@ -7,6 +7,7 @@ public class CannonRotate : MonoBehaviour
     public float rotationSpeed = 50f;  // 회전 속도
     public float rotateSpeed;
     Vector3 currentRotation;
+
     private void Start()
     {
         rotateSpeed = rotationSpeed;
