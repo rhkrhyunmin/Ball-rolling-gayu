@@ -15,17 +15,9 @@ public class UIManager : MonoBehaviour
     public GameObject settingUI;
     public GameObject playerStatUI;
     public GameObject victoryUI;
-
-    [Header("Boss")]
-    public GameObject bossWarningImage;
-    public TextMeshProUGUI TextBossHp;
-    public Slider BossHp;
     [Header("Speed")]
-    public Slider speedSlider;
+    public Image speedSlider;
     //public Image speedImage;
-    [Header("Hp")]
-    public Slider hpSlider;
-    //public Image hpImage;
     [Header("GameOverUI")]
     public GameObject gameOverUI;
     

@@ -11,7 +11,4 @@ public class TrapSo : ScriptableObject
     [Header("Speed")]
     public float MovementSpeed = 0;
     public float rotationSpeed = 0;
-
-    [Header("Damage")]
-    public float AttackDamage = 0;
 }

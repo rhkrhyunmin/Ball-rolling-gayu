@@ -11,9 +11,7 @@ public class PlayerHp : MonoBehaviour
     private void Start()
     {
         player = GetComponent<Player>();
-        UIManager.Instance.hpSlider.maxValue = player.ballSO.maxHp;
         player.ballSO.currentHp = player.ballSO.maxHp;
-        UpdateHealthBar();
     }
 
     private void Update()
@@ -23,34 +21,11 @@ public class PlayerHp : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Trap"))
-        {
-            TakeDamage(player.ballSO.damageAmount);
-        }
-
         if (collision.gameObject.CompareTag("EndLine"))
         {
             player.ballSO.currentHp = 0;
             ShowGameOver();
             UIManager.Instance.playerStatUI.SetActive(false);
-        }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        if (isShield == false)
-        {
-            player.ballSO.currentHp -= damage;
-            UpdateHealthBar();
-
-            if (player.ballSO.currentHp <= 0f)
-            {
-                ShowGameOver();
-            }
-        }
-        else
-        {
-            isShield = false;
         }
     }
 
@@ -70,10 +45,5 @@ public class PlayerHp : MonoBehaviour
     {
         UIManager.Instance.gameOverUI.SetActive(true);
         Time.timeScale = 0f;
-    }
-
-    private void UpdateHealthBar()
-    {
-        UIManager.Instance.hpSlider.value = player.ballSO.currentHp; // 현재 체력 값을 체력 바에 할당
     }
 }

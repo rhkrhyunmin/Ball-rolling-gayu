@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
 
             // Rigidbody의 속도를 이용해 슬라이더 값 업데이트
             float velocityMagnitude = rigid.velocity.magnitude;
-            UIManager.Instance.speedSlider.value = velocityMagnitude;
+            UIManager.Instance.speedSlider.fillAmount = velocityMagnitude;
 
             Debug.Log("Velocity magnitude: " + velocityMagnitude); // Debug log 추가
         }
@@ -104,30 +104,10 @@ public class Player : MonoBehaviour
         }
 
         // 돌진 중에 보스와 충돌하면 데미지 입히고 튕겨나감
-        if (isDashing && other.collider.CompareTag("Boss"))
-        {
-            isDashing = false;
-
-            // 적에게 데미지 입히기
-            BossControl bossHp = other.collider.GetComponent<BossControl>();
-            if (bossHp != null)
-            {
-                bossHp.TakeDamage(ballSO.dashDamage);
-
-                Vector3 direction = (other.transform.position - transform.position).normalized;
-                rigid.AddForce(-direction * boundsForce, ForceMode.Impulse);
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("OnBoss") && !GameManager.Instance.isBoss)
-        {
-            StartCoroutine(BossUI(3f));
-            GameManager.Instance.isBoss = true;
-        }
-
         if (other.CompareTag("Goal"))
         {
             UIManager.Instance.VictroyUI();
@@ -152,15 +132,6 @@ public class Player : MonoBehaviour
     {
         rigid.AddForce(Vector3.forward * ballSO.moveSpeed * 3);
         yield return new WaitForSeconds(delay);
-    }
-
-    IEnumerator BossUI(float duration)
-    {
-        UIManager.Instance.bossWarningImage.SetActive(true);
-        yield return new WaitForSeconds(duration);
-
-        UIManager.Instance.BossHp.gameObject.SetActive(true);
-        UIManager.Instance.bossWarningImage.SetActive(false);
     }
 
     private IEnumerator SpaceCooldown()

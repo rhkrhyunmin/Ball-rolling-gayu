@@ -46,11 +46,6 @@ public class CannonShoot : MonoBehaviour
     private void Update()
     {
         Timer();
-        if (isCharging)
-        {
-            //UpdateLineRenderer();
-
-        }
     }
 
     public void Timer()
@@ -63,7 +58,6 @@ public class CannonShoot : MonoBehaviour
         GameManager.Instance.isShrinking = true;
         boomEffect.Play();
         
-        UIManager.Instance.hpSlider.enabled = false;
         UIManager.Instance.playerStatUI.SetActive(true);
 
         isCharging = false;
@@ -74,7 +68,6 @@ public class CannonShoot : MonoBehaviour
         Rigidbody ballRb = ballInstance.GetComponent<Rigidbody>();
         ballRb.AddForce(forceVector, ForceMode.Impulse);
 
-        UIManager.Instance.hpSlider.enabled = true;
 
         CameraManger.instance.SetActiveCam(CameraCatagory.Ballcam, ballInstance.transform);
         CameraManger.instance.SetFollowTarget(CameraCatagory.Ballcam, ballInstance.transform);
