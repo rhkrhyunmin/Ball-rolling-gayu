@@ -21,6 +21,11 @@ public class Setting : MonoBehaviour
     public Image MediumGrapicButton;
     public Image LowGrapicButton;
 
+    private void Awake()
+    {
+        DOTween.Init();
+    }
+
     private void Update()
     {
         SoundVolum();
@@ -43,8 +48,11 @@ public class Setting : MonoBehaviour
 
     public void OpenAlarm()
     {
+        alarm.gameObject.SetActive(true);
 
+        alarm.transform.DOScale(3f, 1f).SetEase(Ease.InOutQuad);
     }
+
 
     public void OpenURLOtherGame()
     {
