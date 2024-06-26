@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class Setting : MonoBehaviour
 {
+    [Header("Alarm")]
+    public Image alarm;
+
     [Header("Music")]
-    public Image OnMusicImage;
-    public Image OffMusicImage;
-    public Slider MusicSlider;
+    public Slider SFXSlider;
+    public AudioSource[] SFXSoure;
+    public Slider BGMSlider;
+    public AudioSource BGMSSoure;
 
     [Header("GrapicButton")]
     public Image highGrapicButton;
@@ -18,13 +23,27 @@ public class Setting : MonoBehaviour
 
     private void Update()
     {
-        
+        SoundVolum();
     }
 
     public void Exit()
     {
         UIManager.Instance.settingUI.gameObject.SetActive(false);
         UIManager.Instance.pauseUI.gameObject.SetActive(true);
+    }
+
+    public void SoundVolum()
+    {
+       foreach(var source in SFXSoure)
+        {
+            source.volume = SFXSlider.value;
+        }
+        
+    }
+
+    public void OpenAlarm()
+    {
+
     }
 
     public void OpenURLOtherGame()

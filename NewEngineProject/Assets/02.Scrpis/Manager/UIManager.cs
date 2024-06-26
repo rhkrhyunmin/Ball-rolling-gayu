@@ -90,4 +90,9 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.isGoal = true;
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
