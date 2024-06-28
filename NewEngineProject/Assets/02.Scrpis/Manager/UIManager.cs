@@ -13,10 +13,7 @@ public class UIManager : MonoBehaviour
     [Header("GameUI")]
     public GameObject pauseUI;
     public GameObject settingUI;
-    public GameObject playerStatUI;
     public GameObject victoryUI;
-    [Header("Speed")]
-    public Image speedSlider;
     //public Image speedImage;
     [Header("GameOverUI")]
     public GameObject gameOverUI;
@@ -82,7 +79,6 @@ public class UIManager : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        playerStatUI.SetActive(false);
         victoryUI.SetActive(true);
 
         yield return new WaitForSeconds(duration);

@@ -57,8 +57,6 @@ public class CannonShoot : MonoBehaviour
     {
         GameManager.Instance.isShrinking = true;
         boomEffect.Play();
-        
-        UIManager.Instance.playerStatUI.SetActive(true);
 
         isCharging = false;
         Vector3 forceVector = cannonExit.forward * currentForceMagnitude;

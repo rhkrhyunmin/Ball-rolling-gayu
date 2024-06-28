@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public BallSO ballSO;
+    public Image speedSlider;
 
     public ParticleSystem shieldParticle;
     public ParticleSystem boostParticle;
@@ -60,9 +62,7 @@ public class Player : MonoBehaviour
 
             // Rigidbody의 속도를 이용해 슬라이더 값 업데이트
             float velocityMagnitude = rigid.velocity.magnitude;
-            UIManager.Instance.speedSlider.fillAmount = velocityMagnitude;
-
-            Debug.Log("Velocity magnitude: " + velocityMagnitude); // Debug log 추가
+            speedSlider.fillAmount = velocityMagnitude / 100;
         }
 
         // 스페이스 사용 가능한 상태에서 스페이스를 누르면 행동 실행

@@ -25,7 +25,6 @@ public class PlayerHp : MonoBehaviour
         {
             player.ballSO.currentHp = 0;
             ShowGameOver();
-            UIManager.Instance.playerStatUI.SetActive(false);
         }
     }
 
