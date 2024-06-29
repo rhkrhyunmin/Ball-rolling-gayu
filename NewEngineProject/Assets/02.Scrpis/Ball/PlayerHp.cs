@@ -42,7 +42,7 @@ public class PlayerHp : MonoBehaviour
 
     private void ShowGameOver()
     {
-        UIManager.Instance.gameOverUI.SetActive(true);
+        UIManager.Instance.ActiveUI(UIManager.Instance.UIObjects.Find(obj => obj.name == "GameOverUI"));
         Time.timeScale = 0f;
     }
 }

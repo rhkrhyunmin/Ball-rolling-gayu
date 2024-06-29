@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,30 +7,59 @@ using TMPro;
 
 public class UIManager : MonoSingleton<UIManager>
 {
-    [Header("GameUI")]
-    public GameObject pauseUI;
-    public GameObject settingUI;
-    public GameObject victoryUI;
-
-    [Header("GameOverUI")]
-    public GameObject gameOverUI;
+    public List<GameObject> UIObjects;
 
     protected override void Awake()
     {
         base.Awake();
+        InitializeUI();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     protected override void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        // base.OnDestroy(); 이 호출을 제거합니다.
+    }
+    #region UI껐다 키기
+    public virtual void ActiveUI(GameObject OnObj)
+    {
+        // 모든 UI 오브젝트를 비활성화
+        foreach (GameObject obj in UIObjects)
+        {
+           obj.SetActive(false);
+        }
+
+        // 특정 UI 오브젝트만 활성화
+        if (OnObj != null)
+        {
+            OnObj.SetActive(true);
+        }
     }
 
-    private void Start()
+    public void SettingUI()
     {
-        InitializeUI();
+        ActiveUI(UIObjects.Find(obj => obj.name == "SettingUI"));
+        
     }
+
+    public void PauseUI()
+    {
+        ActiveUI(UIObjects.Find(obj => obj.name == "PauseUI"));
+    }
+
+    public void VictoryUI()
+    {
+        StartCoroutine(OnVictoryUI(3f));
+    }
+
+    private IEnumerator OnVictoryUI(float duration)
+    {
+        ActiveUI(UIObjects.Find(obj => obj.name == "VictoryUI"));
+        yield return new WaitForSeconds(duration);
+        GameManager.Instance.isGoal = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    #endregion
 
     private void Update()
     {
@@ -47,17 +77,18 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void InitializeUI()
     {
-        pauseUI = pauseUI ?? GameObject.Find("PauseUI");
-        settingUI = settingUI ?? GameObject.Find("SettingUI");
-        victoryUI = victoryUI ?? GameObject.Find("VictoryUI");
-        gameOverUI = gameOverUI ?? GameObject.Find("GameOverUI");
+        // Initialize UIObjects if not set in the inspector
+        foreach (var objName in new[] { "PauseUI", "SettingUI", "VictoryUI", "GameOverUI" })
+        {
+            var obj = GameObject.Find(objName);
+            if (obj != null && !UIObjects.Contains(obj))
+            {
+                UIObjects.Add(obj);
+            }
+        }
     }
 
-    public void SettingUI()
-    {
-        pauseUI.SetActive(false);
-        settingUI.SetActive(true);
-    }
+
 
     public void RestartGame()
     {
@@ -65,34 +96,15 @@ public class UIManager : MonoSingleton<UIManager>
         Time.timeScale = 1f;
     }
 
-    public void ConinueGame()
+    public void Continue()
     {
-        pauseUI.SetActive(false);
+        ActiveUI(null); // No UI should be active
         Time.timeScale = 1f;
-    }
-
-    public void PauseUI()
-    {
-        pauseUI.SetActive(true);
     }
 
     public void MainScene()
     {
         SceneManager.LoadScene(0);
-    }
-
-    public void VictroyUI()
-    {
-        StartCoroutine(OnvictoryUI(3f));
-    }
-
-    private IEnumerator OnvictoryUI(float duration)
-    {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        victoryUI.SetActive(true);
-        yield return new WaitForSeconds(duration);
-        GameManager.Instance.isGoal = true;
-        SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
     public void Quit()

@@ -31,12 +31,6 @@ public class Setting : MonoBehaviour
         SoundVolum();
     }
 
-    public void Exit()
-    {
-        UIManager.Instance.settingUI.gameObject.SetActive(false);
-        UIManager.Instance.pauseUI.gameObject.SetActive(true);
-    }
-
     public void SoundVolum()
     {
        foreach(var source in SFXSoure)

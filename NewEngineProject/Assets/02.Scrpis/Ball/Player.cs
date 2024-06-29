@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Goal"))
         {
-            UIManager.Instance.VictroyUI();
+            UIManager.Instance.ActiveUI(UIManager.Instance.UIObjects.Find(obj => obj.name == "VictoryUI"));
         }
 
         if (other.CompareTag("Key"))
