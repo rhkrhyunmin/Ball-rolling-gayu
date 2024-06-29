@@ -21,8 +21,6 @@ public class Player : MonoBehaviour
     private bool isDashing = false;
     private bool canUseSpace = true;
 
-    private float accel = 5f, deAccel = 10f, boundsForce = 10f;
-
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -45,27 +43,24 @@ public class Player : MonoBehaviour
             // 속도 가속 및 감속 처리
             if (verticalInput > 0)
             {
-                ballSO.moveSpeed += Time.deltaTime * accel;
+                ballSO.moveSpeed += Time.deltaTime;
             }
             else if (verticalInput < 0)
             {
-                ballSO.moveSpeed -= Time.deltaTime * accel; // 뒤로 갈 때는 속도를 감소시킴
+                ballSO.moveSpeed -= Time.deltaTime; // 뒤로 갈 때는 속도를 감소시킴
             }
 
             ballSO.moveSpeed = Mathf.Clamp(ballSO.moveSpeed, 0, 15);
 
-            // dir.normalized의 각 성분을 ballSO.moveSpeed로 곱하여 힘 계산
             Vector3 normalizedDir = dir.normalized;
             Vector3 force = normalizedDir * ballSO.moveSpeed;
 
             rigid.AddForce(force, ForceMode.Force);
 
-            // Rigidbody의 속도를 이용해 슬라이더 값 업데이트
             float velocityMagnitude = rigid.velocity.magnitude;
             speedSlider.fillAmount = velocityMagnitude / 100;
         }
 
-        // 스페이스 사용 가능한 상태에서 스페이스를 누르면 행동 실행
         if (canUseSpace && Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(SpaceCooldown());
@@ -75,7 +70,7 @@ public class Player : MonoBehaviour
 
     private bool CheckGrounded()
     {
-        float rayLength = 0.5f; // Raycast 길이
+        float rayLength = 0.5f;
         Vector3[] raycastOrigins = new Vector3[]
         {
             transform.position + Vector3.forward * 0.5f,
@@ -102,8 +97,6 @@ public class Player : MonoBehaviour
         {
             canMove = true;
         }
-
-        // 돌진 중에 보스와 충돌하면 데미지 입히고 튕겨나감
     }
 
     private void OnTriggerEnter(Collider other)

@@ -22,4 +22,6 @@ public class PlayerSpeed : MonoBehaviour
         // UI 위치 부드럽게 이동
         speedUI.transform.position = Vector3.SmoothDamp(speedUI.transform.position, targetPosition, ref velocity, 0.08f);
     }
+
+    
 }

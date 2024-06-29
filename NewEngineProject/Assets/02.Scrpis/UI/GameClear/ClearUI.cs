@@ -3,60 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class ClearUI : MonoBehaviour
 {
-    public GameObject panelObject;
-    public TMP_Text[] texts;
-    public float displayTime = 5f;
-    private int currentTextIndex = 0;
-    private float displayTimer = 0f;
-
-    //public GameObject LastPanel;
+    public TextMeshProUGUI timerText;
+    public float animDuartion = 2f;
 
     private void Start()
     {
-        // 패널 비활성화
-        panelObject.SetActive(false);
+        OnTimerText();
     }
 
-    private void Update()
+    private void OnTimerText()
     {
-        if (panelObject.activeSelf)
+        timerText.text = GameManager.Instance.timer.ToString();
+
+        DOTween.To(() => 0.ToString(), x => timerText.text = x.ToString(), timerText.text, animDuartion).OnUpdate(() =>
         {
-            displayTimer += Time.deltaTime;
-
-            // 글 활성화 시간이 지났을 때
-            if (displayTimer >= displayTime)
-            {
-                // 현재 글 비활성화
-                texts[currentTextIndex].gameObject.SetActive(false);
-
-                // 다음 글 활성화
-                currentTextIndex++;
-                if (currentTextIndex >= texts.Length)
-                {
-                    // 모든 글이 나타났을 때 패널 비활성화
-                    panelObject.SetActive(false);
-                    SceneManager.LoadScene("Intro");
-                    return;
-                }
-
-                texts[currentTextIndex].gameObject.SetActive(true);
-
-                displayTimer = 0f;
-            }
-        }
-    }
-
-    public void ShowPanel()
-    {
-        // 첫 번째 글 활성화
-        currentTextIndex = 0;
-        texts[currentTextIndex].gameObject.SetActive(true);
-
-        // 패널 활성화
-        panelObject.SetActive(true);
+            int randomValue = Random.Range(0, 1000000);
+            timerText.text = randomValue.ToString();
+        }).OnComplete(() =>
+        {
+            timerText.text = GameManager.Instance.timer.ToString();
+        });
     }
 }

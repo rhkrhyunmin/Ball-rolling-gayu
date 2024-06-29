@@ -1,18 +1,17 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
     public GameObject player;
 
-    public bool isBoss = false;
+    public float timer;
     public bool isGoal = false;
     public bool isKey = false;
     public bool isShrinking = false;
 
-    private static GameManager instance;
-
     void Update()
     {
+        timer += Time.deltaTime;
         // "ball" 태그를 가진 게임 오브젝트를 찾습니다.
         GameObject ballObject = GameObject.FindGameObjectWithTag("Ball");
         if (ballObject != null)
@@ -22,21 +21,4 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // 싱글톤 인스턴스를 만듭니다.
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<GameManager>();
-                if (instance == null)
-                {
-                    GameObject managerObject = new GameObject("GameManager");
-                    instance = managerObject.AddComponent<GameManager>();
-                }
-            }
-            return instance;
-        }
-    }
 }

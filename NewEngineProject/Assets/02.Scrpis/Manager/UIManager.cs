@@ -1,45 +1,56 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
-
-public class UIManager : MonoBehaviour
+public class UIManager : MonoSingleton<UIManager>
 {
-    public static UIManager Instance { get; private set; }
-
     [Header("GameUI")]
     public GameObject pauseUI;
     public GameObject settingUI;
     public GameObject victoryUI;
-    //public Image speedImage;
+
     [Header("GameOverUI")]
     public GameObject gameOverUI;
-    
 
-    private void Awake()
+    protected override void Awake()
     {
-        // 싱글톤 인스턴스를 설정합니다.
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬이 변경되어도 파괴되지 않도록 설정합니다.
-        }
-        else
-        {
-            Destroy(gameObject); // 이미 인스턴스가 존재하면 새로 생성된 객체를 파괴합니다.
-        }
+        base.Awake();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public void Update()
+    protected override void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        // base.OnDestroy(); 이 호출을 제거합니다.
+    }
+
+    private void Start()
+    {
+        InitializeUI();
+    }
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseUI();
             Time.timeScale = 0;
         }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InitializeUI();
+    }
+
+    private void InitializeUI()
+    {
+        pauseUI = pauseUI ?? GameObject.Find("PauseUI");
+        settingUI = settingUI ?? GameObject.Find("SettingUI");
+        victoryUI = victoryUI ?? GameObject.Find("VictoryUI");
+        gameOverUI = gameOverUI ?? GameObject.Find("GameOverUI");
     }
 
     public void SettingUI()
@@ -74,15 +85,12 @@ public class UIManager : MonoBehaviour
     {
         StartCoroutine(OnvictoryUI(3f));
     }
-    
-    public IEnumerator OnvictoryUI(float duration)
+
+    private IEnumerator OnvictoryUI(float duration)
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
         victoryUI.SetActive(true);
-
         yield return new WaitForSeconds(duration);
-
         GameManager.Instance.isGoal = true;
         SceneManager.LoadScene(currentSceneIndex + 1);
     }

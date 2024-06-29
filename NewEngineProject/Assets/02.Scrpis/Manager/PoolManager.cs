@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour
+public class PoolManager : MonoSingleton<PoolManager>
 {
-    public static PoolManager Instance { get; private set; }
 
     [System.Serializable]
     public struct Pool
@@ -19,18 +18,6 @@ public class PoolManager : MonoBehaviour
 
     private void Awake()
     {
-        // ½Ì±ÛÅæ ÆÐÅÏ ±¸Çö
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
         foreach (Pool pool in pools)

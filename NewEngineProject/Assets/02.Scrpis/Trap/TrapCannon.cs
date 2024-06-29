@@ -8,11 +8,6 @@ public class TrapCannon : MonoBehaviour
     public Player player; 
     private float fireDelay = 5f;
 
-    private void Start()
-    {
-        StartCoroutine(FireRoutine());
-    }
-
     private void Update()
     {
         player = FindObjectOfType<Player>();
@@ -28,30 +23,5 @@ public class TrapCannon : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, 90, 0);
         }
 
-    }
-
-
-
-    IEnumerator FireRoutine()
-    {
-        while (true)
-        {
-            if (GameManager.Instance.isBoss)
-            {
-                GameObject bullet = PoolManager.Instance.GetObject(poolTag);
-                if (bullet != null)
-                {
-                    bullet.transform.position = spawnPoint.position;
-                    bullet.transform.rotation = spawnPoint.rotation;
-                    bullet.SetActive(true);
-                }
-
-                yield return new WaitForSeconds(fireDelay);
-            }
-            else
-            {
-                yield return null;
-            }
-        }
     }
 }
