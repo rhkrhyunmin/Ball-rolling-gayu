@@ -118,6 +118,8 @@ public class Player : MonoBehaviour
         {
             boostParticle.Play();
             StartCoroutine(BoostCo(5f));
+
+
         }
     }
 
@@ -136,16 +138,6 @@ public class Player : MonoBehaviour
 
     private void StartDash()
     {
-        GameObject bossObject = GameObject.FindWithTag("Boss");
-        if (bossObject != null)
-        {
-            isDashing = true;
-
-            // 돌진 방향 설정 (보스 위치를 향하도록)
-            Vector3 dashDirection = (bossObject.transform.position - transform.position).normalized;
-
-            // 돌진 힘 적용
-            rigid.AddForce(dashDirection * ballSO.dashForce + Vector3.up * ballSO.dashForce, ForceMode.Impulse);
-        }
+       
     }
 }
