@@ -19,14 +19,17 @@ public class Boost : MonoBehaviour
 
     public void CollectBoost()
     {
-        if (ballMove.ballSO.moveSpeed <= 2)
+        if(Input.GetKeyDown(KeyCode.LeftShift))
         {
-            boostGage -= ballMove.ballSO.moveSpeed * 2;
-        }
-        else
-        {
-            boostGage += ballMove.ballSO.moveSpeed / 1.5f;
-        }
+            if (ballMove.ballSO.moveSpeed <= 2)
+            {
+                boostGage -= ballMove.ballSO.moveSpeed * 2;
+            }
+            else
+            {
+                boostGage += ballMove.ballSO.moveSpeed / 1.5f;
+            }
+        }      
     }
     
     public IEnumerator OnBoost()
