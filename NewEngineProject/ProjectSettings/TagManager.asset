@@ -7,16 +7,10 @@ TagManager:
   - Ground
   - Ball
   - Trap
-  - Enemy
   - EndLine
-  - Boss
-  - Bullet
-  - Bossarea
   - Goal
   - IntroBall
-  - TrapBall
   - ItemBox
-  - Destination
   - OnBoss
   - Key
   layers:
