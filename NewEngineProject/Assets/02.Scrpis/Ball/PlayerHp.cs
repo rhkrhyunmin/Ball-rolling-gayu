@@ -14,29 +14,12 @@ public class PlayerHp : MonoBehaviour
         player.ballSO.currentHp = player.ballSO.maxHp;
     }
 
-    private void Update()
-    {
-        Onshield();
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("EndLine"))
         {
             player.ballSO.currentHp = 0;
             ShowGameOver();
-        }
-    }
-
-    public void Onshield()
-    {
-        if (isShield == true)
-        {
-            player.shieldParticle.Play();
-        }
-        else
-        {
-            player.shieldParticle.Stop();
         }
     }
 

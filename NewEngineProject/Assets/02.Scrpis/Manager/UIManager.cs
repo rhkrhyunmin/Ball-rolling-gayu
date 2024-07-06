@@ -8,6 +8,8 @@ using TMPro;
 public class UIManager : MonoSingleton<UIManager>
 {
     public List<GameObject> UIObjects;
+    public Image speedGage;
+    public Image boostPack;
 
     protected override void Awake()
     {
