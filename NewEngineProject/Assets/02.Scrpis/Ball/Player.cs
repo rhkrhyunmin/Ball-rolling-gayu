@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public BallSO ballSO;
-    public Image speedSlider;
 
     public ParticleSystem shieldParticle;
     public ParticleSystem boostParticle;
@@ -58,7 +57,6 @@ public class Player : MonoBehaviour
             rigid.AddForce(force, ForceMode.Force);
 
             float velocityMagnitude = rigid.velocity.magnitude;
-            speedSlider.fillAmount = velocityMagnitude / 100;
         }
 
         if (canUseSpace && Input.GetKeyDown(KeyCode.Space))

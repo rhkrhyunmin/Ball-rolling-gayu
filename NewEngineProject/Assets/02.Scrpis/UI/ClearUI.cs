@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class ClearUI : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
+    
     public float animDuartion = 2f;
 
     private void Start()
