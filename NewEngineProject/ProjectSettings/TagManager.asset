@@ -10,8 +10,6 @@ TagManager:
   - EndLine
   - Goal
   - IntroBall
-  - ItemBox
-  - OnBoss
   - Key
   layers:
   - Default

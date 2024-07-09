@@ -104,7 +104,6 @@ public class Player : MonoBehaviour
         if (UIManager.Instance.boostPack.fillAmount == 1 && Input.GetKeyDown(KeyCode.F))
         {
             isBoost = true;
-            Debug.Log(isBoost);
             //boostParticle.Play();
             StartCoroutine(BoostCo(3f));
         }
@@ -112,7 +111,6 @@ public class Player : MonoBehaviour
         else if(UIManager.Instance.boostPack.fillAmount == 0)
         {
             isBoost = false;
-            Debug.Log(isBoost);
             //boostParticle.Stop();
         }
     }

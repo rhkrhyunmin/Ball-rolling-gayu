@@ -56,6 +56,7 @@ public class CannonShoot : MonoBehaviour
     public void Fire()
     {
         GameManager.Instance.isShrinking = true;
+        Debug.Log(GameManager.Instance.isShrinking);
         boomEffect.Play();
 
         isCharging = false;
