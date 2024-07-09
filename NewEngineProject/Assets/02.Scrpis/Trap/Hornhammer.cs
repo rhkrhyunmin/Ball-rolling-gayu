@@ -34,8 +34,6 @@ public class Hornhammer : MonoBehaviour
 
     private void XRotation()
     {
-
-        // 이동
         movementTimer += Time.deltaTime;
         float xPosition = Mathf.Sin(movementTimer * trapSo.MovementSpeed) * trapSo.movementDistance * initialMovementMultiplier;
         transform.position = initialPosition + new Vector3(xPosition, 0f, 0f);
@@ -43,10 +41,6 @@ public class Hornhammer : MonoBehaviour
 
     private void ZRotation()
     {
-        // Z축을 따라 회전
-        
-
-        // 이동
         movementTimer += Time.deltaTime;
         float zPosition = Mathf.Sin(movementTimer * trapSo.MovementSpeed) * trapSo.movementDistance * initialMovementMultiplier;
         transform.position = initialPosition + new Vector3(0f, 0f, zPosition);
