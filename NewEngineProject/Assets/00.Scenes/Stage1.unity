@@ -905,7 +905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 5, z: -15}
+  m_FollowOffset: {x: 0, y: 5, z: -10}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -23549,7 +23549,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   startPoint: {x: -107.9, y: -2, z: -221.7}
-  endPoint: {x: -107.9, y: -2, z: 1339.3}
 --- !u!95 &665949093
 Animator:
   serializedVersion: 5

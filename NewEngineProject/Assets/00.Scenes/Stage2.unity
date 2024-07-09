@@ -25801,7 +25801,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   startPoint: {x: -344.8, y: -2, z: -241.8}
-  endPoint: {x: -344.8, y: -2, z: 626.4}
 --- !u!95 &756027809
 Animator:
   serializedVersion: 5

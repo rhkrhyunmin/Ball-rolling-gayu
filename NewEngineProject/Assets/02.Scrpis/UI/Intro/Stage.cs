@@ -11,8 +11,8 @@ public class Stage : MonoBehaviour
     private Button button;
     private Image buttonImage;
 
-    public Sprite unlockedImage; // 해금된 스테이지 이미지
-    public Sprite lockedImage; // 잠긴 스테이지 이미지
+    public Image unlockedImage; // 해금된 스테이지 이미지
+    public Image lockedImage; // 잠긴 스테이지 이미지
 
     void Start()
     {
@@ -23,12 +23,13 @@ public class Stage : MonoBehaviour
         if (IsStageUnlocked())
         {
             button.onClick.AddListener(OnButtonClick);
-            buttonImage.sprite = unlockedImage; // 해금된 이미지로 변경
+            unlockedImage.gameObject.SetActive(true);
+            lockedImage.gameObject.SetActive(false);
         }
         else
         {
-            //button.interactable = false; // 잠긴 스테이지는 버튼 비활성화
-            buttonImage.sprite = lockedImage; // 잠긴 이미지로 변경
+            unlockedImage.gameObject.SetActive(false);
+            lockedImage.gameObject.SetActive(true);
         }
     }
 
