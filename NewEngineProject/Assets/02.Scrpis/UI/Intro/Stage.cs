@@ -24,24 +24,10 @@ public class Stage : MonoBehaviour
         button = GetComponent<Button>();
         buttonImage = GetComponent<Image>();
 
-        // 모든 UI 요소가 제대로 설정되었는지 확인
-        Debug.Log($"LoadingUI: {LoadingUI != null}");
-        Debug.Log($"loadingSlider: {loadingSlider != null}");
-        Debug.Log($"loadingText: {loadingText != null}");
-        Debug.Log($"unlockedImage: {unlockedImage != null}");
-        Debug.Log($"lockedImage: {lockedImage != null}");
-
-        // 버튼이 null인지 확인하고 설정
-        if (button == null)
-        {
-            Debug.LogError("Button component is not attached.");
-            return;
-        }
-
         // 스테이지가 해금되어 있는지 확인
         if (IsStageUnlocked())
         {
-            button.onClick.AddListener(() => LoadLevel(sceneName)); 
+            button.onClick.AddListener(OnButtonClicked);
             unlockedImage.gameObject.SetActive(true);
             lockedImage.gameObject.SetActive(false);
         }
@@ -55,10 +41,10 @@ public class Stage : MonoBehaviour
     bool IsStageUnlocked()
     {
         bool isUnlocked = PlayerPrefs.GetInt("Stage" + stageIndex.ToString() + "Unlocked", 0) == 1;
-        Debug.Log($"Stage {stageIndex} unlocked status: {isUnlocked}");
         return isUnlocked;
     }
-    public void LoadLevel()
+
+    void OnButtonClicked()
     {
         LoadingUI.SetActive(true);
         LoadLevel(sceneName);
@@ -78,7 +64,7 @@ public class Stage : MonoBehaviour
 
         while (op.progress < 0.9f)
         {
-            float progress = Mathf.Clamp01(op.progress / 0.9f); // op.progress는 0.0f에서 0.9f 사이입니다.
+            float progress = Mathf.Clamp01(op.progress / 0.9f);
             loadingSlider.value = progress;
             Debug.Log($"Loading progress: {progress * 100f}%");
             loadingText.text = (progress * 100f).ToString("F2") + "%";
