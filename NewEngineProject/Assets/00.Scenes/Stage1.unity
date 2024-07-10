@@ -19196,7 +19196,7 @@ MonoBehaviour:
   SFXSlider: {fileID: 1955175026}
   SFXSoure: []
   BGMSlider: {fileID: 696517061}
-  BGMSSoure: {fileID: 0}
+  BGMSSoure: {fileID: 1278569932}
   highGrapicButton: {fileID: 2104509223}
   MediumGrapicButton: {fileID: 1577920305}
   LowGrapicButton: {fileID: 1748589161}

@@ -11,6 +11,11 @@ public class UIManager : MonoSingleton<UIManager>
     public Image speedGage;
     public Image boostPack;
 
+    [Header("loading")]
+    public GameObject LoadingUI;
+    public TextMeshProUGUI loadingText;
+    public Slider loadingSlider;
+
     protected override void Awake()
     {
         base.Awake();
@@ -90,11 +95,52 @@ public class UIManager : MonoSingleton<UIManager>
         }
     }
 
-
-
-    public void RestartGame()
+    public void OnStageButtonClicked(string sceneName)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // 중복 로딩 방지
+        if (!LoadingUI.activeSelf)
+        {
+            StartCoroutine(LoadSceneAsync(sceneName));
+        }
+    }
+
+    private IEnumerator LoadSceneAsync(string levelName)
+    {
+        LoadingUI.SetActive(true);
+
+        AsyncOperation op = SceneManager.LoadSceneAsync(levelName);
+        op.allowSceneActivation = false;
+
+        while (!op.isDone)
+        {
+            if (op.progress < 0.9f)
+            {
+                float progress = Mathf.Clamp01(op.progress / 0.9f);
+                loadingSlider.value = progress;
+                Debug.Log($"Loading progress: {progress * 100f}%");
+                loadingText.text = (progress * 100f).ToString("F2") + "%";
+            }
+            else
+            {
+                loadingSlider.value = 1f;
+                loadingText.text = "100%";
+                Debug.Log("Loading complete: 100%");
+
+                yield return new WaitForSeconds(0.5f);
+                op.allowSceneActivation = true;
+            }
+
+            yield return null;
+        }
+
+        LoadingUI.SetActive(false);
+    }
+
+
+
+    public void RestartGame(string levelName)
+    {
+        OnStageButtonClicked(levelName);
         Time.timeScale = 1f;
     }
 
@@ -106,6 +152,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void MainScene()
     {
+        OnStageButtonClicked("Intro");
         SceneManager.LoadScene(0);
     }
 
