@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using TMPro;
 
-public class Intro : MonoBehaviour
+public class Intro : MonoSingleton<Intro>
 {
     public GameObject stageUI;
     public RectTransform panel;
@@ -13,14 +13,20 @@ public class Intro : MonoBehaviour
     public float animationDuration = 0.5f;
     private Vector3 offScreenPosition;
 
-    private void Start()
+    protected override void Awake()
     {
-        // 텍스트 깜빡임 효과 시작
+        base.Awake();
         BlinkText();
 
         // 패널 애니메이션 초기화
         offScreenPosition = new Vector3(Screen.width, panel.localPosition.y, panel.localPosition.z);
-        panel.localPosition = offScreenPosition;
+        ResetPanelPosition();
+    }
+
+    protected override void OnDestroy()
+    {
+        // 패널 위치를 초기화
+        ResetPanelPosition();
     }
 
     void BlinkText()
@@ -31,11 +37,14 @@ public class Intro : MonoBehaviour
     public void OpenPanel()
     {
         stageUI.SetActive(true);
+        panel.DOKill(); // 기존의 애니메이션을 중지
         panel.DOLocalMove(Vector3.zero, animationDuration).SetEase(Ease.OutBack); // 패널을 화면 중앙으로 이동
+        Debug.Log("1");
     }
 
     public void ClosePanel()
     {
+        panel.DOKill(); // 기존의 애니메이션을 중지
         panel.DOLocalMove(offScreenPosition, animationDuration).SetEase(Ease.InBack).OnComplete(() =>
         {
             stageUI.SetActive(false);
@@ -45,7 +54,6 @@ public class Intro : MonoBehaviour
     public void NextScene()
     {
         OpenPanel();
-        //LoadingScene.LoadScene("Tutorial");
     }
 
     public void Back()
@@ -53,8 +61,8 @@ public class Intro : MonoBehaviour
         ClosePanel();
     }
 
-    public void Exit()
+    private void ResetPanelPosition()
     {
-        Application.Quit();
+        panel.localPosition = offScreenPosition;
     }
 }

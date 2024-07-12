@@ -27,13 +27,17 @@ public class UIManager : MonoSingleton<UIManager>
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
     #region UI껐다 키기
-    public virtual void ActiveUI(GameObject OnObj)
+    public virtual void ActiveUI(GameObject OnObj, bool keepOthersActive = false)
     {
-        // 모든 UI 오브젝트를 비활성화
-        foreach (GameObject obj in UIObjects)
+        if (!keepOthersActive)
         {
-           obj.SetActive(false);
+            // 모든 UI 오브젝트를 비활성화
+            foreach (GameObject obj in UIObjects)
+            {
+                obj.SetActive(false);
+            }
         }
 
         // 특정 UI 오브젝트만 활성화
@@ -46,7 +50,6 @@ public class UIManager : MonoSingleton<UIManager>
     public void SettingUI()
     {
         ActiveUI(UIObjects.Find(obj => obj.name == "SettingUI"));
-        
     }
 
     public void PauseUI()
@@ -56,15 +59,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void VictoryUI()
     {
-        StartCoroutine(OnVictoryUI(3f));
-    }
-
-    private IEnumerator OnVictoryUI(float duration)
-    {
         ActiveUI(UIObjects.Find(obj => obj.name == "VictoryUI"));
-        yield return new WaitForSeconds(duration);
-        GameManager.Instance.isGoal = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     #endregion
 
@@ -100,6 +95,7 @@ public class UIManager : MonoSingleton<UIManager>
         // 중복 로딩 방지
         if (!LoadingUI.activeSelf)
         {
+            ActiveUI(LoadingUI, true); 
             StartCoroutine(LoadSceneAsync(sceneName));
         }
     }
@@ -117,15 +113,12 @@ public class UIManager : MonoSingleton<UIManager>
             {
                 float progress = Mathf.Clamp01(op.progress / 0.9f);
                 loadingSlider.value = progress;
-                Debug.Log($"Loading progress: {progress * 100f}%");
                 loadingText.text = (progress * 100f).ToString("F2") + "%";
             }
             else
             {
                 loadingSlider.value = 1f;
                 loadingText.text = "100%";
-                Debug.Log("Loading complete: 100%");
-
                 yield return new WaitForSeconds(0.5f);
                 op.allowSceneActivation = true;
             }
@@ -133,26 +126,24 @@ public class UIManager : MonoSingleton<UIManager>
             yield return null;
         }
 
+        Debug.Log("LoadSceneAsync completed");
         LoadingUI.SetActive(false);
     }
 
-
-
-    public void RestartGame(string levelName)
+    public void RestartGame()
     {
-        OnStageButtonClicked(levelName);
         Time.timeScale = 1f;
+        OnStageButtonClicked(SceneManager.GetActiveScene().name);
     }
 
     public void Continue()
     {
-        ActiveUI(null); // No UI should be active
+        ActiveUI(null);
         Time.timeScale = 1f;
     }
 
     public void MainScene()
     {
-        OnStageButtonClicked("Intro");
         SceneManager.LoadScene(0);
     }
 
