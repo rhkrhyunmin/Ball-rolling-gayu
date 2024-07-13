@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Stage : MonoSingleton<Stage>
+public class Stage : MonoBehaviour
 {
     public string sceneName; // 이동할 씬 이름
     public int stageIndex; // 스테이지 인덱스
@@ -15,7 +15,7 @@ public class Stage : MonoSingleton<Stage>
     public Image unlockedImage; // 해금된 스테이지 이미지
     public Image lockedImage; // 잠긴 스테이지 이미지
 
-    protected override void Awake()
+    private void Start()
     {
         button = GetComponent<Button>();
         buttonImage = GetComponent<Image>();
