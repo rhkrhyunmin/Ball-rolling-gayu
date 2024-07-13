@@ -23,11 +23,6 @@ public class UIManager : MonoSingleton<UIManager>
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    protected override void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
     #region UI²°´Ù Å°±â
     public virtual void ActiveUI(GameObject OnObj, bool keepOthersActive = false)
     {
@@ -105,7 +100,7 @@ public class UIManager : MonoSingleton<UIManager>
         LoadingUI.SetActive(true);
 
         AsyncOperation op = SceneManager.LoadSceneAsync(levelName);
-        op.allowSceneActivation = false;
+        op.allowSceneActivation = true;
 
         while (!op.isDone)
         {
@@ -120,7 +115,6 @@ public class UIManager : MonoSingleton<UIManager>
                 loadingSlider.value = 1f;
                 loadingText.text = "100%";
                 yield return new WaitForSeconds(0.5f);
-                op.allowSceneActivation = true;
             }
 
             yield return null;

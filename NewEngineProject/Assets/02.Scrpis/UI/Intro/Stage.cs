@@ -1,10 +1,11 @@
+using DG.Tweening;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Stage : MonoBehaviour
+public class Stage : MonoSingleton<Stage>
 {
     public string sceneName; // 이동할 씬 이름
     public int stageIndex; // 스테이지 인덱스
@@ -14,7 +15,7 @@ public class Stage : MonoBehaviour
     public Image unlockedImage; // 해금된 스테이지 이미지
     public Image lockedImage; // 잠긴 스테이지 이미지
 
-    void Start()
+    protected override void Awake()
     {
         button = GetComponent<Button>();
         buttonImage = GetComponent<Image>();

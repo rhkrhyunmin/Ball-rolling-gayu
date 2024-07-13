@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
@@ -16,49 +15,51 @@ public class Intro : MonoSingleton<Intro>
     protected override void Awake()
     {
         base.Awake();
-        BlinkText();
 
         // 패널 애니메이션 초기화
-        offScreenPosition = new Vector3(Screen.width, panel.localPosition.y, panel.localPosition.z);
-        ResetPanelPosition();
-    }
-
-    protected override void OnDestroy()
-    {
-        // 패널 위치를 초기화
-        ResetPanelPosition();
-    }
-
-    void BlinkText()
-    {
-        _startText.DOFade(0, 1.5f).SetLoops(-1, LoopType.Yoyo); // 텍스트 깜빡임 효과
+        offScreenPosition = new Vector3(Screen.width + 70, panel.localPosition.y, panel.localPosition.z);
+        ResetPanelPosition(); // 패널 위치를 초기화
     }
 
     public void OpenPanel()
     {
-        stageUI.SetActive(true);
-        panel.DOKill(); // 기존의 애니메이션을 중지
         panel.DOLocalMove(Vector3.zero, animationDuration).SetEase(Ease.OutBack); // 패널을 화면 중앙으로 이동
-        Debug.Log("1");
     }
 
     public void ClosePanel()
     {
-        panel.DOKill(); // 기존의 애니메이션을 중지
         panel.DOLocalMove(offScreenPosition, animationDuration).SetEase(Ease.InBack).OnComplete(() =>
         {
-            stageUI.SetActive(false);
-        }); // 패널을 화면 밖으로 이동
+            // 필요한 작업을 OnComplete에 추가할 수 있습니다.
+        });
     }
 
     public void NextScene()
     {
-        OpenPanel();
+        // 패널을 닫고 다음 씬으로 이동
+        ClosePanel();
+        StartCoroutine(LoadNextScene());
     }
 
-    public void Back()
+    private IEnumerator LoadNextScene()
     {
-        ClosePanel();
+        // 씬을 비동기적으로 로드
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("NextSceneName"); // 실제 씬 이름으로 변경하세요.
+
+        // 씬 로드가 완료될 때까지 대기
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        // 씬 로드 완료 후 패널 초기화 및 애니메이션 실행
+        OnSceneLoaded();
+    }
+
+    private void OnSceneLoaded()
+    {
+        ResetPanelPosition();
+        OpenPanel();
     }
 
     private void ResetPanelPosition()
