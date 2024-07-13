@@ -105,12 +105,14 @@ public class Player : MonoBehaviour
         {
             isBoost = true;
             //boostParticle.Play();
+            Debug.Log("1");
             StartCoroutine(BoostCo(3f));
         }
 
-        else if(UIManager.Instance.boostPack.fillAmount == 0)
+        if(UIManager.Instance.boostPack.fillAmount == 0)
         {
             isBoost = false;
+            rigid.AddForce(Vector3.forward * ballSO.moveSpeed / 3);
             //boostParticle.Stop();
         }
     }

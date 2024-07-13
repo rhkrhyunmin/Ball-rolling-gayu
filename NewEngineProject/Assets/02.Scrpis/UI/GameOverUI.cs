@@ -28,6 +28,7 @@ public class GameOverUI : MonoBehaviour
         }).OnComplete(() =>
         {
             timerText.text = GameManager.Instance.timer.ToString();
+            Time.timeScale = 0;
         });
     }
 }
