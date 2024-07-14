@@ -27,5 +27,6 @@ public class PlayerHp : MonoBehaviour
     {
         UIManager.Instance.ActiveUI(UIManager.Instance.UIObjects.Find(obj => obj.name == "GameOverUI"));
         player.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 }

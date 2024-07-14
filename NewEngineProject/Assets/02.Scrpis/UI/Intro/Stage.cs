@@ -23,19 +23,27 @@ public class Stage : MonoBehaviour
         // 스테이지가 해금되어 있는지 확인
         if (IsStageUnlocked())
         {
+            Time.timeScale = 1;
             button.onClick.AddListener(() => UIManager.Instance.OnStageButtonClicked(sceneName));
             unlockedImage.gameObject.SetActive(true);
             lockedImage.gameObject.SetActive(false);
         }
         else
         {
+            button.interactable = false;
             unlockedImage.gameObject.SetActive(false);
             lockedImage.gameObject.SetActive(true);
+            
         }
     }
 
     bool IsStageUnlocked()
-    {
+    { 
+        if (stageIndex == 0)
+        {
+            return true;
+        }
+
         bool isUnlocked = PlayerPrefs.GetInt("Stage" + stageIndex.ToString() + "Unlocked", 0) == 1;
         return isUnlocked;
     }

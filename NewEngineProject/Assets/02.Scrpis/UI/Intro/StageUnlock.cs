@@ -8,7 +8,6 @@ public class StageUnlock : MonoBehaviour
 
     void Update()
     {
-        // 스페이스바를 눌렀을 때 스테이지 클리어 처리
         if (GameManager.Instance.isGoal == true)
         {
             OnStageCleared();
@@ -29,6 +28,6 @@ public class StageUnlock : MonoBehaviour
 
         Debug.Log("Stage " + currentStageIndex + " cleared. Stage " + nextStageIndex + " unlocked.");
 
-        GameManager.Instance.isGoal = false;
+        //GameManager.Instance.isGoal = false;
     }
 }

@@ -10,11 +10,20 @@ using UnityEngine.SceneManagement;
 public class GameOverUI : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
+
+    public Button mainScene;
+    public Button RestartScene;
+
     public float animDuartion = 2f;
 
     private void Start()
     {
         OnTimerText();
+        mainScene.interactable = false;
+        RestartScene.interactable = false;
+        UIManager.Instance.boostBackGround.enabled = false;
+        UIManager.Instance.boostPack.enabled = false;
+        UIManager.Instance.speedGage.enabled = false;
     }
 
     private void OnTimerText()
@@ -28,6 +37,8 @@ public class GameOverUI : MonoBehaviour
         }).OnComplete(() =>
         {
             timerText.text = GameManager.Instance.timer.ToString();
+            mainScene.interactable = true;
+            RestartScene.interactable = true;
             Time.timeScale = 0;
         });
     }

@@ -5023,7 +5023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Stage1
   stageIndex: 0
-  unlockedImage: {fileID: 2000765919}
+  unlockedImage: {fileID: 1647302219}
   lockedImage: {fileID: 209857142}
 --- !u!114 &1392994007
 MonoBehaviour:

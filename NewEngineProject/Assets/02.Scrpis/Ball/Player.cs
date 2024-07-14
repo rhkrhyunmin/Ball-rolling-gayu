@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Goal"))
         {
             UIManager.Instance.ActiveUI(UIManager.Instance.UIObjects.Find(obj => obj.name == "VictoryUI"));
+            GameManager.Instance.isGoal = true;
         }
     }
 
@@ -104,8 +105,8 @@ public class Player : MonoBehaviour
         if (UIManager.Instance.boostPack.fillAmount == 1 && Input.GetKeyDown(KeyCode.F))
         {
             isBoost = true;
-            //boostParticle.Play();
-            Debug.Log("1");
+            boostParticle.transform.rotation = Quaternion.identity;
+            boostParticle.Play();
             StartCoroutine(BoostCo(3f));
         }
 
@@ -113,7 +114,7 @@ public class Player : MonoBehaviour
         {
             isBoost = false;
             rigid.AddForce(Vector3.forward * ballSO.moveSpeed / 3);
-            //boostParticle.Stop();
+            boostParticle.Pause();
         }
     }
 

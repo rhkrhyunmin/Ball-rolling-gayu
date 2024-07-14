@@ -10,6 +10,9 @@ public class UIManager : MonoSingleton<UIManager>
     public List<GameObject> UIObjects;
     public Image speedGage;
     public Image boostPack;
+    public Image boostBackGround;
+
+    public int currentStage = 0;
 
     [Header("loading")]
     public GameObject LoadingUI;
@@ -46,23 +49,13 @@ public class UIManager : MonoSingleton<UIManager>
     {
         ActiveUI(UIObjects.Find(obj => obj.name == "SettingUI"));
     }
-
-    public void PauseUI()
-    {
-        ActiveUI(UIObjects.Find(obj => obj.name == "PauseUI"));
-    }
-
-    public void VictoryUI()
-    {
-        ActiveUI(UIObjects.Find(obj => obj.name == "VictoryUI"));
-    }
     #endregion
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseUI();
+            ActiveUI(UIObjects.Find(obj => obj.name == "PauseUI"));
             Time.timeScale = 0;
         }
     }
@@ -126,8 +119,8 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void RestartGame()
     {
-        Time.timeScale = 1f;
         OnStageButtonClicked(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
     }
 
     public void Continue()
