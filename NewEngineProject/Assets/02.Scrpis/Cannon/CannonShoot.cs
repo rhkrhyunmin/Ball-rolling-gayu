@@ -32,15 +32,13 @@ public class CannonShoot : MonoBehaviour
     private int numPoints = 30; // 선에 사용할 점의 개수
     float lineTimer = 0.3f;
 
-    public AudioClip bombclip;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
    // private Vector3[] points; // 베지어 곡선에서 사용할 점의 배열
 
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -72,7 +70,7 @@ public class CannonShoot : MonoBehaviour
         chargeTime = 0f;
 
         Destroy(lineRenderer);
-        audioSource.PlayOneShot(bombclip);
+        audioSource.Play();
     }
 
     public void Charge()

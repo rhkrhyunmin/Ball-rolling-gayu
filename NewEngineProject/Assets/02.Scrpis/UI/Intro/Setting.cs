@@ -10,12 +10,6 @@ public class Setting : MonoBehaviour
     [Header("Alarm")]
     public Image alarm;
 
-    [Header("Music")]
-    public Slider SFXSlider;
-    public AudioSource[] SFXSoure;
-    public Slider BGMSlider;
-    public AudioSource BGMSSoure;
-
     [Header("GrapicButton")]
     public Image highGrapicButton;
     public Image MediumGrapicButton;
@@ -29,15 +23,20 @@ public class Setting : MonoBehaviour
     private void Update()
     {
         SoundVolum();
+        BGMVolum();
     }
 
     public void SoundVolum()
     {
-       foreach(var source in SFXSoure)
+        foreach(var source in SoundManager.Instance.SFXSource)
         {
-            source.volume = SFXSlider.value;
+            source.volume = SoundManager.Instance.SFXSlider.value;
         }
-        
+    }
+
+    public void BGMVolum()
+    {
+        SoundManager.Instance.BGMSource.volume = SoundManager.Instance.BGMSlider.value;
     }
 
     public void OpenAlarm()

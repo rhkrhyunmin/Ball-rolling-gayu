@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CannonRotate : MonoBehaviour
 {
-    public float rotationSpeed = 50f;  // 회전 속도
-    public float rotateSpeed;
+    private float rotationSpeed = 100f;  // 회전 속도
+    private float rotateSpeed;
     Vector3 currentRotation;
 
     private void Start()
