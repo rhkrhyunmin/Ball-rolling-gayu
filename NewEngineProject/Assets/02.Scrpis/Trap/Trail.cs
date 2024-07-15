@@ -23,13 +23,15 @@ public class Trail : MonoBehaviour
                 // 목표 지점으로 이동
                 yield return StartCoroutine(MoveToPosition(endPoint.position));
                 movingToEnd = false;
-                transform.Rotate(0, 0, 0);
+                // 목표 지점에 도달 후 0도 회전 (상대적인 회전이 아님)
+                transform.rotation = Quaternion.Euler(0,-90,0);
             }
             else
             {
                 yield return StartCoroutine(MoveToPosition(startPoint.position));
                 movingToEnd = true;
-                transform.Rotate(0, -180, 0);
+                // 목표 지점에 도달 후 180도 회전 (상대적인 회전이 아님)
+                transform.rotation = Quaternion.Euler(0, 90, 0);
             }
         }
     }

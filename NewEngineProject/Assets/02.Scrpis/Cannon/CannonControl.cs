@@ -9,7 +9,7 @@ public class CannonControl : MonoBehaviour
 
     [SerializeField]
     private Transform barrerTRM;
-    //public GameObject ballPrefab;
+    
     public Transform firePosition;
 
     [SerializeField]

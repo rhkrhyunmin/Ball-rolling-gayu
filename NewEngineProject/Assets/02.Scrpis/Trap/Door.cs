@@ -22,10 +22,9 @@ public class Door : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("Ball") && GameManager.Instance.isKey)
+        if(collision.collider.CompareTag("Ball"))
         {
             rotating = true;
-            GameManager.Instance.isKey = false;
         }
     }
 

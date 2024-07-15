@@ -28,6 +28,5 @@ public class StageUnlock : MonoBehaviour
 
         Debug.Log("Stage " + currentStageIndex + " cleared. Stage " + nextStageIndex + " unlocked.");
 
-        //GameManager.Instance.isGoal = false;
     }
 }

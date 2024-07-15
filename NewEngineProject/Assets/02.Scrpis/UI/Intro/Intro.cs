@@ -31,10 +31,4 @@ public class Intro : MonoBehaviour
             Debug.Log(offScreenPosition);
         });
     }
-
-
-    private void ResetPanelPosition()
-    {
-        panel.localPosition = offScreenPosition;
-    }
 }

@@ -6,7 +6,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public float timer;
     public bool isGoal = false;
-    public bool isKey = false;
     public bool isShrinking = false;
 
     void Update()

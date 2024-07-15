@@ -1,25 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 
 public class Cars : MonoBehaviour
 {
+    public Vector3 StartPos;
+    public Vector3 EndPos;
     public TrapSo carsSo;
-    private float speed = 5f;
+    public LayerMask carLayer; // 감지할 레이어
 
-    public void Start()
+    void Start()
     {
+        // 초기 위치를 월드 좌표계에서 설정
+        transform.position = transform.parent.TransformPoint(StartPos);
         StartCoroutine(Move());
     }
 
     IEnumerator Move()
     {
-        while (true) // 무한 루프
+        while (true)
         {
-            // Move the car forward in its local space
-            transform.position += transform.forward * speed * Time.deltaTime;
-            yield return null; // 다음 프레임까지 대기
+            Debug.Log("Moving to End Position: " + EndPos);
+            // 목표 위치로 이동
+            yield return StartCoroutine(MoveToPosition(transform.parent.TransformPoint(EndPos)));
+            Debug.Log("Reached End Position");
+
+            Debug.Log("Resetting to Start Position: " + StartPos);
+            transform.position = transform.parent.TransformPoint(StartPos);
         }
     }
 
@@ -27,9 +33,18 @@ public class Cars : MonoBehaviour
     {
         while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            // 앞에 장애물이 있는지 레이캐스트로 확인
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 2, carLayer))
+            {
+                Vector3 backOffPosition = transform.position - transform.forward * 2;
+                transform.position = Vector3.MoveTowards(transform.position, backOffPosition, carsSo.MovementSpeed * Time.deltaTime);
+                yield return new WaitForSeconds(0.5f); // 잠시 대기
+                continue; // 다시 충돌 검사
+            }
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, carsSo.MovementSpeed * Time.deltaTime);
             yield return null;
         }
-        transform.position = targetPosition; // 목표 위치에 정확히 설정
+        transform.position = targetPosition;
     }
 }

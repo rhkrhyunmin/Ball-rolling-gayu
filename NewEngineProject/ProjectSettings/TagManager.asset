@@ -11,6 +11,7 @@ TagManager:
   - Goal
   - IntroBall
   - Key
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Player
   - Weapon
   - Ground
-  - 
+  - Cars
   - 
   - 
   - 
