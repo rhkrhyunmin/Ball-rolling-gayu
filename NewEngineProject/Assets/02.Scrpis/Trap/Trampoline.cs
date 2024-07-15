@@ -8,10 +8,10 @@ public class Trampoline : MonoBehaviour
 
     private bool isJumping = false;
     private Rigidbody rb;
-    public Animator animator;
+    private Animator animator;
 
     private AudioSource audioSource; // AudioSource 변수 추가
-    public AudioClip jumpSound;
+    //public AudioClip jumpSound;
 
     public void Start()
     {
@@ -36,7 +36,7 @@ public class Trampoline : MonoBehaviour
             animator.SetBool("jump", true);
             StartCoroutine(ResetJump());
 
-            audioSource.PlayOneShot(jumpSound);
+            //audioSource.PlayOneShot(jumpSound);
         }
     }
 

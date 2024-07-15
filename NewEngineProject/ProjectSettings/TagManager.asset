@@ -9,9 +9,7 @@ TagManager:
   - Trap
   - EndLine
   - Goal
-  - IntroBall
   - Key
-  - Bullet
   layers:
   - Default
   - TransparentFX
