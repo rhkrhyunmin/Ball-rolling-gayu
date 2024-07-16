@@ -32,7 +32,8 @@ public class Trampoline : MonoBehaviour
         if (!isJumping)
         {
             isJumping = true;
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            Vector3 jumpDirection = Vector3.up * jumpForce + Vector3.forward * 75;
+            rb.AddForce(jumpDirection, ForceMode.Impulse);
             animator.SetBool("jump", true);
             StartCoroutine(ResetJump());
 
@@ -42,10 +43,9 @@ public class Trampoline : MonoBehaviour
 
     private IEnumerator ResetJump()
     {
-        yield return new WaitForSeconds(0.5f); 
+        yield return new WaitForSeconds(0.5f);
 
         isJumping = false;
         animator.SetBool("jump", false);
     }
-
 }

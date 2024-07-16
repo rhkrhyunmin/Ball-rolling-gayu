@@ -56,7 +56,7 @@ public class UIManager : MonoSingleton<UIManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ActiveUI(UIObjects.Find(obj => obj.name == "PauseUI"));
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
     }
 

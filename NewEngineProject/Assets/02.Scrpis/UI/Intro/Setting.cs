@@ -41,9 +41,25 @@ public class Setting : MonoBehaviour
 
     public void OpenAlarm()
     {
+        // alarm 객체를 활성화하고 초기 스케일을 설정합니다.
         alarm.gameObject.SetActive(true);
+        alarm.transform.localScale = Vector3.zero; // 스케일을 초기 상태로 설정
 
-        alarm.transform.DOScale(3f, 1f).SetEase(Ease.InOutQuad);
+        // 새로운 시퀀스를 생성합니다.
+        Sequence sequence = DOTween.Sequence();
+
+        // 트윈 애니메이션을 시퀀스에 추가합니다.
+        sequence.Append(alarm.transform.DOScale(1f, 1f).SetEase(Ease.InOutQuad));
+
+        // 3초의 딜레이를 추가합니다.
+        sequence.AppendInterval(3f);
+
+
+        // 딜레이 후 alarm 객체를 비활성화하는 콜백을 추가합니다.
+        sequence.AppendCallback(() => alarm.gameObject.SetActive(false));
+
+        // 시퀀스를 재생합니다.
+        sequence.Play();
     }
 
 

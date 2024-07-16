@@ -5,6 +5,7 @@ public class GameManager : MonoSingleton<GameManager>
     public GameObject player;
 
     public float timer;
+    public bool isUI = false;
     public bool isGoal = false;
     public bool isShrinking = false;
 
