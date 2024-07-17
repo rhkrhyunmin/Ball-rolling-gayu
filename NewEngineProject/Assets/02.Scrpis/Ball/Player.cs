@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public BallSO ballSO;
-    public ParticleSystem boostParticle;
+    public GameObject boostParticle;
     private Rigidbody rigid;
     public LayerMask whatIsGround;
 
@@ -117,7 +117,8 @@ public class Player : MonoBehaviour
         {
             isBoost = true;
             boostParticle.transform.rotation = Quaternion.identity;
-            boostParticle.Play();
+            boostParticle.SetActive(true);
+            boostParticle.transform.localScale =Vector3.zero;
             StartCoroutine(BoostCo(2f));
         }
     }
@@ -126,7 +127,7 @@ public class Player : MonoBehaviour
     {
         rigid.AddForce(Vector3.forward * ballSO.moveSpeed * 3);
         yield return new WaitForSeconds(delay);
-        boostParticle.Stop();
+        boostParticle.SetActive(false);
         rigid.AddForce(Vector3.forward * ballSO.moveSpeed / 3);
         isBoost = false;
     }

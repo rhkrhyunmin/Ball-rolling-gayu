@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     public GameObject player;
+    public GameObject Boss;
 
     public float timer;
     public bool isUI = false;
