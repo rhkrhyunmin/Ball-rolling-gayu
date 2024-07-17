@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 
 public class GameManager : MonoSingleton<GameManager>
 {
     public GameObject player;
     public GameObject Boss;
+    public Boost boost;
 
     public float timer;
     public bool isUI = false;

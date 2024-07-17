@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Player : MonoBehaviour
 {
     public BallSO ballSO;
-    public GameObject boostParticle;
+
     private Rigidbody rigid;
     public LayerMask whatIsGround;
 
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        
         rigid.freezeRotation = false;
     }
 
@@ -116,18 +118,17 @@ public class Player : MonoBehaviour
         if (UIManager.Instance.boostPack.fillAmount == 1 && Input.GetKeyDown(KeyCode.F))
         {
             isBoost = true;
-            boostParticle.transform.rotation = Quaternion.identity;
-            boostParticle.SetActive(true);
-            boostParticle.transform.localScale =Vector3.zero;
             StartCoroutine(BoostCo(2f));
+            
         }
     }
 
     private IEnumerator BoostCo(float delay)
     {
         rigid.AddForce(Vector3.forward * ballSO.moveSpeed * 3);
+        GameManager.Instance.boost.Play();
         yield return new WaitForSeconds(delay);
-        boostParticle.SetActive(false);
+        GameManager.Instance.boost.Stop();
         rigid.AddForce(Vector3.forward * ballSO.moveSpeed / 3);
         isBoost = false;
     }

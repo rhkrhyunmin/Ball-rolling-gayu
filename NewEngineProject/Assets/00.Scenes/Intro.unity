@@ -3431,6 +3431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 740485240}
+  - component: {fileID: 740485241}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -3453,6 +3454,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &740485241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740485239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb36ecb4212d7cb4fa78eecf0f8a6a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  Boss: {fileID: 0}
+  timer: 0
+  isUI: 0
+  isGoal: 0
+  isShrinking: 0
 --- !u!1 &742245325
 GameObject:
   m_ObjectHideFlags: 0
@@ -5124,7 +5143,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1152868241}
-  - component: {fileID: 1152868240}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -5132,18 +5150,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1152868240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152868239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 673a41f4d760da84aae0a42bb4f7a4fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1152868241
 Transform:
   m_ObjectHideFlags: 0

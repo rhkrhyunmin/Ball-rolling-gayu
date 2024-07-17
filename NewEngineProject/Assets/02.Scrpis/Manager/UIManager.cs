@@ -125,7 +125,6 @@ public class UIManager : MonoSingleton<UIManager>
         Debug.Log("LoadSceneAsync completed");
         LoadingUI.SetActive(false);
     }
-
     public void RestartGame()
     {
         OnStageButtonClicked(SceneManager.GetActiveScene().name);
