@@ -32,8 +32,6 @@ public class CannonShoot : MonoBehaviour
     private int numPoints = 30; // 선에 사용할 점의 개수
     float lineTimer = 0.3f;
 
-    public AudioSource audioSource;
-
    // private Vector3[] points; // 베지어 곡선에서 사용할 점의 배열
 
     private void Start()
@@ -54,7 +52,7 @@ public class CannonShoot : MonoBehaviour
     public void Fire()
     {
         GameManager.Instance.isShrinking = true;
-        //boomEffect.Play();
+        boomEffect.Play();
 
         isCharging = false;
         Vector3 forceVector = cannonExit.forward * currentForceMagnitude;
@@ -70,7 +68,6 @@ public class CannonShoot : MonoBehaviour
         chargeTime = 0f;
 
         Destroy(lineRenderer);
-        audioSource.Play();
     }
 
     public void Charge()

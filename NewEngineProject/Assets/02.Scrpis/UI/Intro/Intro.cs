@@ -15,7 +15,6 @@ public class Intro : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 1;
         offScreenPosition = new Vector3(Screen.width + 70, panel.localPosition.y, panel.localPosition.z);
     }
 

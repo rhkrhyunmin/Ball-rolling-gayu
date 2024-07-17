@@ -59,8 +59,17 @@ public class UIManager : MonoSingleton<UIManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ActiveUI(UIObjects.Find(obj => obj.name == "PauseUI"));
-            GameManager.Instance.Boss.SetActive(false);
-            GameManager.Instance.player.SetActive(false);
+
+            if(GameManager.Instance.Boss != null)
+            {
+                GameManager.Instance.Boss.SetActive(false);
+            }
+            
+            if(GameManager.Instance.player != null)
+            {
+                GameManager.Instance.player.SetActive(false);
+            }
+            
         }
     }
 
@@ -140,7 +149,8 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void MainScene()
     {
-        SceneManager.LoadScene(0);
+        OnStageButtonClicked("Intro");
+        //SceneManager.LoadScene(0);
     }
 
     public void Quit()

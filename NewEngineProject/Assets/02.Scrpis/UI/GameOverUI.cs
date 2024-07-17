@@ -39,7 +39,7 @@ public class GameOverUI : MonoBehaviour
             timerText.text = GameManager.Instance.timer.ToString();
             mainScene.interactable = true;
             RestartScene.interactable = true;
-            Time.timeScale = 0;
+            GameManager.Instance.Boss.gameObject.SetActive(false);
         });
     }
 }

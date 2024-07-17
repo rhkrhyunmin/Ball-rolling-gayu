@@ -39,7 +39,7 @@ public class ClearUI : MonoBehaviour
             timerText.text = GameManager.Instance.timer.ToString();
             mainScene.interactable = true;
             NextScene.interactable = true;
-            Time.timeScale = 0;
+            GameManager.Instance.Boss.gameObject.SetActive(false);
         });
     }
 }
