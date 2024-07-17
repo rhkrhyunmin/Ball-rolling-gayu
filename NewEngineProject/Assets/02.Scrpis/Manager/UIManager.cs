@@ -11,6 +11,7 @@ public class UIManager : MonoSingleton<UIManager>
     public Image speedGage;
     public Image boostPack;
     public Image boostBackGround;
+   
 
     public int currentStage = 0;
 
@@ -18,6 +19,8 @@ public class UIManager : MonoSingleton<UIManager>
     public GameObject LoadingUI;
     public TextMeshProUGUI loadingText;
     public Slider loadingSlider;
+
+    //public Image Tutorial;
 
     protected override void Awake()
     {
@@ -68,7 +71,7 @@ public class UIManager : MonoSingleton<UIManager>
     private void InitializeUI()
     {
         // Initialize UIObjects if not set in the inspector
-        foreach (var objName in new[] { "PauseUI", "SettingUI", "VictoryUI", "GameOverUI" })
+        foreach (var objName in new[] { "PauseUI", "SettingUI", "VictoryUI", "GameOverUI", "TutorialUI" })
         {
             var obj = GameObject.Find(objName);
             if (obj != null && !UIObjects.Contains(obj))
@@ -76,6 +79,11 @@ public class UIManager : MonoSingleton<UIManager>
                 UIObjects.Add(obj);
             }
         }
+    }
+
+    public void OnTutorial()
+    {
+        ActiveUI(UIObjects.Find(obj => obj.name == "TutorialUI"));
     }
 
     public void OnStageButtonClicked(string sceneName)

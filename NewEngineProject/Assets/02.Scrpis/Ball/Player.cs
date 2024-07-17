@@ -128,5 +128,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(delay);
         boostParticle.Stop();
         rigid.AddForce(Vector3.forward * ballSO.moveSpeed / 3);
+        isBoost = false;
     }
 }

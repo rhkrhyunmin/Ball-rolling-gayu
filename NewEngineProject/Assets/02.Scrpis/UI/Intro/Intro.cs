@@ -28,7 +28,6 @@ public class Intro : MonoBehaviour
     {
         panel.DOLocalMove(offScreenPosition, animationDuration).SetEase(Ease.InBack).OnComplete(() =>
         {
-            Debug.Log(offScreenPosition);
         });
     }
 }
